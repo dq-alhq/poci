@@ -1,116 +1,250 @@
-"use client"
+'use client'
 
-import * as React from "react"
+import type {
+    CellProps,
+    ColumnProps,
+    ColumnResizerProps,
+    TableHeaderProps as HeaderProps,
+    TableProps as RACTableProps,
+    RowProps,
+    TableBodyProps
+} from 'react-aria-components'
+import { IconChevronDown, IconGripVertical } from '@tabler/icons-react'
+import { createContext, type Ref, use } from 'react'
+import {
+    Button,
+    Cell,
+    Collection,
+    Column,
+    composeRenderProps,
+    ColumnResizer as RACColumnResizer,
+    Table as RACTable,
+    TableBody as RACTableBody,
+    TableHeader as RACTableHeader,
+    ResizableTableContainer,
+    Row,
+    useTableOptions
+} from 'react-aria-components'
+import { cn } from '@/lib/utils'
+import { Checkbox } from './checkbox'
 
-import { cn } from "@/lib/utils"
+interface TableProps extends Omit<RACTableProps, 'className'> {
+    allowResize?: boolean
+    className?: string
+    bleed?: boolean
+    grid?: boolean
+    striped?: boolean
+    ref?: Ref<HTMLTableElement>
+}
 
-function Table({ className, ...props }: React.ComponentProps<"table">) {
-  return (
-    <div
-      data-slot="table-container"
-      className="relative w-full overflow-x-auto"
-    >
-      <table
-        data-slot="table"
-        className={cn("w-full caption-bottom text-sm", className)}
+const TableContext = createContext<TableProps>({
+    allowResize: false
+})
+
+const Root = (props: TableProps) => (
+    <RACTable
+        className='w-full min-w-full caption-bottom text-sm/6 outline-hidden [--table-selected-bg:var(--color-secondary)]/50'
         {...props}
-      />
-    </div>
-  )
-}
-
-function TableHeader({ className, ...props }: React.ComponentProps<"thead">) {
-  return (
-    <thead
-      data-slot="table-header"
-      className={cn("[&_tr]:border-b", className)}
-      {...props}
     />
-  )
+)
+
+const Table = ({ allowResize, className, bleed = false, grid = false, striped = false, ref, ...props }: TableProps) => {
+    return (
+        <TableContext.Provider value={{ allowResize, bleed, grid, striped }}>
+            <div className='flow-root **:[.react-aria-DropIndicator]:bg-primary'>
+                <div
+                    className={cn(
+                        'relative -mx-(--gutter) overflow-x-auto whitespace-nowrap [--gutter-y:--spacing(2)] has-data-[slot=table-resizable-container]:overflow-auto',
+                        className
+                    )}
+                >
+                    <div className={cn('inline-block min-w-full align-middle', !bleed && 'sm:px-(--gutter)')}>
+                        {allowResize ? (
+                            <ResizableTableContainer data-slot='table-resizable-container'>
+                                <Root ref={ref} {...props} />
+                            </ResizableTableContainer>
+                        ) : (
+                            <Root {...props} ref={ref} />
+                        )}
+                    </div>
+                </div>
+            </div>
+        </TableContext.Provider>
+    )
 }
 
-function TableBody({ className, ...props }: React.ComponentProps<"tbody">) {
-  return (
-    <tbody
-      data-slot="table-body"
-      className={cn("[&_tr:last-child]:border-0", className)}
-      {...props}
-    />
-  )
+const ColumnResizer = ({ className, ...props }: ColumnResizerProps) => (
+    <RACColumnResizer
+        {...props}
+        className={composeRenderProps(className, (className) =>
+            cn(
+                'absolute top-0 right-0 bottom-0 grid w-px &[data-resizable-direction=left]:cursor-e-resize &[data-resizable-direction=right]:cursor-w-resize touch-none place-content-center px-1 data-[resizable-direction=both]:cursor-ew-resize [&[data-resizing]>div]:bg-primary',
+                className
+            )
+        )}
+    >
+        <div className='h-full w-px bg-border py-(--gutter-y)' />
+    </RACColumnResizer>
+)
+
+const TableBody = <T extends object>(props: TableBodyProps<T>) => <RACTableBody data-slot='table-body' {...props} />
+
+const TableColumn = ({ isResizable = false, className, ...props }: ColumnProps & { isResizable?: boolean }) => {
+    const { bleed, grid } = use(TableContext)
+    return (
+        <Column
+            data-slot='table-column'
+            {...props}
+            className={composeRenderProps(className, (className) =>
+                cn(
+                    [
+                        'text-left font-medium text-muted-foreground',
+                        'relative outline-hidden data-[allows-sorting=true]:cursor-default data-dragging:cursor-grabbing',
+                        'px-4 py-(--gutter-y)',
+                        'first:pl-(--gutter,--spacing(2)) last:pr-(--gutter,--spacing(2))',
+                        !bleed && 'sm:last:pr-1 sm:first:pl-1',
+                        grid && 'border-l first:border-l-0',
+                        isResizable && 'overflow-hidden truncate'
+                    ],
+                    className
+                )
+            )}
+        >
+            {(values) => (
+                <div className={cn(['inline-flex items-center gap-2 **:[svg]:shrink-0'])}>
+                    {typeof props.children === 'function' ? props.children(values) : props.children}
+                    {values.allowsSorting && (
+                        <span
+                            className={cn(
+                                'grid size-[1.15rem] flex-none shrink-0 place-content-center rounded bg-secondary text-foreground *:[svg]:size-3.5 *:[svg]:shrink-0 *:[svg]:transition-transform *:[svg]:duration-200',
+                                values.isHovered ? 'bg-secondary-foreground/10' : ''
+                            )}
+                        >
+                            <IconChevronDown className={values.sortDirection === 'ascending' ? 'rotate-180' : ''} />
+                        </span>
+                    )}
+                    {isResizable && <ColumnResizer />}
+                </div>
+            )}
+        </Column>
+    )
 }
 
-function TableFooter({ className, ...props }: React.ComponentProps<"tfoot">) {
-  return (
-    <tfoot
-      data-slot="table-footer"
-      className={cn(
-        "bg-muted/50 border-t font-medium [&>tr]:last:border-b-0",
-        className
-      )}
-      {...props}
-    />
-  )
+interface TableHeaderProps<T extends object> extends HeaderProps<T> {
+    ref?: Ref<HTMLTableSectionElement>
 }
 
-function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
-  return (
-    <tr
-      data-slot="table-row"
-      className={cn(
-        "hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors",
-        className
-      )}
-      {...props}
-    />
-  )
+const TableHeader = <T extends object>({ children, ref, columns, className, ...props }: TableHeaderProps<T>) => {
+    const { bleed } = use(TableContext)
+    const { selectionBehavior, selectionMode, allowsDragging } = useTableOptions()
+    return (
+        <RACTableHeader
+            className={composeRenderProps(className, (className) => cn('border-b', className))}
+            data-slot='table-header'
+            ref={ref}
+            {...props}
+        >
+            {allowsDragging && (
+                <Column
+                    className={cn('first:pl-(--gutter,--spacing(2))', !bleed && 'sm:last:pr-1 sm:first:pl-1')}
+                    data-slot='table-column'
+                />
+            )}
+            {selectionBehavior === 'toggle' && (
+                <Column
+                    className={cn('w-auto first:pl-(--gutter,--spacing(2))', !bleed && 'sm:last:pr-1 sm:first:pl-1')}
+                    data-slot='table-column'
+                >
+                    {selectionMode === 'multiple' && <Checkbox slot='selection' />}
+                </Column>
+            )}
+            <Collection items={columns}>{children}</Collection>
+        </RACTableHeader>
+    )
 }
 
-function TableHead({ className, ...props }: React.ComponentProps<"th">) {
-  return (
-    <th
-      data-slot="table-head"
-      className={cn(
-        "text-foreground h-10 px-2 text-left align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
-        className
-      )}
-      {...props}
-    />
-  )
+interface TableRowProps<T extends object> extends RowProps<T> {
+    ref?: Ref<HTMLTableRowElement>
 }
 
-function TableCell({ className, ...props }: React.ComponentProps<"td">) {
-  return (
-    <td
-      data-slot="table-cell"
-      className={cn(
-        "p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
-        className
-      )}
-      {...props}
-    />
-  )
+const TableRow = <T extends object>({ children, className, columns, ref, ...props }: TableRowProps<T>) => {
+    const { selectionBehavior, allowsDragging } = useTableOptions()
+    const { striped } = use(TableContext)
+    return (
+        <Row
+            data-slot='table-row'
+            ref={ref}
+            {...props}
+            className={composeRenderProps(
+                className,
+                (
+                    className,
+                    { isSelected, selectionMode, isFocusVisibleWithin, isDragging, isDisabled, isFocusVisible }
+                ) =>
+                    cn(
+                        'group relative cursor-default text-muted-foreground outline outline-transparent',
+                        isFocusVisible && 'bg-primary/5 outline-primary ring-3 ring-ring/20 hover:bg-primary/10',
+                        isDragging && 'cursor-grabbing bg-primary/10 text-foreground outline-primary',
+                        isSelected && 'bg-(--table-selected-bg) text-foreground hover:bg-(--table-selected-bg)/50',
+                        striped && 'even:bg-muted',
+                        (props.href || props.onAction || selectionMode === 'multiple') &&
+                            'hover:bg-(--table-selected-bg) hover:text-foreground',
+                        (props.href || props.onAction || selectionMode === 'multiple') &&
+                            isFocusVisibleWithin &&
+                            'bg-(--table-selected-bg)/50 selected:bg-(--table-selected-bg)/50 text-foreground',
+                        isDisabled && 'opacity-50',
+                        className
+                    )
+            )}
+        >
+            {allowsDragging && (
+                <TableCell className='px-0'>
+                    <Button
+                        className='grid place-content-center rounded-xs px-[calc(var(--gutter)/2)] outline-hidden focus-visible:ring focus-visible:ring-ring'
+                        slot='drag'
+                    >
+                        <IconGripVertical className='size-4' />
+                    </Button>
+                </TableCell>
+            )}
+            {selectionBehavior === 'toggle' && (
+                <TableCell className='w-auto px-0'>
+                    <Checkbox slot='selection' />
+                </TableCell>
+            )}
+            <Collection items={columns}>{children}</Collection>
+        </Row>
+    )
 }
 
-function TableCaption({
-  className,
-  ...props
-}: React.ComponentProps<"caption">) {
-  return (
-    <caption
-      data-slot="table-caption"
-      className={cn("text-muted-foreground mt-4 text-sm", className)}
-      {...props}
-    />
-  )
+interface TableCellProps extends CellProps {
+    ref?: Ref<HTMLTableCellElement>
+}
+const TableCell = ({ className, ref, ...props }: TableCellProps) => {
+    const { allowResize, bleed, grid, striped } = use(TableContext)
+    return (
+        <Cell
+            data-slot='table-cell'
+            ref={ref}
+            {...props}
+            className={composeRenderProps(className, (className) =>
+                cn(
+                    'group px-4 py-(--gutter-y) align-middle outline-hidden first:pl-(--gutter,--spacing(2)) last:pr-(--gutter,--spacing(2)) group-has-data-focus-visible-within:text-foreground',
+                    !striped && 'border-b',
+                    grid && 'border-l first:border-l-0',
+                    !bleed && 'sm:last:pr-1 sm:first:pl-1',
+                    allowResize && 'overflow-hidden truncate',
+                    className
+                )
+            )}
+        />
+    )
 }
 
-export {
-  Table,
-  TableHeader,
-  TableBody,
-  TableFooter,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableCaption,
-}
+Table.Header = TableHeader
+Table.Body = TableBody
+Table.Column = TableColumn
+Table.Cell = TableCell
+Table.Row = TableRow
+
+export { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow }

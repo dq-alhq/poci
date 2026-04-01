@@ -1,15 +1,44 @@
-import { betterAuth } from "better-auth";
-import { env } from "process";
-import { prismaAdapter } from "better-auth/adapters/prisma";
-import { PrismaClient } from "@src/generated/prisma/client";
-import { PrismaPg } from "@prisma/adapter-pg"
-const adapter = new PrismaPg({ connectionString: env.DATABASE_URL });
-const prisma = new PrismaClient({ adapter });
+import { betterAuth } from 'better-auth'
+import { prismaAdapter } from 'better-auth/adapters/prisma'
+import { APIError, createAuthMiddleware } from 'better-auth/api'
+import { nextCookies } from 'better-auth/next-js'
+import { admin, username } from 'better-auth/plugins'
+import z from 'zod'
+import db from './prisma'
+
+export const passwordSchema = z.string().min(8, { message: 'Password minimal 8 karakter' })
+
 export const auth = betterAuth({
-  emailAndPassword: {
-    enabled: true,
-  },
-  database: prismaAdapter(prisma, {
-    provider: "postgresql", // or "mysql", "postgresql", ...etc
-  }),
-});
+    database: prismaAdapter(db, {
+        provider: 'postgresql'
+    }),
+    emailAndPassword: {
+        disableSignUp: false,
+        enabled: true,
+        requireEmailVerification: false
+    },
+    hooks: {
+        before: createAuthMiddleware(async (ctx) => {
+            if (ctx.path === '/reset-password' || ctx.path === '/change-password') {
+                const password = ctx.body.password || ctx.body.newPassword
+                const { error } = passwordSchema.safeParse(password)
+                if (error) {
+                    throw new APIError('BAD_REQUEST', {
+                        message: 'Password kurang kuat'
+                    })
+                }
+            }
+        })
+    },
+    plugins: [nextCookies(), admin(), username()],
+    secret: process.env.BETTER_AUTH_SECRET,
+    user: {
+        changeEmail: {
+            updateEmailWithoutVerification: true,
+            enabled: true
+        }
+    }
+})
+
+export type Session = typeof auth.$Infer.Session
+export type User = typeof auth.$Infer.Session.user

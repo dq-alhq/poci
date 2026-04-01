@@ -1,47 +1,38 @@
-import type { Metadata } from "next";
-import { ThemeProvider } from "@/components/theme-provider";
+import { Providers } from '@/components/providers'
+import './globals.css'
+import type { Metadata } from 'next'
+import localFont from 'next/font/local'
 
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+const fontSans = localFont({
+    src: './fonts/InstrumentSans.ttf',
+    variable: '--font-instrument-sans'
+})
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const fontMono = localFont({
+    src: './fonts/JetbrainsMono.ttf',
+    variable: '--font-jetbrains-mono'
+})
 
 export const metadata: Metadata = {
-  title: "Auth System",
-  description: "Auth System",
-};
+    title: 'Nextjs Starter',
+    description: 'Nextjs, Prisma, Better Auth, HQ UI'
+}
 
 export default function RootLayout({
-  children,
+    children,
+    modal
 }: Readonly<{
-  children: React.ReactNode;
+    children: React.ReactNode
+    modal: React.ReactNode
 }>) {
-  return (
-    <html lang="en">
-      <head>
-        {/* Replace this with your own analytics script */}
-        <script defer src="https://cloud.umami.is/script.js" data-website-id="352eab6a-a921-4d6b-b73c-3282f2a38d2f"></script>
-      </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
-      </body>
-    </html>
-  );
+    return (
+        <html className={`${fontSans.variable} ${fontMono.variable}`} lang='en' suppressHydrationWarning>
+            <body className='font-sans antialiased'>
+                <Providers attribute='class' defaultTheme='system' disableTransitionOnChange enableSystem>
+                    {children}
+                    {modal}
+                </Providers>
+            </body>
+        </html>
+    )
 }

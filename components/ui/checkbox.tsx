@@ -1,32 +1,83 @@
-"use client"
+'use client'
 
-import * as React from "react"
-import * as CheckboxPrimitive from "@radix-ui/react-checkbox"
-import { CheckIcon } from "lucide-react"
+import type { VariantProps } from 'tailwind-variants'
+import { IconCheck, IconMinus } from '@tabler/icons-react'
+import {
+    type CheckboxGroupProps,
+    type CheckboxProps,
+    composeRenderProps,
+    Label,
+    Checkbox as RACCheckbox,
+    CheckboxGroup as RACCheckboxGroup
+} from 'react-aria-components'
+import { cn } from '@/lib/utils'
+import { fieldVariants } from './field'
 
-import { cn } from "@/lib/utils"
-
-function Checkbox({
-  className,
-  ...props
-}: React.ComponentProps<typeof CheckboxPrimitive.Root>) {
-  return (
-    <CheckboxPrimitive.Root
-      data-slot="checkbox"
-      className={cn(
-        "peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50",
-        className
-      )}
-      {...props}
-    >
-      <CheckboxPrimitive.Indicator
-        data-slot="checkbox-indicator"
-        className="flex items-center justify-center text-current transition-none"
-      >
-        <CheckIcon className="size-3.5" />
-      </CheckboxPrimitive.Indicator>
-    </CheckboxPrimitive.Root>
-  )
+const CheckboxGroup = ({
+    className,
+    orientation = 'vertical',
+    ...props
+}: CheckboxGroupProps & VariantProps<typeof fieldVariants>) => {
+    return (
+        <RACCheckboxGroup
+            {...props}
+            className={composeRenderProps(className, (className) =>
+                cn(fieldVariants({ orientation }), 'w-fit', className)
+            )}
+            data-orientation={orientation}
+            data-slot='field'
+        />
+    )
 }
 
-export { Checkbox }
+const Checkbox = ({ className, children, ...props }: CheckboxProps) => {
+    return (
+        <RACCheckbox
+            className={composeRenderProps(className, (className) =>
+                cn(
+                    'group/checkbox peer flex items-center space-x-3 has-[&_p]:items-start **:[p]:mt-2 **:[p]:text-muted-foreground **:[p]:text-sm',
+                    className
+                )
+            )}
+            data-slot='checkbox'
+            {...props}
+        >
+            {(values) => (
+                <>
+                    <div
+                        className={cn(
+                            'relative flex size-4 shrink-0 items-center justify-center rounded-[4px] border bg-transparent shadow-xs transition dark:bg-input/30',
+                            'border-input group-hover/checkbox:border-ring group-data-invalid/checkbox:border-destructive/70',
+                            'group-data-selected/checkbox:group-data-has-invalid/checkbox:border-destructive/70 group-data-selected/checkbox:border-primary group-data-selected/checkbox:bg-primary group-data-selected/checkbox:text-primary-foreground group-data-selected/checkbox:group-has-invalid/checkbox:border-destructive/70 group-data-selected/checkbox:group-has-invalid/checkbox:bg-destructive group-data-selected/checkbox:group-has-invalid/checkbox:text-destructive-foreground dark:group-data-selected/checkbox:bg-primary',
+                            'group-data-focus/checkbox:border-primary group-data-focus/checkbox:group-has-invalid/checkbox:border-destructive/70',
+                            'group-data-focus-visible/checkbox:border-primary/70 group-data-focus-visible/checkbox:ring-[3px] group-data-focus-visible/checkbox:ring-ring/50 group-data-focus-visible/checkbox:group-has-invalid/checkbox:border-destructive/70 group-data-focus-visible/checkbox:group-has-invalid/checkbox:ring-destructive/20',
+                            'group-data-indeterminate/checkbox:border-primary group-data-indeterminate/checkbox:bg-primary group-data-indeterminate/checkbox:text-primary-foreground dark:group-data-indeterminate/checkbox:bg-primary',
+                            className
+                        )}
+                        data-slot='box'
+                    >
+                        <div
+                            className='flex items-center justify-center text-current transition-none'
+                            data-slot='checkbox-indicator'
+                        >
+                            <IconMinus className='hidden size-3.5 group-data-indeterminate/checkbox:block group-data-selected/checkbox:hidden' />
+                            <IconCheck className='hidden size-3.5 group-data-selected/checkbox:block group-data-indeterminate/checkbox:hidden' />
+                        </div>
+                    </div>
+                    {typeof children === 'function' ? (
+                        children(values)
+                    ) : (
+                        <Label
+                            className='text-sm transition group-data-invalid/checkbox:text-destructive'
+                            elementType='span'
+                        >
+                            {children}
+                        </Label>
+                    )}
+                </>
+            )}
+        </RACCheckbox>
+    )
+}
+
+export { Checkbox, CheckboxGroup }
