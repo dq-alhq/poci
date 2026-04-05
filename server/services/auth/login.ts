@@ -1,4 +1,5 @@
 'use server'
+import { redirect } from 'next/navigation'
 import z from 'zod'
 import { auth } from '@/lib/auth'
 
@@ -30,8 +31,6 @@ export async function login(_: any, formData: FormData) {
                 body: data
             })
         }
-
-        return { success: true }
     } catch (error: any) {
         return {
             success: false,
@@ -40,4 +39,6 @@ export async function login(_: any, formData: FormData) {
             }
         }
     }
+
+    redirect('/dashboard', 'replace')
 }

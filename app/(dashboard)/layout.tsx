@@ -1,22 +1,21 @@
 import { headers } from 'next/headers'
+import { redirect } from 'next/navigation' // path to your Better Auth server instance
 import { AppSidebar } from '@/components/app-sidebar'
 import { AppSidebarHeader } from '@/components/app-sidebar-header'
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
-import { auth } from '@/lib/auth' // path to your Better Auth server instance
+import { auth } from '@/lib/auth'
 
 export default async function layout({
     children
-    // modal
 }: Readonly<{
     children: React.ReactNode
-    // modal: React.ReactNode
 }>) {
     const session = await auth.api.getSession({
         headers: await headers()
     })
 
     if (!session?.user) {
-        return
+        redirect('/login')
     }
 
     return (
@@ -33,10 +32,7 @@ export default async function layout({
                 <AppSidebarHeader />
                 <div className='flex flex-1 flex-col'>
                     <div className='@container/main flex flex-1 flex-col gap-2'>
-                        <div className='flex flex-col gap-4 py-4 md:gap-6 md:py-6'>
-                            {children}
-                            {/* {modal} */}
-                        </div>
+                        <div className='flex flex-col gap-4 py-4 md:gap-6 md:py-6'>{children}</div>
                     </div>
                 </div>
             </SidebarInset>

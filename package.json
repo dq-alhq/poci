@@ -1,12 +1,20 @@
 {
-    "name": "better-auth-nextjs-prisma-ts",
+    "name": "poci-al-barokah",
     "version": "1.0.0",
     "private": true,
     "scripts": {
         "dev": "next dev --turbopack",
-        "build": "npx prisma generate && next build",
+        "build": "prisma generate && next build",
         "start": "next start",
-        "lint": "next lint"
+        "lint": "biome check",
+        "format": "biome lint --fix && biome check --write",
+        "format:unsafe": "biome check --unsafe --write",
+        "db:generate": "prisma generate",
+        "db:push": "prisma db push",
+        "db:migrate": "prisma migrate dev",
+        "db:reset": "prisma migrate reset",
+        "db:studio": "prisma studio",
+        "db:seed": "prisma db seed"
     },
     "dependencies": {
         "@prisma/adapter-pg": "^7.6.0",
@@ -16,9 +24,8 @@
         "clsx": "^2.1.1",
         "embla-carousel-react": "^8.6.0",
         "input-otp": "^1.4.2",
-        "lucide-react": "^1.7.0",
         "motion": "^12.38.0",
-        "next": "^16.2.1",
+        "next": "^16.2.2",
         "next-themes": "^0.4.6",
         "react": "19.2.4",
         "react-aria-components": "^1.16.0",

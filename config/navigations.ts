@@ -1,4 +1,4 @@
-import { IconKey, IconLayoutGrid, IconUserCircle, IconUsers } from '@tabler/icons-react'
+import { IconKey, IconLayoutGrid, IconPackage, IconUserCircle, IconUsers } from '@tabler/icons-react'
 
 export const getNavigations = (role: string | undefined) => {
     const mainNavigations = [
@@ -6,6 +6,12 @@ export const getNavigations = (role: string | undefined) => {
             title: 'Dashboard',
             href: '/dashboard',
             icon: IconLayoutGrid,
+            show: true
+        },
+        {
+            title: 'Produk',
+            href: '/dashboard/produk',
+            icon: IconPackage,
             show: true
         }
     ]

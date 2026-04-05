@@ -9,8 +9,7 @@ import { FieldError, FieldGroup, FieldLabel, Form } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { Radio, RadioGroup } from '@/components/ui/radio'
 import { PasswordInput, TextField } from '@/components/ui/text-field'
-import { createUser } from '@/server/users/create-user'
-import { updateUser } from '@/server/users/update-user'
+import { createUser, updateUser } from '@/server/services/users.service'
 
 export function UserForm({ user }: { user?: User }) {
     const router = useRouter()

@@ -1,5 +1,5 @@
-import Image from 'next/image'
 import Link from 'next/link'
+import { AppLogo } from '@/components/app-logo'
 import { Card } from '@/components/ui/card'
 import { auth } from '@/lib/auth'
 import { LoginForm } from './login-form'
@@ -7,10 +7,10 @@ import { LoginForm } from './login-form'
 export default async function Page() {
     const { disableSignUp } = auth.options.emailAndPassword
     return (
-        <div className='flex min-h-svh w-full items-center justify-center p-6 md:p-10'>
+        <div className='flex min-h-[90vh] w-full items-center justify-center p-6 md:min-h-svh md:p-10'>
             <div className='flex w-full max-w-sm flex-col items-center justify-center gap-6'>
                 <Link className='text-center' href='/'>
-                    <Image alt='Logo' height={20} src='/next.svg' width={98.5} />
+                    <AppLogo className='h-20' />
                 </Link>
                 <Card className='w-full'>
                     <Card.Header>

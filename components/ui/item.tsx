@@ -1,11 +1,11 @@
 import type { ComponentProps, ComponentPropsWithoutRef } from 'react'
-import { Link, type LinkProps } from 'react-aria-components'
+import Link from 'next/link'
 import { tv, type VariantProps } from 'tailwind-variants'
 import { cn } from '@/lib/utils'
 import { Separator } from './separator'
 
 const ItemGroup = ({ className, ...props }: ComponentProps<'div'>) => (
-    <div className={cn('group/item-group flex flex-col', className)} data-slot='item-group' role='list' {...props} />
+    <div className={cn('group/item-group flex flex-col', className)} data-slot='item-group' {...props} />
 )
 
 const ItemSeparator = ({ className, ...props }: ComponentProps<typeof Separator>) => (
@@ -39,7 +39,7 @@ const Item = ({
     variant = 'default',
     size = 'default',
     ...props
-}: Omit<LinkProps, 'slot' | 'className'> &
+}: { href?: string } & Omit<ComponentProps<typeof Link>, 'slot' | 'className' | 'ref'> &
     Omit<ComponentPropsWithoutRef<'div'>, 'style'> &
     VariantProps<typeof itemVariants>) => {
     const Comp = 'href' in props ? Link : 'div'

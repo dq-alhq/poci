@@ -7,6 +7,10 @@ datasource db {
   provider = "postgresql"
 }
 
+//////////////////////////
+// AUTH (BETTER-AUTH)
+//////////////////////////
+
 model User {
   id              String    @id
   name            String
@@ -15,14 +19,22 @@ model User {
   image           String?
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
-  role            String?
+  role            String? // "admin" | "user"
   banned          Boolean?  @default(false)
   banReason       String?
   banExpires      DateTime?
   username        String?
   displayUsername String?
-  sessions        Session[]
-  accounts        Account[]
+
+  sessions Session[]
+  accounts Account[]
+
+  // RELATION TAMBAHAN
+  shifts         Shift[]         @relation("ShiftUser")
+  createdShifts  Shift[]         @relation("ShiftCreatedBy")
+  createdStocks  Stock[]         @relation("StockCreatedBy")
+  stockMovements StockMovement[]
+  expenses       Expense[]
 
   @@unique([email])
   @@unique([username])
@@ -66,14 +78,207 @@ model Account {
   @@map("account")
 }
 
-model Verification {
-  id         String   @id
-  identifier String
-  value      String
-  expiresAt  DateTime
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+enum StockMovementType {
+  IN
+  OUT
+  ADJUST
+}
 
-  @@index([identifier])
-  @@map("verification")
+enum ShiftStatus {
+  ACTIVE
+  CLOSED
+}
+
+enum ExpenseType {
+  ITEM // terkait barang
+  NON_ITEM // listrik, gaji, dll
+}
+
+//////////////////////////
+// MASTER DATA
+//////////////////////////
+
+model Item {
+  id        String @id @default(cuid())
+  name      String
+  unit      String
+  price     Int
+  sellPrice Int?
+
+  isProduct Boolean @default(false)
+
+  image String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  stocks         Stock[]
+  shiftItems     ShiftItem[]
+  expenseItems   ExpenseItem[]
+  stockMovements StockMovement[]
+
+  @@map("item")
+}
+
+model Outlet {
+  id       String  @id @default(cuid())
+  name     String
+  location String?
+
+  createdAt DateTime @default(now())
+
+  shifts Shift[]
+
+  @@map("outlet")
+}
+
+model Stock {
+  id String @id @default(cuid())
+
+  itemId String
+  item   Item   @relation(fields: [itemId], references: [id])
+
+  qty Int
+
+  // AUDIT (siapa yang bikin/update stock)
+  createdById String?
+  createdBy   User?   @relation("StockCreatedBy", fields: [createdById], references: [id])
+
+  updatedAt DateTime @updatedAt
+
+  @@unique([itemId])
+  @@map("stock")
+}
+
+model StockMovement {
+  id String @id @default(cuid())
+
+  itemId String
+  item   Item   @relation(fields: [itemId], references: [id])
+
+  qty Int
+
+  type StockMovementType @default(IN)
+  note String?
+
+  outletId String? // kalau kirim ke outlet
+
+  createdById String?
+  createdBy   User?   @relation(fields: [createdById], references: [id])
+
+  createdAt DateTime @default(now())
+}
+
+model Shift {
+  id String @id @default(cuid())
+
+  outletId String
+  outlet   Outlet @relation(fields: [outletId], references: [id])
+
+  // kasir yang jaga
+  userId String
+  user   User   @relation("ShiftUser", fields: [userId], references: [id])
+
+  // AUDIT (siapa yang create shift, bisa admin)
+  createdById String?
+  createdBy   User?   @relation("ShiftCreatedBy", fields: [createdById], references: [id])
+
+  status ShiftStatus @default(ACTIVE)
+
+  date DateTime
+
+  note String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  items ShiftItem[]
+  sales Sale?
+
+  @@index([userId])
+  @@index([outletId])
+  @@map("shift")
+}
+
+model ShiftItem {
+  id String @id @default(cuid())
+
+  shiftId String
+  shift   Shift  @relation(fields: [shiftId], references: [id])
+
+  itemId String
+  item   Item   @relation(fields: [itemId], references: [id])
+
+  sellPrice Int
+
+  qtyOut    Int
+  qtySold   Int @default(0)
+  qtyReturn Int @default(0)
+  qtyWaste  Int @default(0)
+
+  note String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([shiftId, itemId])
+  @@index([shiftId])
+  @@index([itemId])
+  @@map("shift_item")
+}
+
+model Sale {
+  id String @id @default(cuid())
+
+  shiftId String @unique
+  shift   Shift  @relation(fields: [shiftId], references: [id])
+
+  total    Int @default(0)
+  realSale Int @default(0)
+
+  note String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("sale")
+}
+
+model Expense {
+  id String @id @default(cuid())
+
+  title       String
+  description String?
+
+  type ExpenseType
+
+  total Int
+
+  date DateTime @default(now())
+
+  expenseItems ExpenseItem[]
+
+  createdById String?
+  createdBy   User?   @relation(fields: [createdById], references: [id])
+
+  @@map("expense")
+}
+
+model ExpenseItem {
+  id String @id @default(cuid())
+
+  expenseId String
+  expense   Expense @relation(fields: [expenseId], references: [id])
+
+  itemId String?
+  item   Item?   @relation(fields: [itemId], references: [id])
+
+  qty   Int
+  price Int
+
+  note String?
+
+  @@index([expenseId])
+  @@index([itemId])
+  @@map("expense_item")
 }

@@ -9,7 +9,7 @@ import { FieldError, FieldGroup, FieldLabel, Form } from '@/components/ui/field'
 import { Separator } from '@/components/ui/separator'
 import { PasswordInput, TextField } from '@/components/ui/text-field'
 import { authClient } from '@/lib/auth-client'
-import { updatePassword } from '@/server/auth/password'
+import { updatePassword } from '@/server/services/auth/password'
 
 export default function ProfileUpdateForm() {
     const { refetch } = authClient.useSession()
