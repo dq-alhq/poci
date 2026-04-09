@@ -5,7 +5,7 @@ import type { Product } from '@/generated/prisma/client'
 import Image from 'next/image'
 import { GridList, GridListHeader, GridListItem, GridListSection } from 'react-aria-components'
 import { ItemContent, ItemDescription, ItemHeader, ItemTitle, itemVariants } from '@/components/ui/item'
-import { formatRupiah } from '@/lib/utils'
+import { cn, formatRupiah } from '@/lib/utils'
 
 export const ItemCard = ({ product }: { product: Product }) => {
     return (
@@ -37,9 +37,9 @@ export const ItemCard = ({ product }: { product: Product }) => {
     )
 }
 
-export const ItemGroup = ({ children }: PropsWithChildren) => {
+export const ItemGroup = ({ children, className }: PropsWithChildren & { className?: string }) => {
     return (
-        <GridList aria-label='Item Group' className='space-y-6' layout='grid'>
+        <GridList aria-label='Item Group' className={cn('space-y-6', className)} layout='grid'>
             {children}
         </GridList>
     )
@@ -49,9 +49,11 @@ export const ItemGroupHeader = ({ children }: PropsWithChildren) => {
     return <GridListHeader className='col-span-full font-bold text-lg'>{children}</GridListHeader>
 }
 
-export const ItemGroupSection = ({ children }: PropsWithChildren) => {
+export const ItemGroupSection = ({ children, className }: PropsWithChildren & { className?: string }) => {
     return (
-        <GridListSection className='grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6'>
+        <GridListSection
+            className={cn('grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6', className)}
+        >
             {children}
         </GridListSection>
     )

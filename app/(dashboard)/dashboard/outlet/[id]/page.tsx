@@ -1,19 +1,19 @@
 import { Suspense } from 'react'
 import { Skeleton } from '@/components/ui/skeleton'
-import { ProdukDetailPage, ProdukImage } from './product-details'
+import { OutletDetails, OutletMapLocation } from './outlet-details'
 
-export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function OutletPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params
 
     return (
         <div className='grid gap-4 px-6 lg:grid-cols-[300px_1fr]'>
             <div className='aspect-square rounded-lg border shadow-sm'>
                 <Suspense fallback={<Skeleton className='size-full' />}>
-                    <ProdukImage id={id} />
+                    <OutletMapLocation id={id} />
                 </Suspense>
             </div>
             <Suspense fallback={<Skeleton className='size-full' />}>
-                <ProdukDetailPage id={id} />
+                <OutletDetails id={id} />
             </Suspense>
         </div>
     )

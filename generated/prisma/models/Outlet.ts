@@ -184,7 +184,7 @@ export type OutletWhereInput = {
   longitude?: Prisma.StringNullableFilter<"Outlet"> | string | null
   stocks?: Prisma.OutletStockListRelationFilter
   transfers?: Prisma.StockTransferListRelationFilter
-  shiftReports?: Prisma.ShiftReportListRelationFilter
+  shifts?: Prisma.ShiftListRelationFilter
 }
 
 export type OutletOrderByWithRelationInput = {
@@ -195,7 +195,7 @@ export type OutletOrderByWithRelationInput = {
   longitude?: Prisma.SortOrderInput | Prisma.SortOrder
   stocks?: Prisma.OutletStockOrderByRelationAggregateInput
   transfers?: Prisma.StockTransferOrderByRelationAggregateInput
-  shiftReports?: Prisma.ShiftReportOrderByRelationAggregateInput
+  shifts?: Prisma.ShiftOrderByRelationAggregateInput
 }
 
 export type OutletWhereUniqueInput = Prisma.AtLeast<{
@@ -209,7 +209,7 @@ export type OutletWhereUniqueInput = Prisma.AtLeast<{
   longitude?: Prisma.StringNullableFilter<"Outlet"> | string | null
   stocks?: Prisma.OutletStockListRelationFilter
   transfers?: Prisma.StockTransferListRelationFilter
-  shiftReports?: Prisma.ShiftReportListRelationFilter
+  shifts?: Prisma.ShiftListRelationFilter
 }, "id">
 
 export type OutletOrderByWithAggregationInput = {
@@ -242,7 +242,7 @@ export type OutletCreateInput = {
   longitude?: string | null
   stocks?: Prisma.OutletStockCreateNestedManyWithoutOutletInput
   transfers?: Prisma.StockTransferCreateNestedManyWithoutOutletInput
-  shiftReports?: Prisma.ShiftReportCreateNestedManyWithoutOutletInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutOutletInput
 }
 
 export type OutletUncheckedCreateInput = {
@@ -253,7 +253,7 @@ export type OutletUncheckedCreateInput = {
   longitude?: string | null
   stocks?: Prisma.OutletStockUncheckedCreateNestedManyWithoutOutletInput
   transfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutOutletInput
-  shiftReports?: Prisma.ShiftReportUncheckedCreateNestedManyWithoutOutletInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutOutletInput
 }
 
 export type OutletUpdateInput = {
@@ -264,7 +264,7 @@ export type OutletUpdateInput = {
   longitude?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stocks?: Prisma.OutletStockUpdateManyWithoutOutletNestedInput
   transfers?: Prisma.StockTransferUpdateManyWithoutOutletNestedInput
-  shiftReports?: Prisma.ShiftReportUpdateManyWithoutOutletNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutOutletNestedInput
 }
 
 export type OutletUncheckedUpdateInput = {
@@ -275,7 +275,7 @@ export type OutletUncheckedUpdateInput = {
   longitude?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stocks?: Prisma.OutletStockUncheckedUpdateManyWithoutOutletNestedInput
   transfers?: Prisma.StockTransferUncheckedUpdateManyWithoutOutletNestedInput
-  shiftReports?: Prisma.ShiftReportUncheckedUpdateManyWithoutOutletNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutOutletNestedInput
 }
 
 export type OutletCreateManyInput = {
@@ -331,6 +331,11 @@ export type OutletScalarRelationFilter = {
   isNot?: Prisma.OutletWhereInput
 }
 
+export type OutletNullableScalarRelationFilter = {
+  is?: Prisma.OutletWhereInput | null
+  isNot?: Prisma.OutletWhereInput | null
+}
+
 export type OutletCreateNestedOneWithoutStocksInput = {
   create?: Prisma.XOR<Prisma.OutletCreateWithoutStocksInput, Prisma.OutletUncheckedCreateWithoutStocksInput>
   connectOrCreate?: Prisma.OutletCreateOrConnectWithoutStocksInput
@@ -351,26 +356,28 @@ export type OutletCreateNestedOneWithoutTransfersInput = {
   connect?: Prisma.OutletWhereUniqueInput
 }
 
-export type OutletUpdateOneRequiredWithoutTransfersNestedInput = {
+export type OutletUpdateOneWithoutTransfersNestedInput = {
   create?: Prisma.XOR<Prisma.OutletCreateWithoutTransfersInput, Prisma.OutletUncheckedCreateWithoutTransfersInput>
   connectOrCreate?: Prisma.OutletCreateOrConnectWithoutTransfersInput
   upsert?: Prisma.OutletUpsertWithoutTransfersInput
+  disconnect?: Prisma.OutletWhereInput | boolean
+  delete?: Prisma.OutletWhereInput | boolean
   connect?: Prisma.OutletWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.OutletUpdateToOneWithWhereWithoutTransfersInput, Prisma.OutletUpdateWithoutTransfersInput>, Prisma.OutletUncheckedUpdateWithoutTransfersInput>
 }
 
-export type OutletCreateNestedOneWithoutShiftReportsInput = {
-  create?: Prisma.XOR<Prisma.OutletCreateWithoutShiftReportsInput, Prisma.OutletUncheckedCreateWithoutShiftReportsInput>
-  connectOrCreate?: Prisma.OutletCreateOrConnectWithoutShiftReportsInput
+export type OutletCreateNestedOneWithoutShiftsInput = {
+  create?: Prisma.XOR<Prisma.OutletCreateWithoutShiftsInput, Prisma.OutletUncheckedCreateWithoutShiftsInput>
+  connectOrCreate?: Prisma.OutletCreateOrConnectWithoutShiftsInput
   connect?: Prisma.OutletWhereUniqueInput
 }
 
-export type OutletUpdateOneRequiredWithoutShiftReportsNestedInput = {
-  create?: Prisma.XOR<Prisma.OutletCreateWithoutShiftReportsInput, Prisma.OutletUncheckedCreateWithoutShiftReportsInput>
-  connectOrCreate?: Prisma.OutletCreateOrConnectWithoutShiftReportsInput
-  upsert?: Prisma.OutletUpsertWithoutShiftReportsInput
+export type OutletUpdateOneRequiredWithoutShiftsNestedInput = {
+  create?: Prisma.XOR<Prisma.OutletCreateWithoutShiftsInput, Prisma.OutletUncheckedCreateWithoutShiftsInput>
+  connectOrCreate?: Prisma.OutletCreateOrConnectWithoutShiftsInput
+  upsert?: Prisma.OutletUpsertWithoutShiftsInput
   connect?: Prisma.OutletWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.OutletUpdateToOneWithWhereWithoutShiftReportsInput, Prisma.OutletUpdateWithoutShiftReportsInput>, Prisma.OutletUncheckedUpdateWithoutShiftReportsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OutletUpdateToOneWithWhereWithoutShiftsInput, Prisma.OutletUpdateWithoutShiftsInput>, Prisma.OutletUncheckedUpdateWithoutShiftsInput>
 }
 
 export type OutletCreateWithoutStocksInput = {
@@ -380,7 +387,7 @@ export type OutletCreateWithoutStocksInput = {
   latitude?: string | null
   longitude?: string | null
   transfers?: Prisma.StockTransferCreateNestedManyWithoutOutletInput
-  shiftReports?: Prisma.ShiftReportCreateNestedManyWithoutOutletInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutOutletInput
 }
 
 export type OutletUncheckedCreateWithoutStocksInput = {
@@ -390,7 +397,7 @@ export type OutletUncheckedCreateWithoutStocksInput = {
   latitude?: string | null
   longitude?: string | null
   transfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutOutletInput
-  shiftReports?: Prisma.ShiftReportUncheckedCreateNestedManyWithoutOutletInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutOutletInput
 }
 
 export type OutletCreateOrConnectWithoutStocksInput = {
@@ -416,7 +423,7 @@ export type OutletUpdateWithoutStocksInput = {
   latitude?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   longitude?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transfers?: Prisma.StockTransferUpdateManyWithoutOutletNestedInput
-  shiftReports?: Prisma.ShiftReportUpdateManyWithoutOutletNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutOutletNestedInput
 }
 
 export type OutletUncheckedUpdateWithoutStocksInput = {
@@ -426,7 +433,7 @@ export type OutletUncheckedUpdateWithoutStocksInput = {
   latitude?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   longitude?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transfers?: Prisma.StockTransferUncheckedUpdateManyWithoutOutletNestedInput
-  shiftReports?: Prisma.ShiftReportUncheckedUpdateManyWithoutOutletNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutOutletNestedInput
 }
 
 export type OutletCreateWithoutTransfersInput = {
@@ -436,7 +443,7 @@ export type OutletCreateWithoutTransfersInput = {
   latitude?: string | null
   longitude?: string | null
   stocks?: Prisma.OutletStockCreateNestedManyWithoutOutletInput
-  shiftReports?: Prisma.ShiftReportCreateNestedManyWithoutOutletInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutOutletInput
 }
 
 export type OutletUncheckedCreateWithoutTransfersInput = {
@@ -446,7 +453,7 @@ export type OutletUncheckedCreateWithoutTransfersInput = {
   latitude?: string | null
   longitude?: string | null
   stocks?: Prisma.OutletStockUncheckedCreateNestedManyWithoutOutletInput
-  shiftReports?: Prisma.ShiftReportUncheckedCreateNestedManyWithoutOutletInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutOutletInput
 }
 
 export type OutletCreateOrConnectWithoutTransfersInput = {
@@ -472,7 +479,7 @@ export type OutletUpdateWithoutTransfersInput = {
   latitude?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   longitude?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stocks?: Prisma.OutletStockUpdateManyWithoutOutletNestedInput
-  shiftReports?: Prisma.ShiftReportUpdateManyWithoutOutletNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutOutletNestedInput
 }
 
 export type OutletUncheckedUpdateWithoutTransfersInput = {
@@ -482,10 +489,10 @@ export type OutletUncheckedUpdateWithoutTransfersInput = {
   latitude?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   longitude?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stocks?: Prisma.OutletStockUncheckedUpdateManyWithoutOutletNestedInput
-  shiftReports?: Prisma.ShiftReportUncheckedUpdateManyWithoutOutletNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutOutletNestedInput
 }
 
-export type OutletCreateWithoutShiftReportsInput = {
+export type OutletCreateWithoutShiftsInput = {
   id?: string
   name: string
   location?: string | null
@@ -495,7 +502,7 @@ export type OutletCreateWithoutShiftReportsInput = {
   transfers?: Prisma.StockTransferCreateNestedManyWithoutOutletInput
 }
 
-export type OutletUncheckedCreateWithoutShiftReportsInput = {
+export type OutletUncheckedCreateWithoutShiftsInput = {
   id?: string
   name: string
   location?: string | null
@@ -505,23 +512,23 @@ export type OutletUncheckedCreateWithoutShiftReportsInput = {
   transfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutOutletInput
 }
 
-export type OutletCreateOrConnectWithoutShiftReportsInput = {
+export type OutletCreateOrConnectWithoutShiftsInput = {
   where: Prisma.OutletWhereUniqueInput
-  create: Prisma.XOR<Prisma.OutletCreateWithoutShiftReportsInput, Prisma.OutletUncheckedCreateWithoutShiftReportsInput>
+  create: Prisma.XOR<Prisma.OutletCreateWithoutShiftsInput, Prisma.OutletUncheckedCreateWithoutShiftsInput>
 }
 
-export type OutletUpsertWithoutShiftReportsInput = {
-  update: Prisma.XOR<Prisma.OutletUpdateWithoutShiftReportsInput, Prisma.OutletUncheckedUpdateWithoutShiftReportsInput>
-  create: Prisma.XOR<Prisma.OutletCreateWithoutShiftReportsInput, Prisma.OutletUncheckedCreateWithoutShiftReportsInput>
+export type OutletUpsertWithoutShiftsInput = {
+  update: Prisma.XOR<Prisma.OutletUpdateWithoutShiftsInput, Prisma.OutletUncheckedUpdateWithoutShiftsInput>
+  create: Prisma.XOR<Prisma.OutletCreateWithoutShiftsInput, Prisma.OutletUncheckedCreateWithoutShiftsInput>
   where?: Prisma.OutletWhereInput
 }
 
-export type OutletUpdateToOneWithWhereWithoutShiftReportsInput = {
+export type OutletUpdateToOneWithWhereWithoutShiftsInput = {
   where?: Prisma.OutletWhereInput
-  data: Prisma.XOR<Prisma.OutletUpdateWithoutShiftReportsInput, Prisma.OutletUncheckedUpdateWithoutShiftReportsInput>
+  data: Prisma.XOR<Prisma.OutletUpdateWithoutShiftsInput, Prisma.OutletUncheckedUpdateWithoutShiftsInput>
 }
 
-export type OutletUpdateWithoutShiftReportsInput = {
+export type OutletUpdateWithoutShiftsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -531,7 +538,7 @@ export type OutletUpdateWithoutShiftReportsInput = {
   transfers?: Prisma.StockTransferUpdateManyWithoutOutletNestedInput
 }
 
-export type OutletUncheckedUpdateWithoutShiftReportsInput = {
+export type OutletUncheckedUpdateWithoutShiftsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -549,13 +556,13 @@ export type OutletUncheckedUpdateWithoutShiftReportsInput = {
 export type OutletCountOutputType = {
   stocks: number
   transfers: number
-  shiftReports: number
+  shifts: number
 }
 
 export type OutletCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   stocks?: boolean | OutletCountOutputTypeCountStocksArgs
   transfers?: boolean | OutletCountOutputTypeCountTransfersArgs
-  shiftReports?: boolean | OutletCountOutputTypeCountShiftReportsArgs
+  shifts?: boolean | OutletCountOutputTypeCountShiftsArgs
 }
 
 /**
@@ -585,8 +592,8 @@ export type OutletCountOutputTypeCountTransfersArgs<ExtArgs extends runtime.Type
 /**
  * OutletCountOutputType without action
  */
-export type OutletCountOutputTypeCountShiftReportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ShiftReportWhereInput
+export type OutletCountOutputTypeCountShiftsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ShiftWhereInput
 }
 
 
@@ -598,7 +605,7 @@ export type OutletSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   longitude?: boolean
   stocks?: boolean | Prisma.Outlet$stocksArgs<ExtArgs>
   transfers?: boolean | Prisma.Outlet$transfersArgs<ExtArgs>
-  shiftReports?: boolean | Prisma.Outlet$shiftReportsArgs<ExtArgs>
+  shifts?: boolean | Prisma.Outlet$shiftsArgs<ExtArgs>
   _count?: boolean | Prisma.OutletCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["outlet"]>
 
@@ -630,7 +637,7 @@ export type OutletOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
 export type OutletInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   stocks?: boolean | Prisma.Outlet$stocksArgs<ExtArgs>
   transfers?: boolean | Prisma.Outlet$transfersArgs<ExtArgs>
-  shiftReports?: boolean | Prisma.Outlet$shiftReportsArgs<ExtArgs>
+  shifts?: boolean | Prisma.Outlet$shiftsArgs<ExtArgs>
   _count?: boolean | Prisma.OutletCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type OutletIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -641,7 +648,7 @@ export type $OutletPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   objects: {
     stocks: Prisma.$OutletStockPayload<ExtArgs>[]
     transfers: Prisma.$StockTransferPayload<ExtArgs>[]
-    shiftReports: Prisma.$ShiftReportPayload<ExtArgs>[]
+    shifts: Prisma.$ShiftPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1045,7 +1052,7 @@ export interface Prisma__OutletClient<T, Null = never, ExtArgs extends runtime.T
   readonly [Symbol.toStringTag]: "PrismaPromise"
   stocks<T extends Prisma.Outlet$stocksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Outlet$stocksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OutletStockPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   transfers<T extends Prisma.Outlet$transfersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Outlet$transfersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockTransferPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  shiftReports<T extends Prisma.Outlet$shiftReportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Outlet$shiftReportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ShiftReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  shifts<T extends Prisma.Outlet$shiftsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Outlet$shiftsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ShiftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1521,27 +1528,27 @@ export type Outlet$transfersArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
- * Outlet.shiftReports
+ * Outlet.shifts
  */
-export type Outlet$shiftReportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Outlet$shiftsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the ShiftReport
+   * Select specific fields to fetch from the Shift
    */
-  select?: Prisma.ShiftReportSelect<ExtArgs> | null
+  select?: Prisma.ShiftSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the ShiftReport
+   * Omit specific fields from the Shift
    */
-  omit?: Prisma.ShiftReportOmit<ExtArgs> | null
+  omit?: Prisma.ShiftOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ShiftReportInclude<ExtArgs> | null
-  where?: Prisma.ShiftReportWhereInput
-  orderBy?: Prisma.ShiftReportOrderByWithRelationInput | Prisma.ShiftReportOrderByWithRelationInput[]
-  cursor?: Prisma.ShiftReportWhereUniqueInput
+  include?: Prisma.ShiftInclude<ExtArgs> | null
+  where?: Prisma.ShiftWhereInput
+  orderBy?: Prisma.ShiftOrderByWithRelationInput | Prisma.ShiftOrderByWithRelationInput[]
+  cursor?: Prisma.ShiftWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.ShiftReportScalarFieldEnum | Prisma.ShiftReportScalarFieldEnum[]
+  distinct?: Prisma.ShiftScalarFieldEnum | Prisma.ShiftScalarFieldEnum[]
 }
 
 /**

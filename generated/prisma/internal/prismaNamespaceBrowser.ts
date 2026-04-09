@@ -58,9 +58,8 @@ export const ModelName = {
   Outlet: 'Outlet',
   OutletStock: 'OutletStock',
   StockTransfer: 'StockTransfer',
-  ShiftReport: 'ShiftReport',
+  Shift: 'Shift',
   TransferItem: 'TransferItem',
-  SalesItem: 'SalesItem',
   Purchase: 'Purchase',
   PurchaseItem: 'PurchaseItem'
 } as const
@@ -174,10 +173,8 @@ export type OutletStockScalarFieldEnum = (typeof OutletStockScalarFieldEnum)[key
 export const StockTransferScalarFieldEnum = {
   id: 'id',
   type: 'type',
-  status: 'status',
   createdAt: 'createdAt',
   outletId: 'outletId',
-  shiftId: 'shiftId',
   note: 'note',
   createdById: 'createdById'
 } as const
@@ -185,14 +182,14 @@ export const StockTransferScalarFieldEnum = {
 export type StockTransferScalarFieldEnum = (typeof StockTransferScalarFieldEnum)[keyof typeof StockTransferScalarFieldEnum]
 
 
-export const ShiftReportScalarFieldEnum = {
+export const ShiftScalarFieldEnum = {
   id: 'id',
   date: 'date',
   status: 'status',
   outletId: 'outletId'
 } as const
 
-export type ShiftReportScalarFieldEnum = (typeof ShiftReportScalarFieldEnum)[keyof typeof ShiftReportScalarFieldEnum]
+export type ShiftScalarFieldEnum = (typeof ShiftScalarFieldEnum)[keyof typeof ShiftScalarFieldEnum]
 
 
 export const TransferItemScalarFieldEnum = {
@@ -203,17 +200,6 @@ export const TransferItemScalarFieldEnum = {
 } as const
 
 export type TransferItemScalarFieldEnum = (typeof TransferItemScalarFieldEnum)[keyof typeof TransferItemScalarFieldEnum]
-
-
-export const SalesItemScalarFieldEnum = {
-  id: 'id',
-  qty: 'qty',
-  price: 'price',
-  shiftReportId: 'shiftReportId',
-  productId: 'productId'
-} as const
-
-export type SalesItemScalarFieldEnum = (typeof SalesItemScalarFieldEnum)[keyof typeof SalesItemScalarFieldEnum]
 
 
 export const PurchaseScalarFieldEnum = {

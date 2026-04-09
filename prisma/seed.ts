@@ -61,14 +61,10 @@ async function main() {
     await db.outlet.deleteMany()
     await db.outlet.create({
         data: {
-            name: 'Gudang Utama'
-        }
-    })
-
-    await db.outlet.create({
-        data: {
             name: 'Cabang Melirang',
-            location: 'Dsn.Galalo RT.09 RW.04 (Samping Tugu Pereng Kulon)'
+            location: 'Dsn.Galalo RT.09 RW.04 (Samping Tugu Pereng Kulon)',
+            latitude: '-7.036017',
+            longitude: '112.531615'
         }
     })
     console.info('✅ Outlet Created!')

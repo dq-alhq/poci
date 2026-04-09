@@ -1,4 +1,5 @@
 import {
+    IconBuildingStore,
     IconBuildingWarehouse,
     IconKey,
     IconLayoutGrid,
@@ -19,6 +20,12 @@ export const getNavigations = (role: string | undefined) => {
             title: 'Produk',
             href: '/dashboard/produk',
             icon: IconPackage,
+            show: true
+        },
+        {
+            title: 'Outlet',
+            href: '/dashboard/outlet',
+            icon: IconBuildingStore,
             show: true
         },
         {

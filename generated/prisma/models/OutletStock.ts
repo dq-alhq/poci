@@ -227,7 +227,6 @@ export type OutletStockOrderByWithRelationInput = {
 
 export type OutletStockWhereUniqueInput = Prisma.AtLeast<{
   id?: number
-  outletId_productId?: Prisma.OutletStockOutletIdProductIdCompoundUniqueInput
   AND?: Prisma.OutletStockWhereInput | Prisma.OutletStockWhereInput[]
   OR?: Prisma.OutletStockWhereInput[]
   NOT?: Prisma.OutletStockWhereInput | Prisma.OutletStockWhereInput[]
@@ -236,7 +235,7 @@ export type OutletStockWhereUniqueInput = Prisma.AtLeast<{
   productId?: Prisma.StringFilter<"OutletStock"> | string
   outlet?: Prisma.XOR<Prisma.OutletScalarRelationFilter, Prisma.OutletWhereInput>
   product?: Prisma.XOR<Prisma.ProductScalarRelationFilter, Prisma.ProductWhereInput>
-}, "id" | "outletId_productId">
+}, "id">
 
 export type OutletStockOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -312,11 +311,6 @@ export type OutletStockListRelationFilter = {
 
 export type OutletStockOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type OutletStockOutletIdProductIdCompoundUniqueInput = {
-  outletId: string
-  productId: string
 }
 
 export type OutletStockCountOrderByAggregateInput = {

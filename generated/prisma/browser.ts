@@ -53,20 +53,15 @@ export type OutletStock = Prisma.OutletStockModel
  */
 export type StockTransfer = Prisma.StockTransferModel
 /**
- * Model ShiftReport
+ * Model Shift
  * 
  */
-export type ShiftReport = Prisma.ShiftReportModel
+export type Shift = Prisma.ShiftModel
 /**
  * Model TransferItem
  * 
  */
 export type TransferItem = Prisma.TransferItemModel
-/**
- * Model SalesItem
- * 
- */
-export type SalesItem = Prisma.SalesItemModel
 /**
  * Model Purchase
  * 

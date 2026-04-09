@@ -19,15 +19,6 @@ export const TransferType = {
 export type TransferType = (typeof TransferType)[keyof typeof TransferType]
 
 
-export const TransferStatus = {
-  PENDING: 'PENDING',
-  COMPLETED: 'COMPLETED',
-  CANCELLED: 'CANCELLED'
-} as const
-
-export type TransferStatus = (typeof TransferStatus)[keyof typeof TransferStatus]
-
-
 export const ShiftStatus = {
   OPEN: 'OPEN',
   CLOSED: 'CLOSED'

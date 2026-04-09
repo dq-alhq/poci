@@ -7,14 +7,19 @@ import { useState } from 'react'
 import { GridListItem } from 'react-aria-components'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
+import { FieldSet } from '@/components/ui/field'
 import { InputGroup } from '@/components/ui/input'
-import { ItemContent, ItemHeader, ItemTitle, itemVariants } from '@/components/ui/item'
+import { ItemContent, ItemDescription, ItemHeader, ItemTitle, itemVariants } from '@/components/ui/item'
+import { Popover } from '@/components/ui/popover'
+import { Radio, RadioGroup } from '@/components/ui/radio'
+import { TransferType } from '@/generated/prisma/enums'
 import { modifyStock } from '@/server/services/products.service'
 
 export const StokItem = ({ product }: { product: Product }) => {
-    const [stock, setStock] = useState<number>(product.qty)
+    const [stock, setStock] = useState<number>(0)
+    const [type, setType] = useState<TransferType>(TransferType.DAMAGED)
     const handleStockChange = async () => {
-        const res = await modifyStock(product.id, stock)
+        const res = await modifyStock(product.id, stock, type)
         if (res.success) {
             toast.success(res.message)
         } else toast.error(res.message)
@@ -39,29 +44,50 @@ export const StokItem = ({ product }: { product: Product }) => {
             </ItemHeader>
             <ItemContent>
                 <ItemTitle className='line-clamp-1 w-full justify-center text-center'>{product.name}</ItemTitle>
-                <InputGroup>
-                    <InputGroup.Addon>
-                        <InputGroup.Button onPress={() => setStock(stock - 1)} variant='default'>
-                            <IconMinus />
-                        </InputGroup.Button>
-                    </InputGroup.Addon>
-                    <InputGroup.Input
-                        className='text-center'
-                        onChange={(e) => setStock(Number(e.target.value))}
-                        value={stock}
-                    />
-                    <InputGroup.Addon align={'inline-end'}>
-                        <InputGroup.Button onPress={() => setStock(stock + 1)} variant='default'>
-                            <IconPlus />
-                        </InputGroup.Button>
-                    </InputGroup.Addon>
-                </InputGroup>
-                <p className='text-center'>{product.unit}</p>
-                {stock !== product.qty && (
-                    <Button className='w-full' onPress={handleStockChange}>
-                        Simpan
-                    </Button>
-                )}
+                <ItemDescription className='text-center'>
+                    {product.qty} {product.unit}
+                </ItemDescription>
+                <Popover>
+                    <Button variant='outline'>Update Stok</Button>
+                    <Popover.Content>
+                        <FieldSet>
+                            <InputGroup>
+                                <InputGroup.Addon>
+                                    <InputGroup.Button
+                                        onPress={() => setStock(Math.max(0, stock - 1))}
+                                        variant='default'
+                                    >
+                                        <IconMinus />
+                                    </InputGroup.Button>
+                                </InputGroup.Addon>
+                                <InputGroup.Input
+                                    className='text-center'
+                                    onChange={(e) => setStock(Number(e.target.value))}
+                                    value={stock}
+                                />
+                                <InputGroup.Addon align={'inline-end'}>
+                                    <InputGroup.Button onPress={() => setStock(stock + 1)} variant='default'>
+                                        <IconPlus />
+                                    </InputGroup.Button>
+                                </InputGroup.Addon>
+                            </InputGroup>
+                            <RadioGroup
+                                aria-label='Type'
+                                onChange={(e) => setType(e as TransferType)}
+                                orientation='horizontal'
+                                value={type}
+                            >
+                                <Radio value={TransferType.IN}>Barang Masuk</Radio>
+                                <Radio value={TransferType.DAMAGED}>Rusak</Radio>
+                            </RadioGroup>
+                            {stock > 0 && (
+                                <Button className='w-full' onPress={handleStockChange}>
+                                    Simpan
+                                </Button>
+                            )}
+                        </FieldSet>
+                    </Popover.Content>
+                </Popover>
             </ItemContent>
         </GridListItem>
     )

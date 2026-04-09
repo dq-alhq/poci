@@ -391,9 +391,8 @@ export const ModelName = {
   Outlet: 'Outlet',
   OutletStock: 'OutletStock',
   StockTransfer: 'StockTransfer',
-  ShiftReport: 'ShiftReport',
+  Shift: 'Shift',
   TransferItem: 'TransferItem',
-  SalesItem: 'SalesItem',
   Purchase: 'Purchase',
   PurchaseItem: 'PurchaseItem'
 } as const
@@ -411,7 +410,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "product" | "outlet" | "outletStock" | "stockTransfer" | "shiftReport" | "transferItem" | "salesItem" | "purchase" | "purchaseItem"
+    modelProps: "user" | "session" | "account" | "product" | "outlet" | "outletStock" | "stockTransfer" | "shift" | "transferItem" | "purchase" | "purchaseItem"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -933,77 +932,77 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    ShiftReport: {
-      payload: Prisma.$ShiftReportPayload<ExtArgs>
-      fields: Prisma.ShiftReportFieldRefs
+    Shift: {
+      payload: Prisma.$ShiftPayload<ExtArgs>
+      fields: Prisma.ShiftFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.ShiftReportFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftReportPayload> | null
+          args: Prisma.ShiftFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.ShiftReportFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftReportPayload>
+          args: Prisma.ShiftFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftPayload>
         }
         findFirst: {
-          args: Prisma.ShiftReportFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftReportPayload> | null
+          args: Prisma.ShiftFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.ShiftReportFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftReportPayload>
+          args: Prisma.ShiftFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftPayload>
         }
         findMany: {
-          args: Prisma.ShiftReportFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftReportPayload>[]
+          args: Prisma.ShiftFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftPayload>[]
         }
         create: {
-          args: Prisma.ShiftReportCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftReportPayload>
+          args: Prisma.ShiftCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftPayload>
         }
         createMany: {
-          args: Prisma.ShiftReportCreateManyArgs<ExtArgs>
+          args: Prisma.ShiftCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.ShiftReportCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftReportPayload>[]
+          args: Prisma.ShiftCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftPayload>[]
         }
         delete: {
-          args: Prisma.ShiftReportDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftReportPayload>
+          args: Prisma.ShiftDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftPayload>
         }
         update: {
-          args: Prisma.ShiftReportUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftReportPayload>
+          args: Prisma.ShiftUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftPayload>
         }
         deleteMany: {
-          args: Prisma.ShiftReportDeleteManyArgs<ExtArgs>
+          args: Prisma.ShiftDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.ShiftReportUpdateManyArgs<ExtArgs>
+          args: Prisma.ShiftUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.ShiftReportUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftReportPayload>[]
+          args: Prisma.ShiftUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftPayload>[]
         }
         upsert: {
-          args: Prisma.ShiftReportUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftReportPayload>
+          args: Prisma.ShiftUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftPayload>
         }
         aggregate: {
-          args: Prisma.ShiftReportAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateShiftReport>
+          args: Prisma.ShiftAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateShift>
         }
         groupBy: {
-          args: Prisma.ShiftReportGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ShiftReportGroupByOutputType>[]
+          args: Prisma.ShiftGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ShiftGroupByOutputType>[]
         }
         count: {
-          args: Prisma.ShiftReportCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ShiftReportCountAggregateOutputType> | number
+          args: Prisma.ShiftCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ShiftCountAggregateOutputType> | number
         }
       }
     }
@@ -1078,80 +1077,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.TransferItemCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.TransferItemCountAggregateOutputType> | number
-        }
-      }
-    }
-    SalesItem: {
-      payload: Prisma.$SalesItemPayload<ExtArgs>
-      fields: Prisma.SalesItemFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.SalesItemFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SalesItemPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.SalesItemFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SalesItemPayload>
-        }
-        findFirst: {
-          args: Prisma.SalesItemFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SalesItemPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.SalesItemFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SalesItemPayload>
-        }
-        findMany: {
-          args: Prisma.SalesItemFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SalesItemPayload>[]
-        }
-        create: {
-          args: Prisma.SalesItemCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SalesItemPayload>
-        }
-        createMany: {
-          args: Prisma.SalesItemCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.SalesItemCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SalesItemPayload>[]
-        }
-        delete: {
-          args: Prisma.SalesItemDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SalesItemPayload>
-        }
-        update: {
-          args: Prisma.SalesItemUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SalesItemPayload>
-        }
-        deleteMany: {
-          args: Prisma.SalesItemDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.SalesItemUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.SalesItemUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SalesItemPayload>[]
-        }
-        upsert: {
-          args: Prisma.SalesItemUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SalesItemPayload>
-        }
-        aggregate: {
-          args: Prisma.SalesItemAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateSalesItem>
-        }
-        groupBy: {
-          args: Prisma.SalesItemGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.SalesItemGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.SalesItemCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.SalesItemCountAggregateOutputType> | number
         }
       }
     }
@@ -1435,10 +1360,8 @@ export type OutletStockScalarFieldEnum = (typeof OutletStockScalarFieldEnum)[key
 export const StockTransferScalarFieldEnum = {
   id: 'id',
   type: 'type',
-  status: 'status',
   createdAt: 'createdAt',
   outletId: 'outletId',
-  shiftId: 'shiftId',
   note: 'note',
   createdById: 'createdById'
 } as const
@@ -1446,14 +1369,14 @@ export const StockTransferScalarFieldEnum = {
 export type StockTransferScalarFieldEnum = (typeof StockTransferScalarFieldEnum)[keyof typeof StockTransferScalarFieldEnum]
 
 
-export const ShiftReportScalarFieldEnum = {
+export const ShiftScalarFieldEnum = {
   id: 'id',
   date: 'date',
   status: 'status',
   outletId: 'outletId'
 } as const
 
-export type ShiftReportScalarFieldEnum = (typeof ShiftReportScalarFieldEnum)[keyof typeof ShiftReportScalarFieldEnum]
+export type ShiftScalarFieldEnum = (typeof ShiftScalarFieldEnum)[keyof typeof ShiftScalarFieldEnum]
 
 
 export const TransferItemScalarFieldEnum = {
@@ -1464,17 +1387,6 @@ export const TransferItemScalarFieldEnum = {
 } as const
 
 export type TransferItemScalarFieldEnum = (typeof TransferItemScalarFieldEnum)[keyof typeof TransferItemScalarFieldEnum]
-
-
-export const SalesItemScalarFieldEnum = {
-  id: 'id',
-  qty: 'qty',
-  price: 'price',
-  shiftReportId: 'shiftReportId',
-  productId: 'productId'
-} as const
-
-export type SalesItemScalarFieldEnum = (typeof SalesItemScalarFieldEnum)[keyof typeof SalesItemScalarFieldEnum]
 
 
 export const PurchaseScalarFieldEnum = {
@@ -1589,20 +1501,6 @@ export type EnumTransferTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$Pri
  * Reference to a field of type 'TransferType[]'
  */
 export type ListEnumTransferTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TransferType[]'>
-    
-
-
-/**
- * Reference to a field of type 'TransferStatus'
- */
-export type EnumTransferStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TransferStatus'>
-    
-
-
-/**
- * Reference to a field of type 'TransferStatus[]'
- */
-export type ListEnumTransferStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TransferStatus[]'>
     
 
 
@@ -1735,9 +1633,8 @@ export type GlobalOmitConfig = {
   outlet?: Prisma.OutletOmit
   outletStock?: Prisma.OutletStockOmit
   stockTransfer?: Prisma.StockTransferOmit
-  shiftReport?: Prisma.ShiftReportOmit
+  shift?: Prisma.ShiftOmit
   transferItem?: Prisma.TransferItemOmit
-  salesItem?: Prisma.SalesItemOmit
   purchase?: Prisma.PurchaseOmit
   purchaseItem?: Prisma.PurchaseItemOmit
 }

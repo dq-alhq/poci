@@ -28,21 +28,17 @@ export type AggregateStockTransfer = {
 
 export type StockTransferAvgAggregateOutputType = {
   id: number | null
-  shiftId: number | null
 }
 
 export type StockTransferSumAggregateOutputType = {
   id: number | null
-  shiftId: number | null
 }
 
 export type StockTransferMinAggregateOutputType = {
   id: number | null
   type: $Enums.TransferType | null
-  status: $Enums.TransferStatus | null
   createdAt: Date | null
   outletId: string | null
-  shiftId: number | null
   note: string | null
   createdById: string | null
 }
@@ -50,10 +46,8 @@ export type StockTransferMinAggregateOutputType = {
 export type StockTransferMaxAggregateOutputType = {
   id: number | null
   type: $Enums.TransferType | null
-  status: $Enums.TransferStatus | null
   createdAt: Date | null
   outletId: string | null
-  shiftId: number | null
   note: string | null
   createdById: string | null
 }
@@ -61,10 +55,8 @@ export type StockTransferMaxAggregateOutputType = {
 export type StockTransferCountAggregateOutputType = {
   id: number
   type: number
-  status: number
   createdAt: number
   outletId: number
-  shiftId: number
   note: number
   createdById: number
   _all: number
@@ -73,21 +65,17 @@ export type StockTransferCountAggregateOutputType = {
 
 export type StockTransferAvgAggregateInputType = {
   id?: true
-  shiftId?: true
 }
 
 export type StockTransferSumAggregateInputType = {
   id?: true
-  shiftId?: true
 }
 
 export type StockTransferMinAggregateInputType = {
   id?: true
   type?: true
-  status?: true
   createdAt?: true
   outletId?: true
-  shiftId?: true
   note?: true
   createdById?: true
 }
@@ -95,10 +83,8 @@ export type StockTransferMinAggregateInputType = {
 export type StockTransferMaxAggregateInputType = {
   id?: true
   type?: true
-  status?: true
   createdAt?: true
   outletId?: true
-  shiftId?: true
   note?: true
   createdById?: true
 }
@@ -106,10 +92,8 @@ export type StockTransferMaxAggregateInputType = {
 export type StockTransferCountAggregateInputType = {
   id?: true
   type?: true
-  status?: true
   createdAt?: true
   outletId?: true
-  shiftId?: true
   note?: true
   createdById?: true
   _all?: true
@@ -204,10 +188,8 @@ export type StockTransferGroupByArgs<ExtArgs extends runtime.Types.Extensions.In
 export type StockTransferGroupByOutputType = {
   id: number
   type: $Enums.TransferType
-  status: $Enums.TransferStatus
   createdAt: Date
-  outletId: string
-  shiftId: number | null
+  outletId: string | null
   note: string | null
   createdById: string
   _count: StockTransferCountAggregateOutputType | null
@@ -238,30 +220,24 @@ export type StockTransferWhereInput = {
   NOT?: Prisma.StockTransferWhereInput | Prisma.StockTransferWhereInput[]
   id?: Prisma.IntFilter<"StockTransfer"> | number
   type?: Prisma.EnumTransferTypeFilter<"StockTransfer"> | $Enums.TransferType
-  status?: Prisma.EnumTransferStatusFilter<"StockTransfer"> | $Enums.TransferStatus
   createdAt?: Prisma.DateTimeFilter<"StockTransfer"> | Date | string
-  outletId?: Prisma.StringFilter<"StockTransfer"> | string
-  shiftId?: Prisma.IntNullableFilter<"StockTransfer"> | number | null
+  outletId?: Prisma.StringNullableFilter<"StockTransfer"> | string | null
   note?: Prisma.StringNullableFilter<"StockTransfer"> | string | null
   createdById?: Prisma.StringFilter<"StockTransfer"> | string
   items?: Prisma.TransferItemListRelationFilter
-  outlet?: Prisma.XOR<Prisma.OutletScalarRelationFilter, Prisma.OutletWhereInput>
-  shiftReport?: Prisma.XOR<Prisma.ShiftReportNullableScalarRelationFilter, Prisma.ShiftReportWhereInput> | null
+  outlet?: Prisma.XOR<Prisma.OutletNullableScalarRelationFilter, Prisma.OutletWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
 export type StockTransferOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  outletId?: Prisma.SortOrder
-  shiftId?: Prisma.SortOrderInput | Prisma.SortOrder
+  outletId?: Prisma.SortOrderInput | Prisma.SortOrder
   note?: Prisma.SortOrderInput | Prisma.SortOrder
   createdById?: Prisma.SortOrder
   items?: Prisma.TransferItemOrderByRelationAggregateInput
   outlet?: Prisma.OutletOrderByWithRelationInput
-  shiftReport?: Prisma.ShiftReportOrderByWithRelationInput
   createdBy?: Prisma.UserOrderByWithRelationInput
 }
 
@@ -271,25 +247,20 @@ export type StockTransferWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.StockTransferWhereInput[]
   NOT?: Prisma.StockTransferWhereInput | Prisma.StockTransferWhereInput[]
   type?: Prisma.EnumTransferTypeFilter<"StockTransfer"> | $Enums.TransferType
-  status?: Prisma.EnumTransferStatusFilter<"StockTransfer"> | $Enums.TransferStatus
   createdAt?: Prisma.DateTimeFilter<"StockTransfer"> | Date | string
-  outletId?: Prisma.StringFilter<"StockTransfer"> | string
-  shiftId?: Prisma.IntNullableFilter<"StockTransfer"> | number | null
+  outletId?: Prisma.StringNullableFilter<"StockTransfer"> | string | null
   note?: Prisma.StringNullableFilter<"StockTransfer"> | string | null
   createdById?: Prisma.StringFilter<"StockTransfer"> | string
   items?: Prisma.TransferItemListRelationFilter
-  outlet?: Prisma.XOR<Prisma.OutletScalarRelationFilter, Prisma.OutletWhereInput>
-  shiftReport?: Prisma.XOR<Prisma.ShiftReportNullableScalarRelationFilter, Prisma.ShiftReportWhereInput> | null
+  outlet?: Prisma.XOR<Prisma.OutletNullableScalarRelationFilter, Prisma.OutletWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id">
 
 export type StockTransferOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  outletId?: Prisma.SortOrder
-  shiftId?: Prisma.SortOrderInput | Prisma.SortOrder
+  outletId?: Prisma.SortOrderInput | Prisma.SortOrder
   note?: Prisma.SortOrderInput | Prisma.SortOrder
   createdById?: Prisma.SortOrder
   _count?: Prisma.StockTransferCountOrderByAggregateInput
@@ -305,32 +276,26 @@ export type StockTransferScalarWhereWithAggregatesInput = {
   NOT?: Prisma.StockTransferScalarWhereWithAggregatesInput | Prisma.StockTransferScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"StockTransfer"> | number
   type?: Prisma.EnumTransferTypeWithAggregatesFilter<"StockTransfer"> | $Enums.TransferType
-  status?: Prisma.EnumTransferStatusWithAggregatesFilter<"StockTransfer"> | $Enums.TransferStatus
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"StockTransfer"> | Date | string
-  outletId?: Prisma.StringWithAggregatesFilter<"StockTransfer"> | string
-  shiftId?: Prisma.IntNullableWithAggregatesFilter<"StockTransfer"> | number | null
+  outletId?: Prisma.StringNullableWithAggregatesFilter<"StockTransfer"> | string | null
   note?: Prisma.StringNullableWithAggregatesFilter<"StockTransfer"> | string | null
   createdById?: Prisma.StringWithAggregatesFilter<"StockTransfer"> | string
 }
 
 export type StockTransferCreateInput = {
   type: $Enums.TransferType
-  status?: $Enums.TransferStatus
   createdAt?: Date | string
   note?: string | null
   items?: Prisma.TransferItemCreateNestedManyWithoutTransferInput
-  outlet: Prisma.OutletCreateNestedOneWithoutTransfersInput
-  shiftReport?: Prisma.ShiftReportCreateNestedOneWithoutTransfersInput
+  outlet?: Prisma.OutletCreateNestedOneWithoutTransfersInput
   createdBy: Prisma.UserCreateNestedOneWithoutStockTransfersInput
 }
 
 export type StockTransferUncheckedCreateInput = {
   id?: number
   type: $Enums.TransferType
-  status?: $Enums.TransferStatus
   createdAt?: Date | string
-  outletId: string
-  shiftId?: number | null
+  outletId?: string | null
   note?: string | null
   createdById: string
   items?: Prisma.TransferItemUncheckedCreateNestedManyWithoutTransferInput
@@ -338,22 +303,18 @@ export type StockTransferUncheckedCreateInput = {
 
 export type StockTransferUpdateInput = {
   type?: Prisma.EnumTransferTypeFieldUpdateOperationsInput | $Enums.TransferType
-  status?: Prisma.EnumTransferStatusFieldUpdateOperationsInput | $Enums.TransferStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   items?: Prisma.TransferItemUpdateManyWithoutTransferNestedInput
-  outlet?: Prisma.OutletUpdateOneRequiredWithoutTransfersNestedInput
-  shiftReport?: Prisma.ShiftReportUpdateOneWithoutTransfersNestedInput
+  outlet?: Prisma.OutletUpdateOneWithoutTransfersNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutStockTransfersNestedInput
 }
 
 export type StockTransferUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.EnumTransferTypeFieldUpdateOperationsInput | $Enums.TransferType
-  status?: Prisma.EnumTransferStatusFieldUpdateOperationsInput | $Enums.TransferStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  outletId?: Prisma.StringFieldUpdateOperationsInput | string
-  shiftId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  outletId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   items?: Prisma.TransferItemUncheckedUpdateManyWithoutTransferNestedInput
@@ -362,17 +323,14 @@ export type StockTransferUncheckedUpdateInput = {
 export type StockTransferCreateManyInput = {
   id?: number
   type: $Enums.TransferType
-  status?: $Enums.TransferStatus
   createdAt?: Date | string
-  outletId: string
-  shiftId?: number | null
+  outletId?: string | null
   note?: string | null
   createdById: string
 }
 
 export type StockTransferUpdateManyMutationInput = {
   type?: Prisma.EnumTransferTypeFieldUpdateOperationsInput | $Enums.TransferType
-  status?: Prisma.EnumTransferStatusFieldUpdateOperationsInput | $Enums.TransferStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -380,10 +338,8 @@ export type StockTransferUpdateManyMutationInput = {
 export type StockTransferUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.EnumTransferTypeFieldUpdateOperationsInput | $Enums.TransferType
-  status?: Prisma.EnumTransferStatusFieldUpdateOperationsInput | $Enums.TransferStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  outletId?: Prisma.StringFieldUpdateOperationsInput | string
-  shiftId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  outletId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
 }
@@ -401,26 +357,21 @@ export type StockTransferOrderByRelationAggregateInput = {
 export type StockTransferCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   outletId?: Prisma.SortOrder
-  shiftId?: Prisma.SortOrder
   note?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
 }
 
 export type StockTransferAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  shiftId?: Prisma.SortOrder
 }
 
 export type StockTransferMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   outletId?: Prisma.SortOrder
-  shiftId?: Prisma.SortOrder
   note?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
 }
@@ -428,17 +379,14 @@ export type StockTransferMaxOrderByAggregateInput = {
 export type StockTransferMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   outletId?: Prisma.SortOrder
-  shiftId?: Prisma.SortOrder
   note?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
 }
 
 export type StockTransferSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  shiftId?: Prisma.SortOrder
 }
 
 export type StockTransferScalarRelationFilter = {
@@ -534,60 +482,6 @@ export type EnumTransferTypeFieldUpdateOperationsInput = {
   set?: $Enums.TransferType
 }
 
-export type EnumTransferStatusFieldUpdateOperationsInput = {
-  set?: $Enums.TransferStatus
-}
-
-export type NullableIntFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
-export type StockTransferCreateNestedManyWithoutShiftReportInput = {
-  create?: Prisma.XOR<Prisma.StockTransferCreateWithoutShiftReportInput, Prisma.StockTransferUncheckedCreateWithoutShiftReportInput> | Prisma.StockTransferCreateWithoutShiftReportInput[] | Prisma.StockTransferUncheckedCreateWithoutShiftReportInput[]
-  connectOrCreate?: Prisma.StockTransferCreateOrConnectWithoutShiftReportInput | Prisma.StockTransferCreateOrConnectWithoutShiftReportInput[]
-  createMany?: Prisma.StockTransferCreateManyShiftReportInputEnvelope
-  connect?: Prisma.StockTransferWhereUniqueInput | Prisma.StockTransferWhereUniqueInput[]
-}
-
-export type StockTransferUncheckedCreateNestedManyWithoutShiftReportInput = {
-  create?: Prisma.XOR<Prisma.StockTransferCreateWithoutShiftReportInput, Prisma.StockTransferUncheckedCreateWithoutShiftReportInput> | Prisma.StockTransferCreateWithoutShiftReportInput[] | Prisma.StockTransferUncheckedCreateWithoutShiftReportInput[]
-  connectOrCreate?: Prisma.StockTransferCreateOrConnectWithoutShiftReportInput | Prisma.StockTransferCreateOrConnectWithoutShiftReportInput[]
-  createMany?: Prisma.StockTransferCreateManyShiftReportInputEnvelope
-  connect?: Prisma.StockTransferWhereUniqueInput | Prisma.StockTransferWhereUniqueInput[]
-}
-
-export type StockTransferUpdateManyWithoutShiftReportNestedInput = {
-  create?: Prisma.XOR<Prisma.StockTransferCreateWithoutShiftReportInput, Prisma.StockTransferUncheckedCreateWithoutShiftReportInput> | Prisma.StockTransferCreateWithoutShiftReportInput[] | Prisma.StockTransferUncheckedCreateWithoutShiftReportInput[]
-  connectOrCreate?: Prisma.StockTransferCreateOrConnectWithoutShiftReportInput | Prisma.StockTransferCreateOrConnectWithoutShiftReportInput[]
-  upsert?: Prisma.StockTransferUpsertWithWhereUniqueWithoutShiftReportInput | Prisma.StockTransferUpsertWithWhereUniqueWithoutShiftReportInput[]
-  createMany?: Prisma.StockTransferCreateManyShiftReportInputEnvelope
-  set?: Prisma.StockTransferWhereUniqueInput | Prisma.StockTransferWhereUniqueInput[]
-  disconnect?: Prisma.StockTransferWhereUniqueInput | Prisma.StockTransferWhereUniqueInput[]
-  delete?: Prisma.StockTransferWhereUniqueInput | Prisma.StockTransferWhereUniqueInput[]
-  connect?: Prisma.StockTransferWhereUniqueInput | Prisma.StockTransferWhereUniqueInput[]
-  update?: Prisma.StockTransferUpdateWithWhereUniqueWithoutShiftReportInput | Prisma.StockTransferUpdateWithWhereUniqueWithoutShiftReportInput[]
-  updateMany?: Prisma.StockTransferUpdateManyWithWhereWithoutShiftReportInput | Prisma.StockTransferUpdateManyWithWhereWithoutShiftReportInput[]
-  deleteMany?: Prisma.StockTransferScalarWhereInput | Prisma.StockTransferScalarWhereInput[]
-}
-
-export type StockTransferUncheckedUpdateManyWithoutShiftReportNestedInput = {
-  create?: Prisma.XOR<Prisma.StockTransferCreateWithoutShiftReportInput, Prisma.StockTransferUncheckedCreateWithoutShiftReportInput> | Prisma.StockTransferCreateWithoutShiftReportInput[] | Prisma.StockTransferUncheckedCreateWithoutShiftReportInput[]
-  connectOrCreate?: Prisma.StockTransferCreateOrConnectWithoutShiftReportInput | Prisma.StockTransferCreateOrConnectWithoutShiftReportInput[]
-  upsert?: Prisma.StockTransferUpsertWithWhereUniqueWithoutShiftReportInput | Prisma.StockTransferUpsertWithWhereUniqueWithoutShiftReportInput[]
-  createMany?: Prisma.StockTransferCreateManyShiftReportInputEnvelope
-  set?: Prisma.StockTransferWhereUniqueInput | Prisma.StockTransferWhereUniqueInput[]
-  disconnect?: Prisma.StockTransferWhereUniqueInput | Prisma.StockTransferWhereUniqueInput[]
-  delete?: Prisma.StockTransferWhereUniqueInput | Prisma.StockTransferWhereUniqueInput[]
-  connect?: Prisma.StockTransferWhereUniqueInput | Prisma.StockTransferWhereUniqueInput[]
-  update?: Prisma.StockTransferUpdateWithWhereUniqueWithoutShiftReportInput | Prisma.StockTransferUpdateWithWhereUniqueWithoutShiftReportInput[]
-  updateMany?: Prisma.StockTransferUpdateManyWithWhereWithoutShiftReportInput | Prisma.StockTransferUpdateManyWithWhereWithoutShiftReportInput[]
-  deleteMany?: Prisma.StockTransferScalarWhereInput | Prisma.StockTransferScalarWhereInput[]
-}
-
 export type StockTransferCreateNestedOneWithoutItemsInput = {
   create?: Prisma.XOR<Prisma.StockTransferCreateWithoutItemsInput, Prisma.StockTransferUncheckedCreateWithoutItemsInput>
   connectOrCreate?: Prisma.StockTransferCreateOrConnectWithoutItemsInput
@@ -604,21 +498,17 @@ export type StockTransferUpdateOneRequiredWithoutItemsNestedInput = {
 
 export type StockTransferCreateWithoutCreatedByInput = {
   type: $Enums.TransferType
-  status?: $Enums.TransferStatus
   createdAt?: Date | string
   note?: string | null
   items?: Prisma.TransferItemCreateNestedManyWithoutTransferInput
-  outlet: Prisma.OutletCreateNestedOneWithoutTransfersInput
-  shiftReport?: Prisma.ShiftReportCreateNestedOneWithoutTransfersInput
+  outlet?: Prisma.OutletCreateNestedOneWithoutTransfersInput
 }
 
 export type StockTransferUncheckedCreateWithoutCreatedByInput = {
   id?: number
   type: $Enums.TransferType
-  status?: $Enums.TransferStatus
   createdAt?: Date | string
-  outletId: string
-  shiftId?: number | null
+  outletId?: string | null
   note?: string | null
   items?: Prisma.TransferItemUncheckedCreateNestedManyWithoutTransferInput
 }
@@ -655,30 +545,24 @@ export type StockTransferScalarWhereInput = {
   NOT?: Prisma.StockTransferScalarWhereInput | Prisma.StockTransferScalarWhereInput[]
   id?: Prisma.IntFilter<"StockTransfer"> | number
   type?: Prisma.EnumTransferTypeFilter<"StockTransfer"> | $Enums.TransferType
-  status?: Prisma.EnumTransferStatusFilter<"StockTransfer"> | $Enums.TransferStatus
   createdAt?: Prisma.DateTimeFilter<"StockTransfer"> | Date | string
-  outletId?: Prisma.StringFilter<"StockTransfer"> | string
-  shiftId?: Prisma.IntNullableFilter<"StockTransfer"> | number | null
+  outletId?: Prisma.StringNullableFilter<"StockTransfer"> | string | null
   note?: Prisma.StringNullableFilter<"StockTransfer"> | string | null
   createdById?: Prisma.StringFilter<"StockTransfer"> | string
 }
 
 export type StockTransferCreateWithoutOutletInput = {
   type: $Enums.TransferType
-  status?: $Enums.TransferStatus
   createdAt?: Date | string
   note?: string | null
   items?: Prisma.TransferItemCreateNestedManyWithoutTransferInput
-  shiftReport?: Prisma.ShiftReportCreateNestedOneWithoutTransfersInput
   createdBy: Prisma.UserCreateNestedOneWithoutStockTransfersInput
 }
 
 export type StockTransferUncheckedCreateWithoutOutletInput = {
   id?: number
   type: $Enums.TransferType
-  status?: $Enums.TransferStatus
   createdAt?: Date | string
-  shiftId?: number | null
   note?: string | null
   createdById: string
   items?: Prisma.TransferItemUncheckedCreateNestedManyWithoutTransferInput
@@ -710,70 +594,19 @@ export type StockTransferUpdateManyWithWhereWithoutOutletInput = {
   data: Prisma.XOR<Prisma.StockTransferUpdateManyMutationInput, Prisma.StockTransferUncheckedUpdateManyWithoutOutletInput>
 }
 
-export type StockTransferCreateWithoutShiftReportInput = {
-  type: $Enums.TransferType
-  status?: $Enums.TransferStatus
-  createdAt?: Date | string
-  note?: string | null
-  items?: Prisma.TransferItemCreateNestedManyWithoutTransferInput
-  outlet: Prisma.OutletCreateNestedOneWithoutTransfersInput
-  createdBy: Prisma.UserCreateNestedOneWithoutStockTransfersInput
-}
-
-export type StockTransferUncheckedCreateWithoutShiftReportInput = {
-  id?: number
-  type: $Enums.TransferType
-  status?: $Enums.TransferStatus
-  createdAt?: Date | string
-  outletId: string
-  note?: string | null
-  createdById: string
-  items?: Prisma.TransferItemUncheckedCreateNestedManyWithoutTransferInput
-}
-
-export type StockTransferCreateOrConnectWithoutShiftReportInput = {
-  where: Prisma.StockTransferWhereUniqueInput
-  create: Prisma.XOR<Prisma.StockTransferCreateWithoutShiftReportInput, Prisma.StockTransferUncheckedCreateWithoutShiftReportInput>
-}
-
-export type StockTransferCreateManyShiftReportInputEnvelope = {
-  data: Prisma.StockTransferCreateManyShiftReportInput | Prisma.StockTransferCreateManyShiftReportInput[]
-  skipDuplicates?: boolean
-}
-
-export type StockTransferUpsertWithWhereUniqueWithoutShiftReportInput = {
-  where: Prisma.StockTransferWhereUniqueInput
-  update: Prisma.XOR<Prisma.StockTransferUpdateWithoutShiftReportInput, Prisma.StockTransferUncheckedUpdateWithoutShiftReportInput>
-  create: Prisma.XOR<Prisma.StockTransferCreateWithoutShiftReportInput, Prisma.StockTransferUncheckedCreateWithoutShiftReportInput>
-}
-
-export type StockTransferUpdateWithWhereUniqueWithoutShiftReportInput = {
-  where: Prisma.StockTransferWhereUniqueInput
-  data: Prisma.XOR<Prisma.StockTransferUpdateWithoutShiftReportInput, Prisma.StockTransferUncheckedUpdateWithoutShiftReportInput>
-}
-
-export type StockTransferUpdateManyWithWhereWithoutShiftReportInput = {
-  where: Prisma.StockTransferScalarWhereInput
-  data: Prisma.XOR<Prisma.StockTransferUpdateManyMutationInput, Prisma.StockTransferUncheckedUpdateManyWithoutShiftReportInput>
-}
-
 export type StockTransferCreateWithoutItemsInput = {
   type: $Enums.TransferType
-  status?: $Enums.TransferStatus
   createdAt?: Date | string
   note?: string | null
-  outlet: Prisma.OutletCreateNestedOneWithoutTransfersInput
-  shiftReport?: Prisma.ShiftReportCreateNestedOneWithoutTransfersInput
+  outlet?: Prisma.OutletCreateNestedOneWithoutTransfersInput
   createdBy: Prisma.UserCreateNestedOneWithoutStockTransfersInput
 }
 
 export type StockTransferUncheckedCreateWithoutItemsInput = {
   id?: number
   type: $Enums.TransferType
-  status?: $Enums.TransferStatus
   createdAt?: Date | string
-  outletId: string
-  shiftId?: number | null
+  outletId?: string | null
   note?: string | null
   createdById: string
 }
@@ -796,21 +629,17 @@ export type StockTransferUpdateToOneWithWhereWithoutItemsInput = {
 
 export type StockTransferUpdateWithoutItemsInput = {
   type?: Prisma.EnumTransferTypeFieldUpdateOperationsInput | $Enums.TransferType
-  status?: Prisma.EnumTransferStatusFieldUpdateOperationsInput | $Enums.TransferStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  outlet?: Prisma.OutletUpdateOneRequiredWithoutTransfersNestedInput
-  shiftReport?: Prisma.ShiftReportUpdateOneWithoutTransfersNestedInput
+  outlet?: Prisma.OutletUpdateOneWithoutTransfersNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutStockTransfersNestedInput
 }
 
 export type StockTransferUncheckedUpdateWithoutItemsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.EnumTransferTypeFieldUpdateOperationsInput | $Enums.TransferType
-  status?: Prisma.EnumTransferStatusFieldUpdateOperationsInput | $Enums.TransferStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  outletId?: Prisma.StringFieldUpdateOperationsInput | string
-  shiftId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  outletId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
 }
@@ -818,30 +647,24 @@ export type StockTransferUncheckedUpdateWithoutItemsInput = {
 export type StockTransferCreateManyCreatedByInput = {
   id?: number
   type: $Enums.TransferType
-  status?: $Enums.TransferStatus
   createdAt?: Date | string
-  outletId: string
-  shiftId?: number | null
+  outletId?: string | null
   note?: string | null
 }
 
 export type StockTransferUpdateWithoutCreatedByInput = {
   type?: Prisma.EnumTransferTypeFieldUpdateOperationsInput | $Enums.TransferType
-  status?: Prisma.EnumTransferStatusFieldUpdateOperationsInput | $Enums.TransferStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   items?: Prisma.TransferItemUpdateManyWithoutTransferNestedInput
-  outlet?: Prisma.OutletUpdateOneRequiredWithoutTransfersNestedInput
-  shiftReport?: Prisma.ShiftReportUpdateOneWithoutTransfersNestedInput
+  outlet?: Prisma.OutletUpdateOneWithoutTransfersNestedInput
 }
 
 export type StockTransferUncheckedUpdateWithoutCreatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.EnumTransferTypeFieldUpdateOperationsInput | $Enums.TransferType
-  status?: Prisma.EnumTransferStatusFieldUpdateOperationsInput | $Enums.TransferStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  outletId?: Prisma.StringFieldUpdateOperationsInput | string
-  shiftId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  outletId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   items?: Prisma.TransferItemUncheckedUpdateManyWithoutTransferNestedInput
 }
@@ -849,39 +672,31 @@ export type StockTransferUncheckedUpdateWithoutCreatedByInput = {
 export type StockTransferUncheckedUpdateManyWithoutCreatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.EnumTransferTypeFieldUpdateOperationsInput | $Enums.TransferType
-  status?: Prisma.EnumTransferStatusFieldUpdateOperationsInput | $Enums.TransferStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  outletId?: Prisma.StringFieldUpdateOperationsInput | string
-  shiftId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  outletId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type StockTransferCreateManyOutletInput = {
   id?: number
   type: $Enums.TransferType
-  status?: $Enums.TransferStatus
   createdAt?: Date | string
-  shiftId?: number | null
   note?: string | null
   createdById: string
 }
 
 export type StockTransferUpdateWithoutOutletInput = {
   type?: Prisma.EnumTransferTypeFieldUpdateOperationsInput | $Enums.TransferType
-  status?: Prisma.EnumTransferStatusFieldUpdateOperationsInput | $Enums.TransferStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   items?: Prisma.TransferItemUpdateManyWithoutTransferNestedInput
-  shiftReport?: Prisma.ShiftReportUpdateOneWithoutTransfersNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutStockTransfersNestedInput
 }
 
 export type StockTransferUncheckedUpdateWithoutOutletInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.EnumTransferTypeFieldUpdateOperationsInput | $Enums.TransferType
-  status?: Prisma.EnumTransferStatusFieldUpdateOperationsInput | $Enums.TransferStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  shiftId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   items?: Prisma.TransferItemUncheckedUpdateManyWithoutTransferNestedInput
@@ -890,50 +705,7 @@ export type StockTransferUncheckedUpdateWithoutOutletInput = {
 export type StockTransferUncheckedUpdateManyWithoutOutletInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.EnumTransferTypeFieldUpdateOperationsInput | $Enums.TransferType
-  status?: Prisma.EnumTransferStatusFieldUpdateOperationsInput | $Enums.TransferStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  shiftId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdById?: Prisma.StringFieldUpdateOperationsInput | string
-}
-
-export type StockTransferCreateManyShiftReportInput = {
-  id?: number
-  type: $Enums.TransferType
-  status?: $Enums.TransferStatus
-  createdAt?: Date | string
-  outletId: string
-  note?: string | null
-  createdById: string
-}
-
-export type StockTransferUpdateWithoutShiftReportInput = {
-  type?: Prisma.EnumTransferTypeFieldUpdateOperationsInput | $Enums.TransferType
-  status?: Prisma.EnumTransferStatusFieldUpdateOperationsInput | $Enums.TransferStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  items?: Prisma.TransferItemUpdateManyWithoutTransferNestedInput
-  outlet?: Prisma.OutletUpdateOneRequiredWithoutTransfersNestedInput
-  createdBy?: Prisma.UserUpdateOneRequiredWithoutStockTransfersNestedInput
-}
-
-export type StockTransferUncheckedUpdateWithoutShiftReportInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.EnumTransferTypeFieldUpdateOperationsInput | $Enums.TransferType
-  status?: Prisma.EnumTransferStatusFieldUpdateOperationsInput | $Enums.TransferStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  outletId?: Prisma.StringFieldUpdateOperationsInput | string
-  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdById?: Prisma.StringFieldUpdateOperationsInput | string
-  items?: Prisma.TransferItemUncheckedUpdateManyWithoutTransferNestedInput
-}
-
-export type StockTransferUncheckedUpdateManyWithoutShiftReportInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.EnumTransferTypeFieldUpdateOperationsInput | $Enums.TransferType
-  status?: Prisma.EnumTransferStatusFieldUpdateOperationsInput | $Enums.TransferStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  outletId?: Prisma.StringFieldUpdateOperationsInput | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
 }
@@ -972,15 +744,12 @@ export type StockTransferCountOutputTypeCountItemsArgs<ExtArgs extends runtime.T
 export type StockTransferSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   type?: boolean
-  status?: boolean
   createdAt?: boolean
   outletId?: boolean
-  shiftId?: boolean
   note?: boolean
   createdById?: boolean
   items?: boolean | Prisma.StockTransfer$itemsArgs<ExtArgs>
-  outlet?: boolean | Prisma.OutletDefaultArgs<ExtArgs>
-  shiftReport?: boolean | Prisma.StockTransfer$shiftReportArgs<ExtArgs>
+  outlet?: boolean | Prisma.StockTransfer$outletArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.StockTransferCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["stockTransfer"]>
@@ -988,58 +757,47 @@ export type StockTransferSelect<ExtArgs extends runtime.Types.Extensions.Interna
 export type StockTransferSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   type?: boolean
-  status?: boolean
   createdAt?: boolean
   outletId?: boolean
-  shiftId?: boolean
   note?: boolean
   createdById?: boolean
-  outlet?: boolean | Prisma.OutletDefaultArgs<ExtArgs>
-  shiftReport?: boolean | Prisma.StockTransfer$shiftReportArgs<ExtArgs>
+  outlet?: boolean | Prisma.StockTransfer$outletArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["stockTransfer"]>
 
 export type StockTransferSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   type?: boolean
-  status?: boolean
   createdAt?: boolean
   outletId?: boolean
-  shiftId?: boolean
   note?: boolean
   createdById?: boolean
-  outlet?: boolean | Prisma.OutletDefaultArgs<ExtArgs>
-  shiftReport?: boolean | Prisma.StockTransfer$shiftReportArgs<ExtArgs>
+  outlet?: boolean | Prisma.StockTransfer$outletArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["stockTransfer"]>
 
 export type StockTransferSelectScalar = {
   id?: boolean
   type?: boolean
-  status?: boolean
   createdAt?: boolean
   outletId?: boolean
-  shiftId?: boolean
   note?: boolean
   createdById?: boolean
 }
 
-export type StockTransferOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "status" | "createdAt" | "outletId" | "shiftId" | "note" | "createdById", ExtArgs["result"]["stockTransfer"]>
+export type StockTransferOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "createdAt" | "outletId" | "note" | "createdById", ExtArgs["result"]["stockTransfer"]>
 export type StockTransferInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   items?: boolean | Prisma.StockTransfer$itemsArgs<ExtArgs>
-  outlet?: boolean | Prisma.OutletDefaultArgs<ExtArgs>
-  shiftReport?: boolean | Prisma.StockTransfer$shiftReportArgs<ExtArgs>
+  outlet?: boolean | Prisma.StockTransfer$outletArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.StockTransferCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type StockTransferIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  outlet?: boolean | Prisma.OutletDefaultArgs<ExtArgs>
-  shiftReport?: boolean | Prisma.StockTransfer$shiftReportArgs<ExtArgs>
+  outlet?: boolean | Prisma.StockTransfer$outletArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type StockTransferIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  outlet?: boolean | Prisma.OutletDefaultArgs<ExtArgs>
-  shiftReport?: boolean | Prisma.StockTransfer$shiftReportArgs<ExtArgs>
+  outlet?: boolean | Prisma.StockTransfer$outletArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
@@ -1047,17 +805,14 @@ export type $StockTransferPayload<ExtArgs extends runtime.Types.Extensions.Inter
   name: "StockTransfer"
   objects: {
     items: Prisma.$TransferItemPayload<ExtArgs>[]
-    outlet: Prisma.$OutletPayload<ExtArgs>
-    shiftReport: Prisma.$ShiftReportPayload<ExtArgs> | null
+    outlet: Prisma.$OutletPayload<ExtArgs> | null
     createdBy: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     type: $Enums.TransferType
-    status: $Enums.TransferStatus
     createdAt: Date
-    outletId: string
-    shiftId: number | null
+    outletId: string | null
     note: string | null
     createdById: string
   }, ExtArgs["result"]["stockTransfer"]>
@@ -1455,8 +1210,7 @@ readonly fields: StockTransferFieldRefs;
 export interface Prisma__StockTransferClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   items<T extends Prisma.StockTransfer$itemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StockTransfer$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TransferItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  outlet<T extends Prisma.OutletDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OutletDefaultArgs<ExtArgs>>): Prisma.Prisma__OutletClient<runtime.Types.Result.GetResult<Prisma.$OutletPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  shiftReport<T extends Prisma.StockTransfer$shiftReportArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StockTransfer$shiftReportArgs<ExtArgs>>): Prisma.Prisma__ShiftReportClient<runtime.Types.Result.GetResult<Prisma.$ShiftReportPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  outlet<T extends Prisma.StockTransfer$outletArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StockTransfer$outletArgs<ExtArgs>>): Prisma.Prisma__OutletClient<runtime.Types.Result.GetResult<Prisma.$OutletPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1489,10 +1243,8 @@ export interface Prisma__StockTransferClient<T, Null = never, ExtArgs extends ru
 export interface StockTransferFieldRefs {
   readonly id: Prisma.FieldRef<"StockTransfer", 'Int'>
   readonly type: Prisma.FieldRef<"StockTransfer", 'TransferType'>
-  readonly status: Prisma.FieldRef<"StockTransfer", 'TransferStatus'>
   readonly createdAt: Prisma.FieldRef<"StockTransfer", 'DateTime'>
   readonly outletId: Prisma.FieldRef<"StockTransfer", 'String'>
-  readonly shiftId: Prisma.FieldRef<"StockTransfer", 'Int'>
   readonly note: Prisma.FieldRef<"StockTransfer", 'String'>
   readonly createdById: Prisma.FieldRef<"StockTransfer", 'String'>
 }
@@ -1920,22 +1672,22 @@ export type StockTransfer$itemsArgs<ExtArgs extends runtime.Types.Extensions.Int
 }
 
 /**
- * StockTransfer.shiftReport
+ * StockTransfer.outlet
  */
-export type StockTransfer$shiftReportArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type StockTransfer$outletArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the ShiftReport
+   * Select specific fields to fetch from the Outlet
    */
-  select?: Prisma.ShiftReportSelect<ExtArgs> | null
+  select?: Prisma.OutletSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the ShiftReport
+   * Omit specific fields from the Outlet
    */
-  omit?: Prisma.ShiftReportOmit<ExtArgs> | null
+  omit?: Prisma.OutletOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ShiftReportInclude<ExtArgs> | null
-  where?: Prisma.ShiftReportWhereInput
+  include?: Prisma.OutletInclude<ExtArgs> | null
+  where?: Prisma.OutletWhereInput
 }
 
 /**

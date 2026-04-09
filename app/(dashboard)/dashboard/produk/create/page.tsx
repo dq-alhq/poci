@@ -1,11 +1,14 @@
-import ProductForm from '@/app/(dashboard)/dashboard/produk/product-form'
+import { Suspense } from 'react'
+import CreateProductForm from '@/app/(dashboard)/dashboard/produk/create/create-product-form'
 import Heading from '@/components/heading'
 
-export default async function CreateProductPage() {
+export default function CreateProductPage() {
     return (
         <div className='px-6'>
             <Heading description={'Isi form di bawah ini'} title={'Tambah Produk'} />
-            <ProductForm />
+            <Suspense fallback={<div>Loading...</div>}>
+                <CreateProductForm />
+            </Suspense>
         </div>
     )
 }

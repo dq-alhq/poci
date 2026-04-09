@@ -2,9 +2,6 @@
 CREATE TYPE "TransferType" AS ENUM ('OUT', 'IN', 'RETURN', 'DAMAGED');
 
 -- CreateEnum
-CREATE TYPE "TransferStatus" AS ENUM ('PENDING', 'COMPLETED', 'CANCELLED');
-
--- CreateEnum
 CREATE TYPE "ShiftStatus" AS ENUM ('OPEN', 'CLOSED');
 
 -- CreateTable
@@ -101,10 +98,8 @@ CREATE TABLE "outlet_stock" (
 CREATE TABLE "stock_transfer" (
     "id" SERIAL NOT NULL,
     "type" "TransferType" NOT NULL,
-    "status" "TransferStatus" NOT NULL DEFAULT 'PENDING',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "outletId" TEXT NOT NULL,
-    "shiftId" INTEGER,
+    "outletId" TEXT,
     "note" TEXT,
     "createdById" TEXT NOT NULL,
 
@@ -112,13 +107,13 @@ CREATE TABLE "stock_transfer" (
 );
 
 -- CreateTable
-CREATE TABLE "shift_report" (
+CREATE TABLE "shift" (
     "id" SERIAL NOT NULL,
     "date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "status" "ShiftStatus" NOT NULL DEFAULT 'OPEN',
     "outletId" TEXT NOT NULL,
 
-    CONSTRAINT "shift_report_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "shift_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -129,17 +124,6 @@ CREATE TABLE "transfer_item" (
     "productId" TEXT NOT NULL,
 
     CONSTRAINT "transfer_item_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "sales_item" (
-    "id" SERIAL NOT NULL,
-    "qty" INTEGER NOT NULL,
-    "price" INTEGER NOT NULL,
-    "shiftReportId" INTEGER NOT NULL,
-    "productId" TEXT NOT NULL,
-
-    CONSTRAINT "sales_item_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -180,7 +164,7 @@ CREATE UNIQUE INDEX "session_token_key" ON "session"("token");
 CREATE INDEX "account_userId_idx" ON "account"("userId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "outlet_stock_outletId_productId_key" ON "outlet_stock"("outletId", "productId");
+CREATE INDEX "outlet_stock_outletId_productId_idx" ON "outlet_stock"("outletId", "productId");
 
 -- AddForeignKey
 ALTER TABLE "session" ADD CONSTRAINT "session_userId_fkey" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -195,28 +179,19 @@ ALTER TABLE "outlet_stock" ADD CONSTRAINT "outlet_stock_outletId_fkey" FOREIGN K
 ALTER TABLE "outlet_stock" ADD CONSTRAINT "outlet_stock_productId_fkey" FOREIGN KEY ("productId") REFERENCES "product"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "stock_transfer" ADD CONSTRAINT "stock_transfer_outletId_fkey" FOREIGN KEY ("outletId") REFERENCES "outlet"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "stock_transfer" ADD CONSTRAINT "stock_transfer_shiftId_fkey" FOREIGN KEY ("shiftId") REFERENCES "shift_report"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "stock_transfer" ADD CONSTRAINT "stock_transfer_outletId_fkey" FOREIGN KEY ("outletId") REFERENCES "outlet"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "stock_transfer" ADD CONSTRAINT "stock_transfer_createdById_fkey" FOREIGN KEY ("createdById") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "shift_report" ADD CONSTRAINT "shift_report_outletId_fkey" FOREIGN KEY ("outletId") REFERENCES "outlet"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "shift" ADD CONSTRAINT "shift_outletId_fkey" FOREIGN KEY ("outletId") REFERENCES "outlet"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "transfer_item" ADD CONSTRAINT "transfer_item_transferId_fkey" FOREIGN KEY ("transferId") REFERENCES "stock_transfer"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "transfer_item" ADD CONSTRAINT "transfer_item_productId_fkey" FOREIGN KEY ("productId") REFERENCES "product"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "sales_item" ADD CONSTRAINT "sales_item_shiftReportId_fkey" FOREIGN KEY ("shiftReportId") REFERENCES "shift_report"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "sales_item" ADD CONSTRAINT "sales_item_productId_fkey" FOREIGN KEY ("productId") REFERENCES "product"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "purchase" ADD CONSTRAINT "purchase_createdById_fkey" FOREIGN KEY ("createdById") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
