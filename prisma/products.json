@@ -1,0 +1,371 @@
+[
+    {
+        "id": "original-kecil",
+        "name": "Original Kecil",
+        "unit": "pcs",
+        "buyPrice": 0,
+        "sellPrice": 2500,
+        "isProduct": true,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/original-kecil.png"
+    },
+    {
+        "id": "original-jumbo",
+        "name": "Original Jumbo",
+        "unit": "pcs",
+        "buyPrice": 0,
+        "sellPrice": 3000,
+        "isProduct": true,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/original-jumbo.png"
+    },
+    {
+        "id": "original-extra",
+        "name": "Original Extra",
+        "unit": "pcs",
+        "buyPrice": 0,
+        "sellPrice": 4000,
+        "isProduct": true,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/original-extra.png"
+    },
+    {
+        "id": "apple",
+        "name": "Apple",
+        "unit": "pcs",
+        "buyPrice": 0,
+        "sellPrice": 5000,
+        "isProduct": true,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/apple.png"
+    },
+    {
+        "id": "blackcurrant",
+        "name": "Blackcurrant",
+        "unit": "pcs",
+        "buyPrice": 0,
+        "sellPrice": 5000,
+        "isProduct": true,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/blackcurrant.png"
+    },
+    {
+        "id": "orange",
+        "name": "Orange",
+        "unit": "pcs",
+        "buyPrice": 0,
+        "sellPrice": 5000,
+        "isProduct": true,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/orange.png"
+    },
+    {
+        "id": "lemon-honey",
+        "name": "Lemon Honey",
+        "unit": "pcs",
+        "buyPrice": 0,
+        "sellPrice": 5000,
+        "isProduct": true,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/lemon.png"
+    },
+    {
+        "id": "mango",
+        "name": "Mango",
+        "unit": "pcs",
+        "buyPrice": 0,
+        "sellPrice": 5000,
+        "isProduct": true,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/mango.png"
+    },
+    {
+        "id": "lychee",
+        "name": "Lychee",
+        "unit": "pcs",
+        "buyPrice": 0,
+        "sellPrice": 5000,
+        "isProduct": true,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/lychee.png"
+    },
+    {
+        "id": "milk-tea",
+        "name": "Milk Tea",
+        "unit": "pcs",
+        "buyPrice": 0,
+        "sellPrice": 7000,
+        "isProduct": true,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/milk-tea.png"
+    },
+    {
+        "id": "chocolate",
+        "name": "Chocolate",
+        "unit": "pcs",
+        "buyPrice": 0,
+        "sellPrice": 8000,
+        "isProduct": true,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/chocolatte.png"
+    },
+    {
+        "id": "cappucino",
+        "name": "Cappucino",
+        "unit": "pcs",
+        "buyPrice": 0,
+        "sellPrice": 8000,
+        "isProduct": true,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/cappucino.png"
+    },
+    {
+        "id": "thai-tea",
+        "name": "Thai Tea",
+        "unit": "pcs",
+        "buyPrice": 0,
+        "sellPrice": 8000,
+        "isProduct": true,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/thai-tea.png"
+    },
+    {
+        "id": "matcha",
+        "name": "Matcha",
+        "unit": "pcs",
+        "buyPrice": 0,
+        "sellPrice": 9000,
+        "isProduct": true,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/matcha.png"
+    },
+    {
+        "id": "coffee-coconut-latte",
+        "name": "Coffee Coconut Latte",
+        "unit": "pcs",
+        "buyPrice": 0,
+        "sellPrice": 8000,
+        "isProduct": true,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/coconut-latte.png"
+    },
+    {
+        "id": "coffee-latte",
+        "name": "Coffee Latte",
+        "unit": "pcs",
+        "buyPrice": 0,
+        "sellPrice": 8000,
+        "isProduct": true,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/coffee-latte.png"
+    },
+    {
+        "id": "bubuk-apple",
+        "name": "Bubuk Apple",
+        "unit": "pcs",
+        "buyPrice": 850,
+        "sellPrice": 0,
+        "isProduct": false,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/apple-powder.png"
+    },
+    {
+        "id": "bubuk-blackcurrant",
+        "name": "Bubuk Blackcurrant",
+        "unit": "pcs",
+        "buyPrice": 850,
+        "sellPrice": 0,
+        "isProduct": false,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/blackcurrant-powder.png"
+    },
+    {
+        "id": "bubuk-orange",
+        "name": "Bubuk Orange",
+        "unit": "pcs",
+        "buyPrice": 850,
+        "sellPrice": 0,
+        "isProduct": false,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/orange-powder.png"
+    },
+    {
+        "id": "bubuk-lemon-honey",
+        "name": "Bubuk Lemon Honey",
+        "unit": "pcs",
+        "buyPrice": 1000,
+        "sellPrice": 0,
+        "isProduct": false,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/lemon-powder.png"
+    },
+    {
+        "id": "bubuk-mango",
+        "name": "Bubuk Mango",
+        "unit": "pcs",
+        "buyPrice": 850,
+        "sellPrice": 0,
+        "isProduct": false,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/mango-powder.png"
+    },
+    {
+        "id": "bubuk-lychee",
+        "name": "Bubuk Lychee",
+        "unit": "pcs",
+        "buyPrice": 1000,
+        "sellPrice": 0,
+        "isProduct": false,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/lychee-powder.png"
+    },
+    {
+        "id": "bubuk-milk-tea",
+        "name": "Bubuk Milk Tea",
+        "unit": "pcs",
+        "buyPrice": 1500,
+        "sellPrice": 0,
+        "isProduct": false,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/milk-tea-powder.png"
+    },
+    {
+        "id": "bubuk-chocolate",
+        "name": "Bubuk Chocolate",
+        "unit": "pcs",
+        "buyPrice": 1600,
+        "sellPrice": 0,
+        "isProduct": false,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/chocolatte-powder.png"
+    },
+    {
+        "id": "bubuk-cappucino",
+        "name": "Bubuk Cappucino",
+        "unit": "pcs",
+        "buyPrice": 1600,
+        "sellPrice": 0,
+        "isProduct": false,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/cappucino-powder.png"
+    },
+    {
+        "id": "bubuk-thai-tea",
+        "name": "Bubuk Thai Tea",
+        "unit": "pcs",
+        "buyPrice": 2500,
+        "sellPrice": 0,
+        "isProduct": false,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/thai-tea-powder.png"
+    },
+    {
+        "id": "bubuk-matcha",
+        "name": "Bubuk Matcha",
+        "unit": "pcs",
+        "buyPrice": 3000,
+        "sellPrice": 0,
+        "isProduct": false,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/matcha-powder.png"
+    },
+    {
+        "id": "bubuk-coffee-coconut-latte",
+        "name": "Bubuk Coffee Coconut Latte",
+        "unit": "pcs",
+        "buyPrice": 3000,
+        "sellPrice": 0,
+        "isProduct": false,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/coconut-latte-powder.png"
+    },
+    {
+        "id": "bubuk-coffee-latte",
+        "name": "Bubuk Coffee Latte",
+        "unit": "pcs",
+        "buyPrice": 3000,
+        "sellPrice": 0,
+        "isProduct": false,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/coffee-latte-powder.png"
+    },
+    {
+        "id": "kantong-teh-jasmine",
+        "name": "Kantong Teh Jasmine",
+        "unit": "pcs",
+        "buyPrice": 1500,
+        "sellPrice": 0,
+        "isProduct": false,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/jasmine-tea-powder.png"
+    },
+    {
+        "id": "kantong-teh-vanilla",
+        "name": "Kantong Teh Vanilla",
+        "unit": "pcs",
+        "buyPrice": 1500,
+        "sellPrice": 0,
+        "isProduct": false,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/vanilla-tea-powder.png"
+    },
+    {
+        "id": "seal-besar",
+        "name": "Seal Besar",
+        "unit": "roll",
+        "buyPrice": 350000,
+        "sellPrice": 0,
+        "isProduct": false,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/seal.png"
+    },
+    {
+        "id": "seal-kecil",
+        "name": "Seal Kecil",
+        "unit": "roll",
+        "buyPrice": 200000,
+        "sellPrice": 0,
+        "isProduct": false,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/seal-kecil.png"
+    },
+    {
+        "id": "cup-kecil",
+        "name": "Cup Kecil",
+        "unit": "pcs",
+        "buyPrice": 525,
+        "sellPrice": 0,
+        "isProduct": false,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/cup-kecil.png"
+    },
+    {
+        "id": "cup",
+        "name": "Cup Jumbo",
+        "unit": "pcs",
+        "buyPrice": 625,
+        "sellPrice": 0,
+        "isProduct": false,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/cup.png"
+    },
+    {
+        "id": "cup-extra",
+        "name": "Cup Extra",
+        "unit": "pcs",
+        "buyPrice": 650,
+        "sellPrice": 0,
+        "isProduct": false,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/cup-extra.png"
+    },
+    {
+        "id": "sedotan",
+        "name": "Sedotan",
+        "unit": "pcs",
+        "buyPrice": 116.25,
+        "sellPrice": 0,
+        "isProduct": false,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/sedotan.png"
+    },
+    {
+        "id": "galon-19l",
+        "name": "Galon 19L",
+        "unit": "liter",
+        "buyPrice": 4000,
+        "sellPrice": 0,
+        "isProduct": false,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/galon-19l.png"
+    },
+    {
+        "id": "gula",
+        "name": "Gula",
+        "unit": "kg",
+        "buyPrice": 17500,
+        "sellPrice": 0,
+        "isProduct": false,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/gula.png"
+    },
+    {
+        "id": "es-batu",
+        "name": "Es Batu",
+        "unit": "pcs",
+        "buyPrice": 4000,
+        "sellPrice": 6000,
+        "isProduct": true,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/es-kristal.png"
+    },
+    {
+        "id": "es-batu-kecil",
+        "name": "Es Batu Kecil",
+        "unit": "pcs",
+        "buyPrice": 1000,
+        "sellPrice": 2000,
+        "isProduct": true,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/es-kristal-kecil.png"
+    }
+]

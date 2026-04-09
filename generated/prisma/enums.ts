@@ -9,26 +9,28 @@
 * 🟢 You can import this file directly.
 */
 
-export const StockMovementType = {
-  IN: 'IN',
+export const TransferType = {
   OUT: 'OUT',
-  ADJUST: 'ADJUST'
+  IN: 'IN',
+  RETURN: 'RETURN',
+  DAMAGED: 'DAMAGED'
 } as const
 
-export type StockMovementType = (typeof StockMovementType)[keyof typeof StockMovementType]
+export type TransferType = (typeof TransferType)[keyof typeof TransferType]
+
+
+export const TransferStatus = {
+  PENDING: 'PENDING',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type TransferStatus = (typeof TransferStatus)[keyof typeof TransferStatus]
 
 
 export const ShiftStatus = {
-  ACTIVE: 'ACTIVE',
+  OPEN: 'OPEN',
   CLOSED: 'CLOSED'
 } as const
 
 export type ShiftStatus = (typeof ShiftStatus)[keyof typeof ShiftStatus]
-
-
-export const ExpenseType = {
-  ITEM: 'ITEM',
-  NON_ITEM: 'NON_ITEM'
-} as const
-
-export type ExpenseType = (typeof ExpenseType)[keyof typeof ExpenseType]

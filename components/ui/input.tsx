@@ -94,6 +94,7 @@ const InputGroupAddon = ({
     align = 'inline-start',
     ...props
 }: ComponentProps<'div'> & VariantProps<typeof inputGroupAddonVariants>) => (
+    // biome-ignore lint/a11y/useSemanticElements: noproblem
     <div
         className={cn(inputGroupAddonVariants({ align }), className)}
         data-align={align}

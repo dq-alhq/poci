@@ -15,3 +15,6 @@ export const slugify = (value: string): string =>
 
 export const strlimit = (text: string, max: number): string =>
     text.length <= max ? text : `${text.slice(0, max - 3)}...`
+
+export const formatRupiah = (value: any): string =>
+    new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(value)

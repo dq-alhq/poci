@@ -4,15 +4,15 @@ import Heading from '@/components/heading'
 import { ItemCard, ItemGroup, ItemGroupHeader, ItemGroupSection } from '@/components/item-card'
 import { Autocomplete } from '@/components/ui/autocomplete'
 import { SearchField, SearchInput } from '@/components/ui/search-field'
+import { getAllMaterials, getAllProducts } from '@/server/repositories/items.repository'
 
 export const metadata: Metadata = {
     title: 'Produk'
 }
 
 export default async function ProdukPage() {
-    const products = await fetch('https://dummyjson.com/products?limit=5')
-        .then((res) => res.json())
-        .then((data) => data.products)
+    const products = await getAllProducts()
+    const materials = await getAllMaterials()
 
     return (
         <div className='px-6'>
@@ -28,14 +28,14 @@ export default async function ProdukPage() {
                         <ItemGroup>
                             <ItemGroupSection>
                                 <ItemGroupHeader>Dijual</ItemGroupHeader>
-                                {products.map((item: any) => (
-                                    <ItemCard item={item} key={item.id} />
+                                {products.data.map((item) => (
+                                    <ItemCard key={item.id} product={item} />
                                 ))}
                             </ItemGroupSection>
                             <ItemGroupSection>
                                 <ItemGroupHeader>Tidak Dijual</ItemGroupHeader>
-                                {products.map((item: any) => (
-                                    <ItemCard item={item} key={item.id} />
+                                {materials.data.map((item) => (
+                                    <ItemCard key={item.id} product={item} />
                                 ))}
                             </ItemGroupSection>
                         </ItemGroup>

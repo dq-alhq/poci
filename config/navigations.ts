@@ -1,4 +1,11 @@
-import { IconKey, IconLayoutGrid, IconPackage, IconUserCircle, IconUsers } from '@tabler/icons-react'
+import {
+    IconBuildingWarehouse,
+    IconKey,
+    IconLayoutGrid,
+    IconPackage,
+    IconUserCircle,
+    IconUsers
+} from '@tabler/icons-react'
 
 export const getNavigations = (role: string | undefined) => {
     const mainNavigations = [
@@ -12,6 +19,12 @@ export const getNavigations = (role: string | undefined) => {
             title: 'Produk',
             href: '/dashboard/produk',
             icon: IconPackage,
+            show: true
+        },
+        {
+            title: 'Stok',
+            href: '/dashboard/stok',
+            icon: IconBuildingWarehouse,
             show: true
         }
     ]

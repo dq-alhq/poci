@@ -1,30 +1,37 @@
 'use client'
 
 import type { PropsWithChildren } from 'react'
+import type { Product } from '@/generated/prisma/client'
 import Image from 'next/image'
 import { GridList, GridListHeader, GridListItem, GridListSection } from 'react-aria-components'
 import { ItemContent, ItemDescription, ItemHeader, ItemTitle, itemVariants } from '@/components/ui/item'
+import { formatRupiah } from '@/lib/utils'
 
-export const ItemCard = ({ item }: { item: any }) => {
+export const ItemCard = ({ product }: { product: Product }) => {
     return (
         <GridListItem
             className={itemVariants({
-                variant: 'outline'
+                variant: 'outline',
+                size: 'sm',
+                className: 'cursor-pointer'
             })}
-            textValue={item.title}
+            href={`/dashboard/produk/${product.id}`}
+            textValue={product.name}
         >
             <ItemHeader>
                 <Image
-                    alt={item.title}
-                    className='aspect-square w-full rounded-sm object-cover'
+                    alt={product.name}
+                    className='aspect-square w-full object-cover'
                     height={128}
-                    src={item.thumbnail}
+                    src={product?.image || ''}
                     width={128}
                 />
             </ItemHeader>
             <ItemContent>
-                <ItemTitle>{item.title}</ItemTitle>
-                <ItemDescription>{item.category}</ItemDescription>
+                <ItemTitle>{product.name}</ItemTitle>
+                <ItemDescription>
+                    {formatRupiah(product.isProduct ? product.sellPrice! : product.buyPrice!)}
+                </ItemDescription>
             </ItemContent>
         </GridListItem>
     )

@@ -57,47 +57,47 @@ export type Session = Prisma.SessionModel
  */
 export type Account = Prisma.AccountModel
 /**
- * Model Item
+ * Model Product
  * 
  */
-export type Item = Prisma.ItemModel
+export type Product = Prisma.ProductModel
 /**
  * Model Outlet
  * 
  */
 export type Outlet = Prisma.OutletModel
 /**
- * Model Stock
+ * Model OutletStock
  * 
  */
-export type Stock = Prisma.StockModel
+export type OutletStock = Prisma.OutletStockModel
 /**
- * Model StockMovement
+ * Model StockTransfer
  * 
  */
-export type StockMovement = Prisma.StockMovementModel
+export type StockTransfer = Prisma.StockTransferModel
 /**
- * Model Shift
+ * Model ShiftReport
  * 
  */
-export type Shift = Prisma.ShiftModel
+export type ShiftReport = Prisma.ShiftReportModel
 /**
- * Model ShiftItem
+ * Model TransferItem
  * 
  */
-export type ShiftItem = Prisma.ShiftItemModel
+export type TransferItem = Prisma.TransferItemModel
 /**
- * Model Sale
+ * Model SalesItem
  * 
  */
-export type Sale = Prisma.SaleModel
+export type SalesItem = Prisma.SalesItemModel
 /**
- * Model Expense
+ * Model Purchase
  * 
  */
-export type Expense = Prisma.ExpenseModel
+export type Purchase = Prisma.PurchaseModel
 /**
- * Model ExpenseItem
+ * Model PurchaseItem
  * 
  */
-export type ExpenseItem = Prisma.ExpenseItemModel
+export type PurchaseItem = Prisma.PurchaseItemModel
