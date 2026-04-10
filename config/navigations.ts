@@ -4,6 +4,7 @@ import {
     IconKey,
     IconLayoutGrid,
     IconPackage,
+    IconShoppingCart,
     IconUserCircle,
     IconUsers
 } from '@tabler/icons-react'
@@ -32,6 +33,12 @@ export const getNavigations = (role: string | undefined) => {
             title: 'Stok',
             href: '/dashboard/stok',
             icon: IconBuildingWarehouse,
+            show: true
+        },
+        {
+            title: 'Pembelanjaan',
+            href: '/dashboard/pembelanjaan',
+            icon: IconShoppingCart,
             show: true
         }
     ]

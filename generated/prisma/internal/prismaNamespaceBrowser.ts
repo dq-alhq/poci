@@ -61,7 +61,8 @@ export const ModelName = {
   Shift: 'Shift',
   TransferItem: 'TransferItem',
   Purchase: 'Purchase',
-  PurchaseItem: 'PurchaseItem'
+  PurchaseItem: 'PurchaseItem',
+  Cart: 'Cart'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -204,6 +205,8 @@ export type TransferItemScalarFieldEnum = (typeof TransferItemScalarFieldEnum)[k
 
 export const PurchaseScalarFieldEnum = {
   id: 'id',
+  title: 'title',
+  type: 'type',
   supplier: 'supplier',
   total: 'total',
   createdAt: 'createdAt',
@@ -222,6 +225,20 @@ export const PurchaseItemScalarFieldEnum = {
 } as const
 
 export type PurchaseItemScalarFieldEnum = (typeof PurchaseItemScalarFieldEnum)[keyof typeof PurchaseItemScalarFieldEnum]
+
+
+export const CartScalarFieldEnum = {
+  id: 'id',
+  qty: 'qty',
+  price: 'price',
+  total: 'total',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  productId: 'productId',
+  userId: 'userId'
+} as const
+
+export type CartScalarFieldEnum = (typeof CartScalarFieldEnum)[keyof typeof CartScalarFieldEnum]
 
 
 export const SortOrder = {

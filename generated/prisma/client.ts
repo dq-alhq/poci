@@ -96,3 +96,8 @@ export type Purchase = Prisma.PurchaseModel
  * 
  */
 export type PurchaseItem = Prisma.PurchaseItemModel
+/**
+ * Model Cart
+ * 
+ */
+export type Cart = Prisma.CartModel

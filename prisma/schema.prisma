@@ -30,6 +30,7 @@ model User {
   accounts       Account[]
   stockTransfers StockTransfer[]
   purchases      Purchase[]
+  carts          Cart[]
 
   @@unique([email])
   @@unique([username])
@@ -88,6 +89,11 @@ enum ShiftStatus {
   CLOSED
 }
 
+enum PurchaseType {
+  ITEM // Barang
+  SERVICE // Layanan
+}
+
 // --- Tabel-Tabel Utama ---
 
 model Product {
@@ -106,6 +112,7 @@ model Product {
   outletStocks  OutletStock[]
   transferItems TransferItem[]
   purchaseItems PurchaseItem[]
+  cart          Cart[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -184,7 +191,9 @@ model TransferItem {
 // --- Tabel Pengadaan (Kulakan) ---
 
 model Purchase {
-  id       Int    @id @default(autoincrement())
+  id       Int          @id @default(autoincrement())
+  title    String?
+  type     PurchaseType @default(ITEM)
   supplier String
   total    Int
 
@@ -209,4 +218,23 @@ model PurchaseItem {
   product  Product  @relation(fields: [productId], references: [id])
 
   @@map("purchase_item")
+}
+
+model Cart {
+  id    Int @id @default(autoincrement())
+  qty   Int
+  price Int
+  total Int @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String?
+
+  @@index([productId])
+  @@map("cart")
 }

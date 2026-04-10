@@ -4,6 +4,9 @@ CREATE TYPE "TransferType" AS ENUM ('OUT', 'IN', 'RETURN', 'DAMAGED');
 -- CreateEnum
 CREATE TYPE "ShiftStatus" AS ENUM ('OPEN', 'CLOSED');
 
+-- CreateEnum
+CREATE TYPE "PurchaseType" AS ENUM ('ITEM', 'SERVICE');
+
 -- CreateTable
 CREATE TABLE "user" (
     "id" TEXT NOT NULL,
@@ -129,6 +132,8 @@ CREATE TABLE "transfer_item" (
 -- CreateTable
 CREATE TABLE "purchase" (
     "id" SERIAL NOT NULL,
+    "title" TEXT,
+    "type" "PurchaseType" NOT NULL DEFAULT 'ITEM',
     "supplier" TEXT NOT NULL,
     "total" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -148,6 +153,20 @@ CREATE TABLE "purchase_item" (
     CONSTRAINT "purchase_item_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "cart" (
+    "id" SERIAL NOT NULL,
+    "qty" INTEGER NOT NULL,
+    "price" INTEGER NOT NULL,
+    "total" INTEGER NOT NULL DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "productId" TEXT NOT NULL,
+    "userId" TEXT,
+
+    CONSTRAINT "cart_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "user_email_key" ON "user"("email");
 
@@ -165,6 +184,9 @@ CREATE INDEX "account_userId_idx" ON "account"("userId");
 
 -- CreateIndex
 CREATE INDEX "outlet_stock_outletId_productId_idx" ON "outlet_stock"("outletId", "productId");
+
+-- CreateIndex
+CREATE INDEX "cart_productId_idx" ON "cart"("productId");
 
 -- AddForeignKey
 ALTER TABLE "session" ADD CONSTRAINT "session_userId_fkey" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -201,3 +223,9 @@ ALTER TABLE "purchase_item" ADD CONSTRAINT "purchase_item_purchaseId_fkey" FOREI
 
 -- AddForeignKey
 ALTER TABLE "purchase_item" ADD CONSTRAINT "purchase_item_productId_fkey" FOREIGN KEY ("productId") REFERENCES "product"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "cart" ADD CONSTRAINT "cart_productId_fkey" FOREIGN KEY ("productId") REFERENCES "product"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "cart" ADD CONSTRAINT "cart_userId_fkey" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE SET NULL ON UPDATE CASCADE;

@@ -17,7 +17,7 @@ const TableHead = (props: ComponentProps<'th'>) => (
         data-slot='table-column'
         {...props}
         className={cn(
-            'relative border-l border-l-border px-4 py-(--gutter-y) text-left font-medium outline-hidden first:border-l-0 first:pl-(--gutter,--spacing(2)) last:pr-(--gutter,--spacing(2))',
+            'relative border-l border-l-border px-4 py-(--gutter-y) text-left font-medium text-primary-foreground outline-hidden first:border-l-0 first:pl-(--gutter,--spacing(2)) last:pr-(--gutter,--spacing(2))',
             props.className
         )}
     />

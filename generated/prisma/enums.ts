@@ -25,3 +25,11 @@ export const ShiftStatus = {
 } as const
 
 export type ShiftStatus = (typeof ShiftStatus)[keyof typeof ShiftStatus]
+
+
+export const PurchaseType = {
+  ITEM: 'ITEM',
+  SERVICE: 'SERVICE'
+} as const
+
+export type PurchaseType = (typeof PurchaseType)[keyof typeof PurchaseType]

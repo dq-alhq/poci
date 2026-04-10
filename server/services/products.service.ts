@@ -1,9 +1,9 @@
 'use server'
 
-import type { TransferType } from '@/generated/prisma/enums'
 import { revalidatePath } from 'next/cache'
 import { headers } from 'next/headers'
 import z from 'zod'
+import { TransferType } from '@/generated/prisma/enums'
 import { auth } from '@/lib/auth'
 import db from '@/lib/prisma'
 
@@ -119,6 +119,105 @@ export const getProduct = async (id: string) => {
             id
         }
     })
+}
+
+const stockSchema = z.object({
+    note: z.string().optional(),
+    outletId: z.string().optional(),
+    type: z.enum(TransferType),
+    items: z.array(
+        z.object({
+            productId: z.string().min(1, 'Produk harus dipilih'),
+            qty: z.coerce.number().default(0)
+        })
+    )
+})
+
+export const updateStock = async (_: any, formData: FormData) => {
+    const session = await auth.api.getSession({
+        headers: await headers()
+    })
+    if (!session?.user) {
+        return {
+            success: false,
+            message: 'Anda tidak berhak'
+        }
+    }
+
+    const rawItems: { productId: string; qty: number }[] = []
+
+    for (const [key, value] of formData.entries()) {
+        if (!key.startsWith('qty-')) continue
+
+        const productId = key.replace('qty-', '')
+        const qty = Number(value)
+
+        if (qty <= 0) continue
+
+        rawItems.push({ productId, qty })
+    }
+
+    const parsedData = {
+        items: rawItems,
+        note: formData.get('note')?.toString(),
+        outletId: formData.get('outletId')?.toString(),
+        type: formData.get('type')
+    }
+
+    const { data, success, error } = stockSchema.safeParse(parsedData)
+    if (!success) {
+        return {
+            success: false,
+            error: z.flattenError(error).fieldErrors
+        }
+    }
+
+    try {
+        await db.stockTransfer.create({
+            data: {
+                type: data.type,
+                note: data.note,
+                outletId: data.outletId,
+                createdById: session.user.id,
+                items: {
+                    createMany: {
+                        data: data.items
+                    }
+                }
+            }
+        })
+        data.items.forEach(async (item) => {
+            if (data.type === TransferType.IN || data.type === TransferType.RETURN) {
+                await db.product.update({
+                    where: { id: item.productId },
+                    data: {
+                        qty: {
+                            increment: item.qty
+                        }
+                    }
+                })
+            } else {
+                await db.product.update({
+                    where: { id: item.productId },
+                    data: {
+                        qty: {
+                            decrement: item.qty
+                        }
+                    }
+                })
+            }
+        })
+        revalidatePath('/dashboard/stok')
+        return {
+            success: true,
+            message: 'Stok berhasil diupdate'
+        }
+    } catch (error: any) {
+        return {
+            success: false,
+            error: error.message
+        }
+    }
 }
 
 export const modifyStock = async (id: string, qty: number, type: TransferType) => {
