@@ -9,9 +9,9 @@ import { FieldError, FieldGroup, FieldLabel, Form } from '@/components/ui/field'
 import { Separator } from '@/components/ui/separator'
 import { PasswordInput, TextField } from '@/components/ui/text-field'
 import { authClient } from '@/lib/auth-client'
-import { updatePassword } from '@/server/services/auth/password'
+import { updatePassword } from '@/server/services/users.service'
 
-export default function ProfileUpdateForm() {
+export default function SecurityUpdateForm() {
     const { refetch } = authClient.useSession()
     const [{ success, errors }, action, isPending] = useActionState(updatePassword, { errors: {} })
 

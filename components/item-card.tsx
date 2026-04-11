@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { GridList, GridListHeader, GridListItem, GridListSection } from 'react-aria-components'
 import { ItemContent, ItemDescription, ItemHeader, ItemTitle, itemVariants } from '@/components/ui/item'
 import { cn, formatRupiah } from '@/lib/utils'
+import { Skeleton } from './ui/skeleton'
 
 export const ItemCard = ({ product }: { product: Product }) => {
     return (
@@ -19,19 +20,21 @@ export const ItemCard = ({ product }: { product: Product }) => {
             textValue={product.name}
         >
             <ItemHeader>
-                <Image
-                    alt={product.name}
-                    className='aspect-square w-full object-cover'
-                    height={128}
-                    src={product?.image || ''}
-                    width={128}
-                />
+                {product?.image ? (
+                    <Image
+                        alt={product.name}
+                        className='aspect-square w-full object-cover'
+                        height={128}
+                        src={product?.image}
+                        width={128}
+                    />
+                ) : (
+                    <Skeleton className='aspect-square w-full object-cover' />
+                )}
             </ItemHeader>
             <ItemContent>
                 <ItemTitle>{product.name}</ItemTitle>
-                <ItemDescription>
-                    {formatRupiah(product.isProduct ? product.sellPrice! : product.buyPrice!)}
-                </ItemDescription>
+                <ItemDescription>{formatRupiah(product.price)}</ItemDescription>
             </ItemContent>
         </GridListItem>
     )

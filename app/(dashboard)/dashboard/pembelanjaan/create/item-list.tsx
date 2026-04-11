@@ -3,5 +3,5 @@ import { ItemForm } from './item-form'
 
 export const ItemList = async () => {
     const products = await getAllMaterials()
-    return <ItemForm items={products.data} />
+    return <ItemForm products={products.data} />
 }

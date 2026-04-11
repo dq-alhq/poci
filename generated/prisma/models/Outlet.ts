@@ -182,9 +182,10 @@ export type OutletWhereInput = {
   location?: Prisma.StringNullableFilter<"Outlet"> | string | null
   latitude?: Prisma.StringNullableFilter<"Outlet"> | string | null
   longitude?: Prisma.StringNullableFilter<"Outlet"> | string | null
-  stocks?: Prisma.OutletStockListRelationFilter
-  transfers?: Prisma.StockTransferListRelationFilter
+  outletStocks?: Prisma.OutletStockListRelationFilter
+  stockTransfers?: Prisma.StockTransferListRelationFilter
   shifts?: Prisma.ShiftListRelationFilter
+  sales?: Prisma.SaleListRelationFilter
 }
 
 export type OutletOrderByWithRelationInput = {
@@ -193,9 +194,10 @@ export type OutletOrderByWithRelationInput = {
   location?: Prisma.SortOrderInput | Prisma.SortOrder
   latitude?: Prisma.SortOrderInput | Prisma.SortOrder
   longitude?: Prisma.SortOrderInput | Prisma.SortOrder
-  stocks?: Prisma.OutletStockOrderByRelationAggregateInput
-  transfers?: Prisma.StockTransferOrderByRelationAggregateInput
+  outletStocks?: Prisma.OutletStockOrderByRelationAggregateInput
+  stockTransfers?: Prisma.StockTransferOrderByRelationAggregateInput
   shifts?: Prisma.ShiftOrderByRelationAggregateInput
+  sales?: Prisma.SaleOrderByRelationAggregateInput
 }
 
 export type OutletWhereUniqueInput = Prisma.AtLeast<{
@@ -207,9 +209,10 @@ export type OutletWhereUniqueInput = Prisma.AtLeast<{
   location?: Prisma.StringNullableFilter<"Outlet"> | string | null
   latitude?: Prisma.StringNullableFilter<"Outlet"> | string | null
   longitude?: Prisma.StringNullableFilter<"Outlet"> | string | null
-  stocks?: Prisma.OutletStockListRelationFilter
-  transfers?: Prisma.StockTransferListRelationFilter
+  outletStocks?: Prisma.OutletStockListRelationFilter
+  stockTransfers?: Prisma.StockTransferListRelationFilter
   shifts?: Prisma.ShiftListRelationFilter
+  sales?: Prisma.SaleListRelationFilter
 }, "id">
 
 export type OutletOrderByWithAggregationInput = {
@@ -240,9 +243,10 @@ export type OutletCreateInput = {
   location?: string | null
   latitude?: string | null
   longitude?: string | null
-  stocks?: Prisma.OutletStockCreateNestedManyWithoutOutletInput
-  transfers?: Prisma.StockTransferCreateNestedManyWithoutOutletInput
+  outletStocks?: Prisma.OutletStockCreateNestedManyWithoutOutletInput
+  stockTransfers?: Prisma.StockTransferCreateNestedManyWithoutOutletInput
   shifts?: Prisma.ShiftCreateNestedManyWithoutOutletInput
+  sales?: Prisma.SaleCreateNestedManyWithoutOutletInput
 }
 
 export type OutletUncheckedCreateInput = {
@@ -251,9 +255,10 @@ export type OutletUncheckedCreateInput = {
   location?: string | null
   latitude?: string | null
   longitude?: string | null
-  stocks?: Prisma.OutletStockUncheckedCreateNestedManyWithoutOutletInput
-  transfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutOutletInput
+  outletStocks?: Prisma.OutletStockUncheckedCreateNestedManyWithoutOutletInput
+  stockTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutOutletInput
   shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutOutletInput
+  sales?: Prisma.SaleUncheckedCreateNestedManyWithoutOutletInput
 }
 
 export type OutletUpdateInput = {
@@ -262,9 +267,10 @@ export type OutletUpdateInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   longitude?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stocks?: Prisma.OutletStockUpdateManyWithoutOutletNestedInput
-  transfers?: Prisma.StockTransferUpdateManyWithoutOutletNestedInput
+  outletStocks?: Prisma.OutletStockUpdateManyWithoutOutletNestedInput
+  stockTransfers?: Prisma.StockTransferUpdateManyWithoutOutletNestedInput
   shifts?: Prisma.ShiftUpdateManyWithoutOutletNestedInput
+  sales?: Prisma.SaleUpdateManyWithoutOutletNestedInput
 }
 
 export type OutletUncheckedUpdateInput = {
@@ -273,9 +279,10 @@ export type OutletUncheckedUpdateInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   longitude?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stocks?: Prisma.OutletStockUncheckedUpdateManyWithoutOutletNestedInput
-  transfers?: Prisma.StockTransferUncheckedUpdateManyWithoutOutletNestedInput
+  outletStocks?: Prisma.OutletStockUncheckedUpdateManyWithoutOutletNestedInput
+  stockTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutOutletNestedInput
   shifts?: Prisma.ShiftUncheckedUpdateManyWithoutOutletNestedInput
+  sales?: Prisma.SaleUncheckedUpdateManyWithoutOutletNestedInput
 }
 
 export type OutletCreateManyInput = {
@@ -336,34 +343,34 @@ export type OutletNullableScalarRelationFilter = {
   isNot?: Prisma.OutletWhereInput | null
 }
 
-export type OutletCreateNestedOneWithoutStocksInput = {
-  create?: Prisma.XOR<Prisma.OutletCreateWithoutStocksInput, Prisma.OutletUncheckedCreateWithoutStocksInput>
-  connectOrCreate?: Prisma.OutletCreateOrConnectWithoutStocksInput
+export type OutletCreateNestedOneWithoutOutletStocksInput = {
+  create?: Prisma.XOR<Prisma.OutletCreateWithoutOutletStocksInput, Prisma.OutletUncheckedCreateWithoutOutletStocksInput>
+  connectOrCreate?: Prisma.OutletCreateOrConnectWithoutOutletStocksInput
   connect?: Prisma.OutletWhereUniqueInput
 }
 
-export type OutletUpdateOneRequiredWithoutStocksNestedInput = {
-  create?: Prisma.XOR<Prisma.OutletCreateWithoutStocksInput, Prisma.OutletUncheckedCreateWithoutStocksInput>
-  connectOrCreate?: Prisma.OutletCreateOrConnectWithoutStocksInput
-  upsert?: Prisma.OutletUpsertWithoutStocksInput
+export type OutletUpdateOneRequiredWithoutOutletStocksNestedInput = {
+  create?: Prisma.XOR<Prisma.OutletCreateWithoutOutletStocksInput, Prisma.OutletUncheckedCreateWithoutOutletStocksInput>
+  connectOrCreate?: Prisma.OutletCreateOrConnectWithoutOutletStocksInput
+  upsert?: Prisma.OutletUpsertWithoutOutletStocksInput
   connect?: Prisma.OutletWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.OutletUpdateToOneWithWhereWithoutStocksInput, Prisma.OutletUpdateWithoutStocksInput>, Prisma.OutletUncheckedUpdateWithoutStocksInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OutletUpdateToOneWithWhereWithoutOutletStocksInput, Prisma.OutletUpdateWithoutOutletStocksInput>, Prisma.OutletUncheckedUpdateWithoutOutletStocksInput>
 }
 
-export type OutletCreateNestedOneWithoutTransfersInput = {
-  create?: Prisma.XOR<Prisma.OutletCreateWithoutTransfersInput, Prisma.OutletUncheckedCreateWithoutTransfersInput>
-  connectOrCreate?: Prisma.OutletCreateOrConnectWithoutTransfersInput
+export type OutletCreateNestedOneWithoutStockTransfersInput = {
+  create?: Prisma.XOR<Prisma.OutletCreateWithoutStockTransfersInput, Prisma.OutletUncheckedCreateWithoutStockTransfersInput>
+  connectOrCreate?: Prisma.OutletCreateOrConnectWithoutStockTransfersInput
   connect?: Prisma.OutletWhereUniqueInput
 }
 
-export type OutletUpdateOneWithoutTransfersNestedInput = {
-  create?: Prisma.XOR<Prisma.OutletCreateWithoutTransfersInput, Prisma.OutletUncheckedCreateWithoutTransfersInput>
-  connectOrCreate?: Prisma.OutletCreateOrConnectWithoutTransfersInput
-  upsert?: Prisma.OutletUpsertWithoutTransfersInput
+export type OutletUpdateOneWithoutStockTransfersNestedInput = {
+  create?: Prisma.XOR<Prisma.OutletCreateWithoutStockTransfersInput, Prisma.OutletUncheckedCreateWithoutStockTransfersInput>
+  connectOrCreate?: Prisma.OutletCreateOrConnectWithoutStockTransfersInput
+  upsert?: Prisma.OutletUpsertWithoutStockTransfersInput
   disconnect?: Prisma.OutletWhereInput | boolean
   delete?: Prisma.OutletWhereInput | boolean
   connect?: Prisma.OutletWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.OutletUpdateToOneWithWhereWithoutTransfersInput, Prisma.OutletUpdateWithoutTransfersInput>, Prisma.OutletUncheckedUpdateWithoutTransfersInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OutletUpdateToOneWithWhereWithoutStockTransfersInput, Prisma.OutletUpdateWithoutStockTransfersInput>, Prisma.OutletUncheckedUpdateWithoutStockTransfersInput>
 }
 
 export type OutletCreateNestedOneWithoutShiftsInput = {
@@ -380,116 +387,138 @@ export type OutletUpdateOneRequiredWithoutShiftsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.OutletUpdateToOneWithWhereWithoutShiftsInput, Prisma.OutletUpdateWithoutShiftsInput>, Prisma.OutletUncheckedUpdateWithoutShiftsInput>
 }
 
-export type OutletCreateWithoutStocksInput = {
+export type OutletCreateNestedOneWithoutSalesInput = {
+  create?: Prisma.XOR<Prisma.OutletCreateWithoutSalesInput, Prisma.OutletUncheckedCreateWithoutSalesInput>
+  connectOrCreate?: Prisma.OutletCreateOrConnectWithoutSalesInput
+  connect?: Prisma.OutletWhereUniqueInput
+}
+
+export type OutletUpdateOneRequiredWithoutSalesNestedInput = {
+  create?: Prisma.XOR<Prisma.OutletCreateWithoutSalesInput, Prisma.OutletUncheckedCreateWithoutSalesInput>
+  connectOrCreate?: Prisma.OutletCreateOrConnectWithoutSalesInput
+  upsert?: Prisma.OutletUpsertWithoutSalesInput
+  connect?: Prisma.OutletWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OutletUpdateToOneWithWhereWithoutSalesInput, Prisma.OutletUpdateWithoutSalesInput>, Prisma.OutletUncheckedUpdateWithoutSalesInput>
+}
+
+export type OutletCreateWithoutOutletStocksInput = {
   id?: string
   name: string
   location?: string | null
   latitude?: string | null
   longitude?: string | null
-  transfers?: Prisma.StockTransferCreateNestedManyWithoutOutletInput
+  stockTransfers?: Prisma.StockTransferCreateNestedManyWithoutOutletInput
   shifts?: Prisma.ShiftCreateNestedManyWithoutOutletInput
+  sales?: Prisma.SaleCreateNestedManyWithoutOutletInput
 }
 
-export type OutletUncheckedCreateWithoutStocksInput = {
+export type OutletUncheckedCreateWithoutOutletStocksInput = {
   id?: string
   name: string
   location?: string | null
   latitude?: string | null
   longitude?: string | null
-  transfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutOutletInput
+  stockTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutOutletInput
   shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutOutletInput
+  sales?: Prisma.SaleUncheckedCreateNestedManyWithoutOutletInput
 }
 
-export type OutletCreateOrConnectWithoutStocksInput = {
+export type OutletCreateOrConnectWithoutOutletStocksInput = {
   where: Prisma.OutletWhereUniqueInput
-  create: Prisma.XOR<Prisma.OutletCreateWithoutStocksInput, Prisma.OutletUncheckedCreateWithoutStocksInput>
+  create: Prisma.XOR<Prisma.OutletCreateWithoutOutletStocksInput, Prisma.OutletUncheckedCreateWithoutOutletStocksInput>
 }
 
-export type OutletUpsertWithoutStocksInput = {
-  update: Prisma.XOR<Prisma.OutletUpdateWithoutStocksInput, Prisma.OutletUncheckedUpdateWithoutStocksInput>
-  create: Prisma.XOR<Prisma.OutletCreateWithoutStocksInput, Prisma.OutletUncheckedCreateWithoutStocksInput>
+export type OutletUpsertWithoutOutletStocksInput = {
+  update: Prisma.XOR<Prisma.OutletUpdateWithoutOutletStocksInput, Prisma.OutletUncheckedUpdateWithoutOutletStocksInput>
+  create: Prisma.XOR<Prisma.OutletCreateWithoutOutletStocksInput, Prisma.OutletUncheckedCreateWithoutOutletStocksInput>
   where?: Prisma.OutletWhereInput
 }
 
-export type OutletUpdateToOneWithWhereWithoutStocksInput = {
+export type OutletUpdateToOneWithWhereWithoutOutletStocksInput = {
   where?: Prisma.OutletWhereInput
-  data: Prisma.XOR<Prisma.OutletUpdateWithoutStocksInput, Prisma.OutletUncheckedUpdateWithoutStocksInput>
+  data: Prisma.XOR<Prisma.OutletUpdateWithoutOutletStocksInput, Prisma.OutletUncheckedUpdateWithoutOutletStocksInput>
 }
 
-export type OutletUpdateWithoutStocksInput = {
+export type OutletUpdateWithoutOutletStocksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   longitude?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  transfers?: Prisma.StockTransferUpdateManyWithoutOutletNestedInput
+  stockTransfers?: Prisma.StockTransferUpdateManyWithoutOutletNestedInput
   shifts?: Prisma.ShiftUpdateManyWithoutOutletNestedInput
+  sales?: Prisma.SaleUpdateManyWithoutOutletNestedInput
 }
 
-export type OutletUncheckedUpdateWithoutStocksInput = {
+export type OutletUncheckedUpdateWithoutOutletStocksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   longitude?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  transfers?: Prisma.StockTransferUncheckedUpdateManyWithoutOutletNestedInput
+  stockTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutOutletNestedInput
   shifts?: Prisma.ShiftUncheckedUpdateManyWithoutOutletNestedInput
+  sales?: Prisma.SaleUncheckedUpdateManyWithoutOutletNestedInput
 }
 
-export type OutletCreateWithoutTransfersInput = {
+export type OutletCreateWithoutStockTransfersInput = {
   id?: string
   name: string
   location?: string | null
   latitude?: string | null
   longitude?: string | null
-  stocks?: Prisma.OutletStockCreateNestedManyWithoutOutletInput
+  outletStocks?: Prisma.OutletStockCreateNestedManyWithoutOutletInput
   shifts?: Prisma.ShiftCreateNestedManyWithoutOutletInput
+  sales?: Prisma.SaleCreateNestedManyWithoutOutletInput
 }
 
-export type OutletUncheckedCreateWithoutTransfersInput = {
+export type OutletUncheckedCreateWithoutStockTransfersInput = {
   id?: string
   name: string
   location?: string | null
   latitude?: string | null
   longitude?: string | null
-  stocks?: Prisma.OutletStockUncheckedCreateNestedManyWithoutOutletInput
+  outletStocks?: Prisma.OutletStockUncheckedCreateNestedManyWithoutOutletInput
   shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutOutletInput
+  sales?: Prisma.SaleUncheckedCreateNestedManyWithoutOutletInput
 }
 
-export type OutletCreateOrConnectWithoutTransfersInput = {
+export type OutletCreateOrConnectWithoutStockTransfersInput = {
   where: Prisma.OutletWhereUniqueInput
-  create: Prisma.XOR<Prisma.OutletCreateWithoutTransfersInput, Prisma.OutletUncheckedCreateWithoutTransfersInput>
+  create: Prisma.XOR<Prisma.OutletCreateWithoutStockTransfersInput, Prisma.OutletUncheckedCreateWithoutStockTransfersInput>
 }
 
-export type OutletUpsertWithoutTransfersInput = {
-  update: Prisma.XOR<Prisma.OutletUpdateWithoutTransfersInput, Prisma.OutletUncheckedUpdateWithoutTransfersInput>
-  create: Prisma.XOR<Prisma.OutletCreateWithoutTransfersInput, Prisma.OutletUncheckedCreateWithoutTransfersInput>
+export type OutletUpsertWithoutStockTransfersInput = {
+  update: Prisma.XOR<Prisma.OutletUpdateWithoutStockTransfersInput, Prisma.OutletUncheckedUpdateWithoutStockTransfersInput>
+  create: Prisma.XOR<Prisma.OutletCreateWithoutStockTransfersInput, Prisma.OutletUncheckedCreateWithoutStockTransfersInput>
   where?: Prisma.OutletWhereInput
 }
 
-export type OutletUpdateToOneWithWhereWithoutTransfersInput = {
+export type OutletUpdateToOneWithWhereWithoutStockTransfersInput = {
   where?: Prisma.OutletWhereInput
-  data: Prisma.XOR<Prisma.OutletUpdateWithoutTransfersInput, Prisma.OutletUncheckedUpdateWithoutTransfersInput>
+  data: Prisma.XOR<Prisma.OutletUpdateWithoutStockTransfersInput, Prisma.OutletUncheckedUpdateWithoutStockTransfersInput>
 }
 
-export type OutletUpdateWithoutTransfersInput = {
+export type OutletUpdateWithoutStockTransfersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   longitude?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stocks?: Prisma.OutletStockUpdateManyWithoutOutletNestedInput
+  outletStocks?: Prisma.OutletStockUpdateManyWithoutOutletNestedInput
   shifts?: Prisma.ShiftUpdateManyWithoutOutletNestedInput
+  sales?: Prisma.SaleUpdateManyWithoutOutletNestedInput
 }
 
-export type OutletUncheckedUpdateWithoutTransfersInput = {
+export type OutletUncheckedUpdateWithoutStockTransfersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   longitude?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stocks?: Prisma.OutletStockUncheckedUpdateManyWithoutOutletNestedInput
+  outletStocks?: Prisma.OutletStockUncheckedUpdateManyWithoutOutletNestedInput
   shifts?: Prisma.ShiftUncheckedUpdateManyWithoutOutletNestedInput
+  sales?: Prisma.SaleUncheckedUpdateManyWithoutOutletNestedInput
 }
 
 export type OutletCreateWithoutShiftsInput = {
@@ -498,8 +527,9 @@ export type OutletCreateWithoutShiftsInput = {
   location?: string | null
   latitude?: string | null
   longitude?: string | null
-  stocks?: Prisma.OutletStockCreateNestedManyWithoutOutletInput
-  transfers?: Prisma.StockTransferCreateNestedManyWithoutOutletInput
+  outletStocks?: Prisma.OutletStockCreateNestedManyWithoutOutletInput
+  stockTransfers?: Prisma.StockTransferCreateNestedManyWithoutOutletInput
+  sales?: Prisma.SaleCreateNestedManyWithoutOutletInput
 }
 
 export type OutletUncheckedCreateWithoutShiftsInput = {
@@ -508,8 +538,9 @@ export type OutletUncheckedCreateWithoutShiftsInput = {
   location?: string | null
   latitude?: string | null
   longitude?: string | null
-  stocks?: Prisma.OutletStockUncheckedCreateNestedManyWithoutOutletInput
-  transfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutOutletInput
+  outletStocks?: Prisma.OutletStockUncheckedCreateNestedManyWithoutOutletInput
+  stockTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutOutletInput
+  sales?: Prisma.SaleUncheckedCreateNestedManyWithoutOutletInput
 }
 
 export type OutletCreateOrConnectWithoutShiftsInput = {
@@ -534,8 +565,9 @@ export type OutletUpdateWithoutShiftsInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   longitude?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stocks?: Prisma.OutletStockUpdateManyWithoutOutletNestedInput
-  transfers?: Prisma.StockTransferUpdateManyWithoutOutletNestedInput
+  outletStocks?: Prisma.OutletStockUpdateManyWithoutOutletNestedInput
+  stockTransfers?: Prisma.StockTransferUpdateManyWithoutOutletNestedInput
+  sales?: Prisma.SaleUpdateManyWithoutOutletNestedInput
 }
 
 export type OutletUncheckedUpdateWithoutShiftsInput = {
@@ -544,8 +576,69 @@ export type OutletUncheckedUpdateWithoutShiftsInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   longitude?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stocks?: Prisma.OutletStockUncheckedUpdateManyWithoutOutletNestedInput
-  transfers?: Prisma.StockTransferUncheckedUpdateManyWithoutOutletNestedInput
+  outletStocks?: Prisma.OutletStockUncheckedUpdateManyWithoutOutletNestedInput
+  stockTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutOutletNestedInput
+  sales?: Prisma.SaleUncheckedUpdateManyWithoutOutletNestedInput
+}
+
+export type OutletCreateWithoutSalesInput = {
+  id?: string
+  name: string
+  location?: string | null
+  latitude?: string | null
+  longitude?: string | null
+  outletStocks?: Prisma.OutletStockCreateNestedManyWithoutOutletInput
+  stockTransfers?: Prisma.StockTransferCreateNestedManyWithoutOutletInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutOutletInput
+}
+
+export type OutletUncheckedCreateWithoutSalesInput = {
+  id?: string
+  name: string
+  location?: string | null
+  latitude?: string | null
+  longitude?: string | null
+  outletStocks?: Prisma.OutletStockUncheckedCreateNestedManyWithoutOutletInput
+  stockTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutOutletInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutOutletInput
+}
+
+export type OutletCreateOrConnectWithoutSalesInput = {
+  where: Prisma.OutletWhereUniqueInput
+  create: Prisma.XOR<Prisma.OutletCreateWithoutSalesInput, Prisma.OutletUncheckedCreateWithoutSalesInput>
+}
+
+export type OutletUpsertWithoutSalesInput = {
+  update: Prisma.XOR<Prisma.OutletUpdateWithoutSalesInput, Prisma.OutletUncheckedUpdateWithoutSalesInput>
+  create: Prisma.XOR<Prisma.OutletCreateWithoutSalesInput, Prisma.OutletUncheckedCreateWithoutSalesInput>
+  where?: Prisma.OutletWhereInput
+}
+
+export type OutletUpdateToOneWithWhereWithoutSalesInput = {
+  where?: Prisma.OutletWhereInput
+  data: Prisma.XOR<Prisma.OutletUpdateWithoutSalesInput, Prisma.OutletUncheckedUpdateWithoutSalesInput>
+}
+
+export type OutletUpdateWithoutSalesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  longitude?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outletStocks?: Prisma.OutletStockUpdateManyWithoutOutletNestedInput
+  stockTransfers?: Prisma.StockTransferUpdateManyWithoutOutletNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutOutletNestedInput
+}
+
+export type OutletUncheckedUpdateWithoutSalesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  longitude?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outletStocks?: Prisma.OutletStockUncheckedUpdateManyWithoutOutletNestedInput
+  stockTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutOutletNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutOutletNestedInput
 }
 
 
@@ -554,15 +647,17 @@ export type OutletUncheckedUpdateWithoutShiftsInput = {
  */
 
 export type OutletCountOutputType = {
-  stocks: number
-  transfers: number
+  outletStocks: number
+  stockTransfers: number
   shifts: number
+  sales: number
 }
 
 export type OutletCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  stocks?: boolean | OutletCountOutputTypeCountStocksArgs
-  transfers?: boolean | OutletCountOutputTypeCountTransfersArgs
+  outletStocks?: boolean | OutletCountOutputTypeCountOutletStocksArgs
+  stockTransfers?: boolean | OutletCountOutputTypeCountStockTransfersArgs
   shifts?: boolean | OutletCountOutputTypeCountShiftsArgs
+  sales?: boolean | OutletCountOutputTypeCountSalesArgs
 }
 
 /**
@@ -578,14 +673,14 @@ export type OutletCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exten
 /**
  * OutletCountOutputType without action
  */
-export type OutletCountOutputTypeCountStocksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type OutletCountOutputTypeCountOutletStocksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.OutletStockWhereInput
 }
 
 /**
  * OutletCountOutputType without action
  */
-export type OutletCountOutputTypeCountTransfersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type OutletCountOutputTypeCountStockTransfersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.StockTransferWhereInput
 }
 
@@ -596,6 +691,13 @@ export type OutletCountOutputTypeCountShiftsArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.ShiftWhereInput
 }
 
+/**
+ * OutletCountOutputType without action
+ */
+export type OutletCountOutputTypeCountSalesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SaleWhereInput
+}
+
 
 export type OutletSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -603,9 +705,10 @@ export type OutletSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   location?: boolean
   latitude?: boolean
   longitude?: boolean
-  stocks?: boolean | Prisma.Outlet$stocksArgs<ExtArgs>
-  transfers?: boolean | Prisma.Outlet$transfersArgs<ExtArgs>
+  outletStocks?: boolean | Prisma.Outlet$outletStocksArgs<ExtArgs>
+  stockTransfers?: boolean | Prisma.Outlet$stockTransfersArgs<ExtArgs>
   shifts?: boolean | Prisma.Outlet$shiftsArgs<ExtArgs>
+  sales?: boolean | Prisma.Outlet$salesArgs<ExtArgs>
   _count?: boolean | Prisma.OutletCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["outlet"]>
 
@@ -635,9 +738,10 @@ export type OutletSelectScalar = {
 
 export type OutletOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "location" | "latitude" | "longitude", ExtArgs["result"]["outlet"]>
 export type OutletInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  stocks?: boolean | Prisma.Outlet$stocksArgs<ExtArgs>
-  transfers?: boolean | Prisma.Outlet$transfersArgs<ExtArgs>
+  outletStocks?: boolean | Prisma.Outlet$outletStocksArgs<ExtArgs>
+  stockTransfers?: boolean | Prisma.Outlet$stockTransfersArgs<ExtArgs>
   shifts?: boolean | Prisma.Outlet$shiftsArgs<ExtArgs>
+  sales?: boolean | Prisma.Outlet$salesArgs<ExtArgs>
   _count?: boolean | Prisma.OutletCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type OutletIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -646,9 +750,10 @@ export type OutletIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
 export type $OutletPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Outlet"
   objects: {
-    stocks: Prisma.$OutletStockPayload<ExtArgs>[]
-    transfers: Prisma.$StockTransferPayload<ExtArgs>[]
+    outletStocks: Prisma.$OutletStockPayload<ExtArgs>[]
+    stockTransfers: Prisma.$StockTransferPayload<ExtArgs>[]
     shifts: Prisma.$ShiftPayload<ExtArgs>[]
+    sales: Prisma.$SalePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1050,9 +1155,10 @@ readonly fields: OutletFieldRefs;
  */
 export interface Prisma__OutletClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  stocks<T extends Prisma.Outlet$stocksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Outlet$stocksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OutletStockPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  transfers<T extends Prisma.Outlet$transfersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Outlet$transfersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockTransferPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  outletStocks<T extends Prisma.Outlet$outletStocksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Outlet$outletStocksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OutletStockPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  stockTransfers<T extends Prisma.Outlet$stockTransfersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Outlet$stockTransfersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockTransferPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   shifts<T extends Prisma.Outlet$shiftsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Outlet$shiftsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ShiftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sales<T extends Prisma.Outlet$salesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Outlet$salesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SalePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1480,9 +1586,9 @@ export type OutletDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
- * Outlet.stocks
+ * Outlet.outletStocks
  */
-export type Outlet$stocksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Outlet$outletStocksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the OutletStock
    */
@@ -1504,9 +1610,9 @@ export type Outlet$stocksArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 }
 
 /**
- * Outlet.transfers
+ * Outlet.stockTransfers
  */
-export type Outlet$transfersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Outlet$stockTransfersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the StockTransfer
    */
@@ -1549,6 +1655,30 @@ export type Outlet$shiftsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.ShiftScalarFieldEnum | Prisma.ShiftScalarFieldEnum[]
+}
+
+/**
+ * Outlet.sales
+ */
+export type Outlet$salesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Sale
+   */
+  select?: Prisma.SaleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Sale
+   */
+  omit?: Prisma.SaleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SaleInclude<ExtArgs> | null
+  where?: Prisma.SaleWhereInput
+  orderBy?: Prisma.SaleOrderByWithRelationInput | Prisma.SaleOrderByWithRelationInput[]
+  cursor?: Prisma.SaleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SaleScalarFieldEnum | Prisma.SaleScalarFieldEnum[]
 }
 
 /**

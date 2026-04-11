@@ -149,9 +149,14 @@ function NavMenu({
 function NavUser({ user }: { user: User }) {
     const { isMobile, state } = useSidebar()
     const router = useRouter()
-
-    const signOut = () => {
-        authClient.signOut().finally(() => router.refresh())
+    const signOut = async () => {
+        await authClient.signOut({
+            fetchOptions: {
+                onSuccess: () => {
+                    router.push('/login')
+                }
+            }
+        })
     }
 
     return (

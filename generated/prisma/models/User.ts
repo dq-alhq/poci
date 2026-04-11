@@ -249,8 +249,8 @@ export type UserWhereInput = {
   sessions?: Prisma.SessionListRelationFilter
   accounts?: Prisma.AccountListRelationFilter
   stockTransfers?: Prisma.StockTransferListRelationFilter
+  shifts?: Prisma.ShiftListRelationFilter
   purchases?: Prisma.PurchaseListRelationFilter
-  carts?: Prisma.CartListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -270,8 +270,8 @@ export type UserOrderByWithRelationInput = {
   sessions?: Prisma.SessionOrderByRelationAggregateInput
   accounts?: Prisma.AccountOrderByRelationAggregateInput
   stockTransfers?: Prisma.StockTransferOrderByRelationAggregateInput
+  shifts?: Prisma.ShiftOrderByRelationAggregateInput
   purchases?: Prisma.PurchaseOrderByRelationAggregateInput
-  carts?: Prisma.CartOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -294,8 +294,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   sessions?: Prisma.SessionListRelationFilter
   accounts?: Prisma.AccountListRelationFilter
   stockTransfers?: Prisma.StockTransferListRelationFilter
+  shifts?: Prisma.ShiftListRelationFilter
   purchases?: Prisma.PurchaseListRelationFilter
-  carts?: Prisma.CartListRelationFilter
 }, "id" | "email" | "username">
 
 export type UserOrderByWithAggregationInput = {
@@ -353,8 +353,8 @@ export type UserCreateInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   stockTransfers?: Prisma.StockTransferCreateNestedManyWithoutCreatedByInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutUserInput
   purchases?: Prisma.PurchaseCreateNestedManyWithoutCreatedByInput
-  carts?: Prisma.CartCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -374,8 +374,8 @@ export type UserUncheckedCreateInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   stockTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutCreatedByInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutUserInput
   purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutCreatedByInput
-  carts?: Prisma.CartUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -395,8 +395,8 @@ export type UserUpdateInput = {
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   stockTransfers?: Prisma.StockTransferUpdateManyWithoutCreatedByNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutUserNestedInput
   purchases?: Prisma.PurchaseUpdateManyWithoutCreatedByNestedInput
-  carts?: Prisma.CartUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -416,8 +416,8 @@ export type UserUncheckedUpdateInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   stockTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutCreatedByNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutUserNestedInput
   purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutCreatedByNestedInput
-  carts?: Prisma.CartUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -521,11 +521,6 @@ export type UserScalarRelationFilter = {
   isNot?: Prisma.UserWhereInput
 }
 
-export type UserNullableScalarRelationFilter = {
-  is?: Prisma.UserWhereInput | null
-  isNot?: Prisma.UserWhereInput | null
-}
-
 export type StringFieldUpdateOperationsInput = {
   set?: string
 }
@@ -592,6 +587,20 @@ export type UserUpdateOneRequiredWithoutStockTransfersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStockTransfersInput, Prisma.UserUpdateWithoutStockTransfersInput>, Prisma.UserUncheckedUpdateWithoutStockTransfersInput>
 }
 
+export type UserCreateNestedOneWithoutShiftsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutShiftsInput, Prisma.UserUncheckedCreateWithoutShiftsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutShiftsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutShiftsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutShiftsInput, Prisma.UserUncheckedCreateWithoutShiftsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutShiftsInput
+  upsert?: Prisma.UserUpsertWithoutShiftsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutShiftsInput, Prisma.UserUpdateWithoutShiftsInput>, Prisma.UserUncheckedUpdateWithoutShiftsInput>
+}
+
 export type UserCreateNestedOneWithoutPurchasesInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutPurchasesInput, Prisma.UserUncheckedCreateWithoutPurchasesInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutPurchasesInput
@@ -604,22 +613,6 @@ export type UserUpdateOneRequiredWithoutPurchasesNestedInput = {
   upsert?: Prisma.UserUpsertWithoutPurchasesInput
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPurchasesInput, Prisma.UserUpdateWithoutPurchasesInput>, Prisma.UserUncheckedUpdateWithoutPurchasesInput>
-}
-
-export type UserCreateNestedOneWithoutCartsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutCartsInput, Prisma.UserUncheckedCreateWithoutCartsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCartsInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserUpdateOneWithoutCartsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutCartsInput, Prisma.UserUncheckedCreateWithoutCartsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCartsInput
-  upsert?: Prisma.UserUpsertWithoutCartsInput
-  disconnect?: Prisma.UserWhereInput | boolean
-  delete?: Prisma.UserWhereInput | boolean
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCartsInput, Prisma.UserUpdateWithoutCartsInput>, Prisma.UserUncheckedUpdateWithoutCartsInput>
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -638,8 +631,8 @@ export type UserCreateWithoutSessionsInput = {
   displayUsername?: string | null
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   stockTransfers?: Prisma.StockTransferCreateNestedManyWithoutCreatedByInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutUserInput
   purchases?: Prisma.PurchaseCreateNestedManyWithoutCreatedByInput
-  carts?: Prisma.CartCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -658,8 +651,8 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   displayUsername?: string | null
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   stockTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutCreatedByInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutUserInput
   purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutCreatedByInput
-  carts?: Prisma.CartUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -694,8 +687,8 @@ export type UserUpdateWithoutSessionsInput = {
   displayUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   stockTransfers?: Prisma.StockTransferUpdateManyWithoutCreatedByNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutUserNestedInput
   purchases?: Prisma.PurchaseUpdateManyWithoutCreatedByNestedInput
-  carts?: Prisma.CartUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -714,8 +707,8 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   displayUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   stockTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutCreatedByNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutUserNestedInput
   purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutCreatedByNestedInput
-  carts?: Prisma.CartUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
@@ -734,8 +727,8 @@ export type UserCreateWithoutAccountsInput = {
   displayUsername?: string | null
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   stockTransfers?: Prisma.StockTransferCreateNestedManyWithoutCreatedByInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutUserInput
   purchases?: Prisma.PurchaseCreateNestedManyWithoutCreatedByInput
-  carts?: Prisma.CartCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -754,8 +747,8 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   displayUsername?: string | null
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   stockTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutCreatedByInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutUserInput
   purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutCreatedByInput
-  carts?: Prisma.CartUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -790,8 +783,8 @@ export type UserUpdateWithoutAccountsInput = {
   displayUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   stockTransfers?: Prisma.StockTransferUpdateManyWithoutCreatedByNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutUserNestedInput
   purchases?: Prisma.PurchaseUpdateManyWithoutCreatedByNestedInput
-  carts?: Prisma.CartUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -810,8 +803,8 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   displayUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   stockTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutCreatedByNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutUserNestedInput
   purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutCreatedByNestedInput
-  carts?: Prisma.CartUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutStockTransfersInput = {
@@ -830,8 +823,8 @@ export type UserCreateWithoutStockTransfersInput = {
   displayUsername?: string | null
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutUserInput
   purchases?: Prisma.PurchaseCreateNestedManyWithoutCreatedByInput
-  carts?: Prisma.CartCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutStockTransfersInput = {
@@ -850,8 +843,8 @@ export type UserUncheckedCreateWithoutStockTransfersInput = {
   displayUsername?: string | null
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutUserInput
   purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutCreatedByInput
-  carts?: Prisma.CartUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutStockTransfersInput = {
@@ -886,8 +879,8 @@ export type UserUpdateWithoutStockTransfersInput = {
   displayUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutUserNestedInput
   purchases?: Prisma.PurchaseUpdateManyWithoutCreatedByNestedInput
-  carts?: Prisma.CartUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStockTransfersInput = {
@@ -906,8 +899,104 @@ export type UserUncheckedUpdateWithoutStockTransfersInput = {
   displayUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutUserNestedInput
   purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutCreatedByNestedInput
-  carts?: Prisma.CartUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutShiftsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  role?: string | null
+  banned?: boolean | null
+  banReason?: string | null
+  banExpires?: Date | string | null
+  username?: string | null
+  displayUsername?: string | null
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  stockTransfers?: Prisma.StockTransferCreateNestedManyWithoutCreatedByInput
+  purchases?: Prisma.PurchaseCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserUncheckedCreateWithoutShiftsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  role?: string | null
+  banned?: boolean | null
+  banReason?: string | null
+  banExpires?: Date | string | null
+  username?: string | null
+  displayUsername?: string | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  stockTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutCreatedByInput
+  purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserCreateOrConnectWithoutShiftsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutShiftsInput, Prisma.UserUncheckedCreateWithoutShiftsInput>
+}
+
+export type UserUpsertWithoutShiftsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutShiftsInput, Prisma.UserUncheckedUpdateWithoutShiftsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutShiftsInput, Prisma.UserUncheckedCreateWithoutShiftsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutShiftsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutShiftsInput, Prisma.UserUncheckedUpdateWithoutShiftsInput>
+}
+
+export type UserUpdateWithoutShiftsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banned?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  stockTransfers?: Prisma.StockTransferUpdateManyWithoutCreatedByNestedInput
+  purchases?: Prisma.PurchaseUpdateManyWithoutCreatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutShiftsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banned?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  stockTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutCreatedByNestedInput
+  purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutPurchasesInput = {
@@ -927,7 +1016,7 @@ export type UserCreateWithoutPurchasesInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   stockTransfers?: Prisma.StockTransferCreateNestedManyWithoutCreatedByInput
-  carts?: Prisma.CartCreateNestedManyWithoutUserInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPurchasesInput = {
@@ -947,7 +1036,7 @@ export type UserUncheckedCreateWithoutPurchasesInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   stockTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutCreatedByInput
-  carts?: Prisma.CartUncheckedCreateNestedManyWithoutUserInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPurchasesInput = {
@@ -983,7 +1072,7 @@ export type UserUpdateWithoutPurchasesInput = {
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   stockTransfers?: Prisma.StockTransferUpdateManyWithoutCreatedByNestedInput
-  carts?: Prisma.CartUpdateManyWithoutUserNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPurchasesInput = {
@@ -1003,103 +1092,7 @@ export type UserUncheckedUpdateWithoutPurchasesInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   stockTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutCreatedByNestedInput
-  carts?: Prisma.CartUncheckedUpdateManyWithoutUserNestedInput
-}
-
-export type UserCreateWithoutCartsInput = {
-  id: string
-  name: string
-  email: string
-  emailVerified?: boolean
-  image?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  role?: string | null
-  banned?: boolean | null
-  banReason?: string | null
-  banExpires?: Date | string | null
-  username?: string | null
-  displayUsername?: string | null
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
-  stockTransfers?: Prisma.StockTransferCreateNestedManyWithoutCreatedByInput
-  purchases?: Prisma.PurchaseCreateNestedManyWithoutCreatedByInput
-}
-
-export type UserUncheckedCreateWithoutCartsInput = {
-  id: string
-  name: string
-  email: string
-  emailVerified?: boolean
-  image?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  role?: string | null
-  banned?: boolean | null
-  banReason?: string | null
-  banExpires?: Date | string | null
-  username?: string | null
-  displayUsername?: string | null
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
-  stockTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutCreatedByInput
-  purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutCreatedByInput
-}
-
-export type UserCreateOrConnectWithoutCartsInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutCartsInput, Prisma.UserUncheckedCreateWithoutCartsInput>
-}
-
-export type UserUpsertWithoutCartsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutCartsInput, Prisma.UserUncheckedUpdateWithoutCartsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutCartsInput, Prisma.UserUncheckedCreateWithoutCartsInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutCartsInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutCartsInput, Prisma.UserUncheckedUpdateWithoutCartsInput>
-}
-
-export type UserUpdateWithoutCartsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  banned?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  banExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  displayUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
-  stockTransfers?: Prisma.StockTransferUpdateManyWithoutCreatedByNestedInput
-  purchases?: Prisma.PurchaseUpdateManyWithoutCreatedByNestedInput
-}
-
-export type UserUncheckedUpdateWithoutCartsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  banned?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  banExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  displayUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
-  stockTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutCreatedByNestedInput
-  purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutCreatedByNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -1111,16 +1104,16 @@ export type UserCountOutputType = {
   sessions: number
   accounts: number
   stockTransfers: number
+  shifts: number
   purchases: number
-  carts: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sessions?: boolean | UserCountOutputTypeCountSessionsArgs
   accounts?: boolean | UserCountOutputTypeCountAccountsArgs
   stockTransfers?: boolean | UserCountOutputTypeCountStockTransfersArgs
+  shifts?: boolean | UserCountOutputTypeCountShiftsArgs
   purchases?: boolean | UserCountOutputTypeCountPurchasesArgs
-  carts?: boolean | UserCountOutputTypeCountCartsArgs
 }
 
 /**
@@ -1157,15 +1150,15 @@ export type UserCountOutputTypeCountStockTransfersArgs<ExtArgs extends runtime.T
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountPurchasesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.PurchaseWhereInput
+export type UserCountOutputTypeCountShiftsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ShiftWhereInput
 }
 
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountCartsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.CartWhereInput
+export type UserCountOutputTypeCountPurchasesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PurchaseWhereInput
 }
 
 
@@ -1186,8 +1179,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   stockTransfers?: boolean | Prisma.User$stockTransfersArgs<ExtArgs>
+  shifts?: boolean | Prisma.User$shiftsArgs<ExtArgs>
   purchases?: boolean | Prisma.User$purchasesArgs<ExtArgs>
-  carts?: boolean | Prisma.User$cartsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1244,8 +1237,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   stockTransfers?: boolean | Prisma.User$stockTransfersArgs<ExtArgs>
+  shifts?: boolean | Prisma.User$shiftsArgs<ExtArgs>
   purchases?: boolean | Prisma.User$purchasesArgs<ExtArgs>
-  carts?: boolean | Prisma.User$cartsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1257,8 +1250,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     sessions: Prisma.$SessionPayload<ExtArgs>[]
     accounts: Prisma.$AccountPayload<ExtArgs>[]
     stockTransfers: Prisma.$StockTransferPayload<ExtArgs>[]
+    shifts: Prisma.$ShiftPayload<ExtArgs>[]
     purchases: Prisma.$PurchasePayload<ExtArgs>[]
-    carts: Prisma.$CartPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1671,8 +1664,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   accounts<T extends Prisma.User$accountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   stockTransfers<T extends Prisma.User$stockTransfersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$stockTransfersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockTransferPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  shifts<T extends Prisma.User$shiftsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$shiftsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ShiftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   purchases<T extends Prisma.User$purchasesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$purchasesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchasePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  carts<T extends Prisma.User$cartsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$cartsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CartPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2180,6 +2173,30 @@ export type User$stockTransfersArgs<ExtArgs extends runtime.Types.Extensions.Int
 }
 
 /**
+ * User.shifts
+ */
+export type User$shiftsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Shift
+   */
+  select?: Prisma.ShiftSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Shift
+   */
+  omit?: Prisma.ShiftOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ShiftInclude<ExtArgs> | null
+  where?: Prisma.ShiftWhereInput
+  orderBy?: Prisma.ShiftOrderByWithRelationInput | Prisma.ShiftOrderByWithRelationInput[]
+  cursor?: Prisma.ShiftWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ShiftScalarFieldEnum | Prisma.ShiftScalarFieldEnum[]
+}
+
+/**
  * User.purchases
  */
 export type User$purchasesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2201,30 +2218,6 @@ export type User$purchasesArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.PurchaseScalarFieldEnum | Prisma.PurchaseScalarFieldEnum[]
-}
-
-/**
- * User.carts
- */
-export type User$cartsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Cart
-   */
-  select?: Prisma.CartSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Cart
-   */
-  omit?: Prisma.CartOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.CartInclude<ExtArgs> | null
-  where?: Prisma.CartWhereInput
-  orderBy?: Prisma.CartOrderByWithRelationInput | Prisma.CartOrderByWithRelationInput[]
-  cursor?: Prisma.CartWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.CartScalarFieldEnum | Prisma.CartScalarFieldEnum[]
 }
 
 /**

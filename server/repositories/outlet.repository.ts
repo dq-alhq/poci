@@ -2,26 +2,20 @@
 
 import db from '@/lib/prisma'
 
-export const getAllOutlet = async () => {
-    const data = await db.outlet.findMany({ orderBy: { id: 'asc' } })
-    const count = await db.outlet.count()
-
-    return {
-        data,
-        count
-    }
+export const getOutlets = async () => {
+    return db.outlet.findMany({ include: { shifts: true }, orderBy: { id: 'asc' } })
 }
 
 export const getOutlet = async (id: string) => {
-    return await db.outlet.findUnique({
+    return db.outlet.findUnique({
         where: {
             id
         },
         include: {
             shifts: true,
-            stocks: {
+            outletStocks: {
                 include: {
-                    product: true
+                    item: true
                 }
             }
         }

@@ -33,10 +33,20 @@ export type Session = Prisma.SessionModel
  */
 export type Account = Prisma.AccountModel
 /**
+ * Model Item
+ * 
+ */
+export type Item = Prisma.ItemModel
+/**
  * Model Product
  * 
  */
 export type Product = Prisma.ProductModel
+/**
+ * Model ProductItem
+ * 
+ */
+export type ProductItem = Prisma.ProductItemModel
 /**
  * Model Outlet
  * 
@@ -53,15 +63,15 @@ export type OutletStock = Prisma.OutletStockModel
  */
 export type StockTransfer = Prisma.StockTransferModel
 /**
+ * Model StockTransferItem
+ * 
+ */
+export type StockTransferItem = Prisma.StockTransferItemModel
+/**
  * Model Shift
  * 
  */
 export type Shift = Prisma.ShiftModel
-/**
- * Model TransferItem
- * 
- */
-export type TransferItem = Prisma.TransferItemModel
 /**
  * Model Purchase
  * 
@@ -73,7 +83,12 @@ export type Purchase = Prisma.PurchaseModel
  */
 export type PurchaseItem = Prisma.PurchaseItemModel
 /**
- * Model Cart
+ * Model Sale
  * 
  */
-export type Cart = Prisma.CartModel
+export type Sale = Prisma.SaleModel
+/**
+ * Model SaleItem
+ * 
+ */
+export type SaleItem = Prisma.SaleItemModel

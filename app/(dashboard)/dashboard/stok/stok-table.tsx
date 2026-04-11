@@ -1,10 +1,10 @@
 'use client'
 
-import type { Product } from '@/generated/prisma/client'
+import type { Item } from '@/generated/prisma/client'
 import Image from 'next/image'
 import { Table } from '@/components/ui/table'
 
-export const StokTable = ({ items }: { items: Product[] }) => (
+export const StokTable = ({ items }: { items: Item[] }) => (
     <Table bleed>
         <Table.Header>
             <Table.Column className='w-20' isRowHeader></Table.Column>
@@ -25,7 +25,7 @@ export const StokTable = ({ items }: { items: Product[] }) => (
                         />
                     </Table.Cell>
                     <Table.Cell>{item.name}</Table.Cell>
-                    <Table.Cell>{item.qty}</Table.Cell>
+                    <Table.Cell>{item.stock}</Table.Cell>
                     <Table.Cell>{item.unit}</Table.Cell>
                 </Table.Row>
             )}

@@ -14,16 +14,17 @@ export const metadata: Metadata = {
 export default function OutletPage() {
     return (
         <div className='px-6'>
-            <Heading description={'Kelola outlet anda'} title={'Outlet'} />
+            <Heading description={'Kelola outlet anda'} title={'Outlet'}>
+                <Link className={buttonVariants()} href='/dashboard/outlet/create'>
+                    Tambah Outlet
+                </Link>
+            </Heading>
             <div className='py-6'>
                 <Autocomplete>
                     <div className='mb-6 flex w-full items-center justify-between gap-4'>
                         <SearchField aria-label='Search products' className='lg:max-w-sm'>
                             <SearchInput placeholder='Cari ...' />
                         </SearchField>
-                        <Link className={buttonVariants()} href='/dashboard/outlet/create'>
-                            Tambah Outlet
-                        </Link>
                     </div>
                     <Suspense fallback={<div>Loading...</div>}>
                         <OutletList />

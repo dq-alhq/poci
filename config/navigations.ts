@@ -1,8 +1,11 @@
 import {
     IconBuildingStore,
     IconBuildingWarehouse,
+    IconClock,
+    IconHome,
     IconKey,
     IconLayoutGrid,
+    IconMoneybagMinus,
     IconPackage,
     IconShoppingCart,
     IconUserCircle,
@@ -40,6 +43,27 @@ export const getNavigations = (role: string | undefined) => {
             href: '/dashboard/pembelanjaan',
             icon: IconShoppingCart,
             show: true
+        },
+        {
+            title: 'Pengeluaran',
+            href: '/dashboard/pengeluaran',
+            icon: IconMoneybagMinus,
+            show: true
+        },
+        {
+            title: 'Shift',
+            href: '/dashboard/shift',
+            icon: IconClock,
+            show: true
+        }
+    ]
+
+    const userNavigations = [
+        {
+            title: 'Home',
+            href: '/',
+            icon: IconHome,
+            show: true
         }
     ]
 
@@ -66,6 +90,7 @@ export const getNavigations = (role: string | undefined) => {
 
     return {
         mainNavigations,
-        footerNavigations
+        footerNavigations,
+        userNavigations
     }
 }

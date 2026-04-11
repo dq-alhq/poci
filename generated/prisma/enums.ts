@@ -10,26 +10,9 @@
 */
 
 export const TransferType = {
-  OUT: 'OUT',
   IN: 'IN',
-  RETURN: 'RETURN',
+  OUT: 'OUT',
   DAMAGED: 'DAMAGED'
 } as const
 
 export type TransferType = (typeof TransferType)[keyof typeof TransferType]
-
-
-export const ShiftStatus = {
-  OPEN: 'OPEN',
-  CLOSED: 'CLOSED'
-} as const
-
-export type ShiftStatus = (typeof ShiftStatus)[keyof typeof ShiftStatus]
-
-
-export const PurchaseType = {
-  ITEM: 'ITEM',
-  SERVICE: 'SERVICE'
-} as const
-
-export type PurchaseType = (typeof PurchaseType)[keyof typeof PurchaseType]

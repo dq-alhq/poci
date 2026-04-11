@@ -1,5 +1,7 @@
 import { auth } from '@/lib/auth'
 import db from '@/lib/prisma'
+import Items from './items.json'
+import ProductItems from './product-item.json'
 import Products from './products.json'
 
 async function main() {
@@ -50,12 +52,26 @@ async function main() {
     })
     console.info('✅ User Created!')
 
+    console.info('🧃 Seeding Items')
+    await db.item.deleteMany()
+    await db.item.createMany({
+        data: Items
+    })
+    console.info('✅ Items Created!')
+
     console.info('🧃 Seeding Products')
     await db.product.deleteMany()
     await db.product.createMany({
         data: Products
     })
     console.info('✅ Products Created!')
+
+    console.info('🧃 Seeding ProductItems')
+    await db.productItem.deleteMany()
+    await db.productItem.createMany({
+        data: ProductItems
+    })
+    console.info('✅ ProductItems Created!')
 
     console.info('🏠 Seeding Outlets')
     await db.outlet.deleteMany()

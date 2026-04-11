@@ -1,58 +1,38 @@
 'use server'
 
+import { revalidatePath } from 'next/cache'
 import { headers } from 'next/headers'
 import z from 'zod'
-import { PurchaseType } from '@/generated/prisma/enums'
 import { auth } from '@/lib/auth'
+import db from '@/lib/prisma'
+import { updateStock } from './item.service'
 
 const purchaseSchema = z.object({
-    supplier: z.string(),
-    title: z.string(),
-    type: z.enum(PurchaseType),
-    total: z.coerce.number(),
+    title: z.string().min(1, 'Judul tidak boleh kosong'),
+    total: z.number().positive('Total harus positif'),
     items: z
         .array(
             z.object({
-                productId: z.string(),
-                quantity: z.coerce.number(),
+                itemId: z.string(),
+                qty: z.coerce.number(),
                 price: z.coerce.number()
             })
         )
         .optional()
 })
 
-export const createPurchase = async (_: any, formData: FormData) => {
+export const createPurchase = async ({ title, total, items }: z.infer<typeof purchaseSchema>) => {
     const session = await auth.api.getSession({
         headers: await headers()
     })
     if (!session?.user) {
         return {
             success: false,
-            message: 'Anda tidak berhak'
+            error: 'Anda tidak berhak'
         }
     }
 
-    const rawItems: { productId: string; qty: number; price: number }[] = []
-
-    for (const [key, value] of formData.entries()) {
-        if (!key.startsWith('qty-')) continue
-
-        const productId = key.replace('qty-', '')
-        const qty = Number(value)
-
-        if (qty <= 0) continue
-
-        rawItems.push({ productId, qty, price: 0 })
-    }
-
-    const parsedData = {
-        items: rawItems,
-        note: formData.get('note')?.toString(),
-        outletId: formData.get('outletId')?.toString(),
-        type: formData.get('type')
-    }
-
-    const { data, success, error } = purchaseSchema.safeParse(parsedData)
+    const { data, success, error } = purchaseSchema.safeParse({ title, total, items })
     if (!success) {
         return {
             success: false,
@@ -61,49 +41,63 @@ export const createPurchase = async (_: any, formData: FormData) => {
     }
 
     try {
-        await db.stockTransfer.create({
-            data: {
-                type: data.type,
-                note: data.note,
-                outletId: data.outletId,
-                createdById: session.user.id,
-                items: {
-                    createMany: {
-                        data: data.items
+        if (data?.items && data?.items.length > 0) {
+            await Promise.all([
+                db.purchase.create({
+                    data: {
+                        title: data.title,
+                        total: data.total,
+                        createdById: session.user.id,
+                        items: {
+                            createMany: {
+                                data: data.items
+                            }
+                        }
                     }
+                }),
+                updateStock({
+                    note: data.title,
+                    type: 'IN',
+                    items: data.items
+                })
+            ])
+        } else {
+            await db.purchase.create({
+                data: {
+                    title: data.title,
+                    total: data.total,
+                    createdById: session.user.id
                 }
-            }
-        })
-        data.items.forEach(async (item) => {
-            if (data.type === TransferType.IN || data.type === TransferType.RETURN) {
-                await db.product.update({
-                    where: { id: item.productId },
-                    data: {
-                        qty: {
-                            increment: item.qty
-                        }
-                    }
-                })
-            } else {
-                await db.product.update({
-                    where: { id: item.productId },
-                    data: {
-                        qty: {
-                            decrement: item.qty
-                        }
-                    }
-                })
-            }
-        })
-        revalidatePath('/dashboard/stok')
+            })
+        }
+
+        revalidatePath('/dashboard/purchases')
         return {
             success: true,
-            message: 'Stok berhasil diupdate'
+            message: 'Pembelanjaan berhasil dibuat'
         }
     } catch (error: any) {
         return {
             success: false,
             error: error.message
+        }
+    }
+}
+
+export const deletePurchase = async (id: number) => {
+    try {
+        await db.purchase.delete({
+            where: { id }
+        })
+        revalidatePath('/dashboard/purchases')
+        return {
+            success: true,
+            message: 'Pembelanjaan berhasil dihapus'
+        }
+    } catch (error: any) {
+        return {
+            success: false,
+            message: error.message
         }
     }
 }

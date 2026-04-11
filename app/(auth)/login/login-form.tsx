@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import { FieldError, FieldGroup, FieldLabel, Form } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { PasswordInput, TextField } from '@/components/ui/text-field'
-import { login } from '@/server/services/auth/login'
+import { login } from '@/server/services/users.service'
 
 export function LoginForm({ disableSignUp }: { disableSignUp: boolean }) {
     const [{ errors }, action, isPending] = useActionState(login, { errors: {} })

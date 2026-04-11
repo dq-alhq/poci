@@ -1,0 +1,186 @@
+[
+    {
+        "id": "bubuk-apple",
+        "name": "Apple",
+        "isMaterial": true,
+        "unit": "pcs",
+        "price": 850,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/apple-powder.png"
+    },
+    {
+        "id": "bubuk-blackcurrant",
+        "name": "Blackcurrant",
+        "isMaterial": true,
+        "unit": "pcs",
+        "price": 850,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/blackcurrant-powder.png"
+    },
+    {
+        "id": "bubuk-orange",
+        "name": "Orange",
+        "isMaterial": true,
+        "unit": "pcs",
+        "price": 850,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/orange-powder.png"
+    },
+    {
+        "id": "bubuk-lemon-honey",
+        "name": "Lemon Honey",
+        "isMaterial": true,
+        "unit": "pcs",
+        "price": 1000,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/lemon-powder.png"
+    },
+    {
+        "id": "bubuk-mango",
+        "name": "Mango",
+        "isMaterial": true,
+        "unit": "pcs",
+        "price": 850,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/mango-powder.png"
+    },
+    {
+        "id": "bubuk-lychee",
+        "name": "Lychee",
+        "isMaterial": true,
+        "unit": "pcs",
+        "price": 1000,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/lychee-powder.png"
+    },
+    {
+        "id": "bubuk-milk-tea",
+        "name": "Milk Tea",
+        "isMaterial": true,
+        "unit": "pcs",
+        "price": 1500,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/milk-tea-powder.png"
+    },
+    {
+        "id": "bubuk-chocolate",
+        "name": "Chocolate",
+        "isMaterial": true,
+        "unit": "pcs",
+        "price": 1600,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/chocolatte-powder.png"
+    },
+    {
+        "id": "bubuk-cappucino",
+        "name": "Cappucino",
+        "isMaterial": true,
+        "unit": "pcs",
+        "price": 1600,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/cappucino-powder.png"
+    },
+    {
+        "id": "bubuk-thai-tea",
+        "name": "Thai Tea",
+        "isMaterial": true,
+        "unit": "pcs",
+        "price": 2500,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/thai-tea-powder.png"
+    },
+    {
+        "id": "bubuk-matcha",
+        "name": "Matcha",
+        "isMaterial": true,
+        "unit": "pcs",
+        "price": 3000,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/matcha-powder.png"
+    },
+    {
+        "id": "bubuk-coffee-coconut-latte",
+        "name": "Coffee Coconut Latte",
+        "isMaterial": true,
+        "unit": "pcs",
+        "price": 3000,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/coconut-latte-powder.png"
+    },
+    {
+        "id": "bubuk-coffee-latte",
+        "name": "Coffee Latte",
+        "isMaterial": true,
+        "unit": "pcs",
+        "price": 3000,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/coffee-latte-powder.png"
+    },
+    {
+        "id": "kantong-teh-jasmine",
+        "name": "Kantong Teh Jasmine",
+        "isMaterial": false,
+        "unit": "pcs",
+        "price": 1500,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/jasmine-tea-powder.png"
+    },
+    {
+        "id": "kantong-teh-vanilla",
+        "name": "Kantong Teh Vanilla",
+        "isMaterial": false,
+        "unit": "pcs",
+        "price": 1500,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/vanilla-tea-powder.png"
+    },
+    {
+        "id": "seal-besar",
+        "name": "Seal Besar",
+        "isMaterial": false,
+        "unit": "roll",
+        "price": 350000,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/seal.png"
+    },
+    {
+        "id": "seal-kecil",
+        "name": "Seal Kecil",
+        "isMaterial": false,
+        "unit": "roll",
+        "price": 200000,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/seal-kecil.png"
+    },
+    {
+        "id": "cup-kecil",
+        "name": "Cup Kecil",
+        "isMaterial": true,
+        "unit": "pcs",
+        "price": 525,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/cup-kecil.png"
+    },
+    {
+        "id": "cup",
+        "name": "Cup Jumbo",
+        "isMaterial": true,
+        "unit": "pcs",
+        "price": 625,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/cup.png"
+    },
+    {
+        "id": "cup-extra",
+        "name": "Cup Extra",
+        "isMaterial": true,
+        "unit": "pcs",
+        "price": 650,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/cup-extra.png"
+    },
+    {
+        "id": "sedotan",
+        "name": "Sedotan",
+        "isMaterial": false,
+        "unit": "pack",
+        "price": 46500,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/sedotan.png"
+    },
+    {
+        "id": "galon",
+        "name": "Galon",
+        "isMaterial": false,
+        "unit": "pcs",
+        "price": 5000,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/galon-19l.png"
+    },
+    {
+        "id": "gula",
+        "name": "Gula",
+        "isMaterial": false,
+        "unit": "kg",
+        "price": 17500,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/gula.png"
+    }
+]

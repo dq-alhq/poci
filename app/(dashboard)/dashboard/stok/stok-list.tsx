@@ -1,14 +1,14 @@
 import { Card } from '@/components/ui/card'
-import { getAllMaterials } from '@/server/repositories/items.repository'
+import { getItems } from '@/server/repositories/items.repository'
 import { StokTable } from './stok-table'
 
 export async function StokList() {
-    const items = await getAllMaterials()
+    const items = await getItems()
 
     return (
         <Card className='p-0'>
             <Card.Content>
-                <StokTable items={items.data} />
+                <StokTable items={items} />
             </Card.Content>
         </Card>
     )

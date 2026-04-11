@@ -36,23 +36,29 @@ export type ShiftSumAggregateOutputType = {
 
 export type ShiftMinAggregateOutputType = {
   id: number | null
-  date: Date | null
-  status: $Enums.ShiftStatus | null
+  start: Date | null
+  end: Date | null
+  isOpen: boolean | null
   outletId: string | null
+  userId: string | null
 }
 
 export type ShiftMaxAggregateOutputType = {
   id: number | null
-  date: Date | null
-  status: $Enums.ShiftStatus | null
+  start: Date | null
+  end: Date | null
+  isOpen: boolean | null
   outletId: string | null
+  userId: string | null
 }
 
 export type ShiftCountAggregateOutputType = {
   id: number
-  date: number
-  status: number
+  start: number
+  end: number
+  isOpen: number
   outletId: number
+  userId: number
   _all: number
 }
 
@@ -67,23 +73,29 @@ export type ShiftSumAggregateInputType = {
 
 export type ShiftMinAggregateInputType = {
   id?: true
-  date?: true
-  status?: true
+  start?: true
+  end?: true
+  isOpen?: true
   outletId?: true
+  userId?: true
 }
 
 export type ShiftMaxAggregateInputType = {
   id?: true
-  date?: true
-  status?: true
+  start?: true
+  end?: true
+  isOpen?: true
   outletId?: true
+  userId?: true
 }
 
 export type ShiftCountAggregateInputType = {
   id?: true
-  date?: true
-  status?: true
+  start?: true
+  end?: true
+  isOpen?: true
   outletId?: true
+  userId?: true
   _all?: true
 }
 
@@ -175,9 +187,11 @@ export type ShiftGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 
 export type ShiftGroupByOutputType = {
   id: number
-  date: Date
-  status: $Enums.ShiftStatus
+  start: Date
+  end: Date | null
+  isOpen: boolean
   outletId: string
+  userId: string
   _count: ShiftCountAggregateOutputType | null
   _avg: ShiftAvgAggregateOutputType | null
   _sum: ShiftSumAggregateOutputType | null
@@ -205,18 +219,24 @@ export type ShiftWhereInput = {
   OR?: Prisma.ShiftWhereInput[]
   NOT?: Prisma.ShiftWhereInput | Prisma.ShiftWhereInput[]
   id?: Prisma.IntFilter<"Shift"> | number
-  date?: Prisma.DateTimeFilter<"Shift"> | Date | string
-  status?: Prisma.EnumShiftStatusFilter<"Shift"> | $Enums.ShiftStatus
+  start?: Prisma.DateTimeFilter<"Shift"> | Date | string
+  end?: Prisma.DateTimeNullableFilter<"Shift"> | Date | string | null
+  isOpen?: Prisma.BoolFilter<"Shift"> | boolean
   outletId?: Prisma.StringFilter<"Shift"> | string
+  userId?: Prisma.StringFilter<"Shift"> | string
   outlet?: Prisma.XOR<Prisma.OutletScalarRelationFilter, Prisma.OutletWhereInput>
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
 export type ShiftOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  date?: Prisma.SortOrder
-  status?: Prisma.SortOrder
+  start?: Prisma.SortOrder
+  end?: Prisma.SortOrderInput | Prisma.SortOrder
+  isOpen?: Prisma.SortOrder
   outletId?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
   outlet?: Prisma.OutletOrderByWithRelationInput
+  user?: Prisma.UserOrderByWithRelationInput
 }
 
 export type ShiftWhereUniqueInput = Prisma.AtLeast<{
@@ -224,17 +244,22 @@ export type ShiftWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.ShiftWhereInput | Prisma.ShiftWhereInput[]
   OR?: Prisma.ShiftWhereInput[]
   NOT?: Prisma.ShiftWhereInput | Prisma.ShiftWhereInput[]
-  date?: Prisma.DateTimeFilter<"Shift"> | Date | string
-  status?: Prisma.EnumShiftStatusFilter<"Shift"> | $Enums.ShiftStatus
+  start?: Prisma.DateTimeFilter<"Shift"> | Date | string
+  end?: Prisma.DateTimeNullableFilter<"Shift"> | Date | string | null
+  isOpen?: Prisma.BoolFilter<"Shift"> | boolean
   outletId?: Prisma.StringFilter<"Shift"> | string
+  userId?: Prisma.StringFilter<"Shift"> | string
   outlet?: Prisma.XOR<Prisma.OutletScalarRelationFilter, Prisma.OutletWhereInput>
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id">
 
 export type ShiftOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  date?: Prisma.SortOrder
-  status?: Prisma.SortOrder
+  start?: Prisma.SortOrder
+  end?: Prisma.SortOrderInput | Prisma.SortOrder
+  isOpen?: Prisma.SortOrder
   outletId?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
   _count?: Prisma.ShiftCountOrderByAggregateInput
   _avg?: Prisma.ShiftAvgOrderByAggregateInput
   _max?: Prisma.ShiftMaxOrderByAggregateInput
@@ -247,54 +272,69 @@ export type ShiftScalarWhereWithAggregatesInput = {
   OR?: Prisma.ShiftScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ShiftScalarWhereWithAggregatesInput | Prisma.ShiftScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Shift"> | number
-  date?: Prisma.DateTimeWithAggregatesFilter<"Shift"> | Date | string
-  status?: Prisma.EnumShiftStatusWithAggregatesFilter<"Shift"> | $Enums.ShiftStatus
+  start?: Prisma.DateTimeWithAggregatesFilter<"Shift"> | Date | string
+  end?: Prisma.DateTimeNullableWithAggregatesFilter<"Shift"> | Date | string | null
+  isOpen?: Prisma.BoolWithAggregatesFilter<"Shift"> | boolean
   outletId?: Prisma.StringWithAggregatesFilter<"Shift"> | string
+  userId?: Prisma.StringWithAggregatesFilter<"Shift"> | string
 }
 
 export type ShiftCreateInput = {
-  date?: Date | string
-  status?: $Enums.ShiftStatus
+  start?: Date | string
+  end?: Date | string | null
+  isOpen?: boolean
   outlet: Prisma.OutletCreateNestedOneWithoutShiftsInput
+  user: Prisma.UserCreateNestedOneWithoutShiftsInput
 }
 
 export type ShiftUncheckedCreateInput = {
   id?: number
-  date?: Date | string
-  status?: $Enums.ShiftStatus
+  start?: Date | string
+  end?: Date | string | null
+  isOpen?: boolean
   outletId: string
+  userId: string
 }
 
 export type ShiftUpdateInput = {
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  status?: Prisma.EnumShiftStatusFieldUpdateOperationsInput | $Enums.ShiftStatus
+  start?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   outlet?: Prisma.OutletUpdateOneRequiredWithoutShiftsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutShiftsNestedInput
 }
 
 export type ShiftUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  status?: Prisma.EnumShiftStatusFieldUpdateOperationsInput | $Enums.ShiftStatus
+  start?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   outletId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ShiftCreateManyInput = {
   id?: number
-  date?: Date | string
-  status?: $Enums.ShiftStatus
+  start?: Date | string
+  end?: Date | string | null
+  isOpen?: boolean
   outletId: string
+  userId: string
 }
 
 export type ShiftUpdateManyMutationInput = {
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  status?: Prisma.EnumShiftStatusFieldUpdateOperationsInput | $Enums.ShiftStatus
+  start?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type ShiftUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  status?: Prisma.EnumShiftStatusFieldUpdateOperationsInput | $Enums.ShiftStatus
+  start?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   outletId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ShiftListRelationFilter = {
@@ -309,9 +349,11 @@ export type ShiftOrderByRelationAggregateInput = {
 
 export type ShiftCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  date?: Prisma.SortOrder
-  status?: Prisma.SortOrder
+  start?: Prisma.SortOrder
+  end?: Prisma.SortOrder
+  isOpen?: Prisma.SortOrder
   outletId?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
 }
 
 export type ShiftAvgOrderByAggregateInput = {
@@ -320,20 +362,66 @@ export type ShiftAvgOrderByAggregateInput = {
 
 export type ShiftMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  date?: Prisma.SortOrder
-  status?: Prisma.SortOrder
+  start?: Prisma.SortOrder
+  end?: Prisma.SortOrder
+  isOpen?: Prisma.SortOrder
   outletId?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
 }
 
 export type ShiftMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  date?: Prisma.SortOrder
-  status?: Prisma.SortOrder
+  start?: Prisma.SortOrder
+  end?: Prisma.SortOrder
+  isOpen?: Prisma.SortOrder
   outletId?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
 }
 
 export type ShiftSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+}
+
+export type ShiftCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.ShiftCreateWithoutUserInput, Prisma.ShiftUncheckedCreateWithoutUserInput> | Prisma.ShiftCreateWithoutUserInput[] | Prisma.ShiftUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.ShiftCreateOrConnectWithoutUserInput | Prisma.ShiftCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.ShiftCreateManyUserInputEnvelope
+  connect?: Prisma.ShiftWhereUniqueInput | Prisma.ShiftWhereUniqueInput[]
+}
+
+export type ShiftUncheckedCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.ShiftCreateWithoutUserInput, Prisma.ShiftUncheckedCreateWithoutUserInput> | Prisma.ShiftCreateWithoutUserInput[] | Prisma.ShiftUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.ShiftCreateOrConnectWithoutUserInput | Prisma.ShiftCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.ShiftCreateManyUserInputEnvelope
+  connect?: Prisma.ShiftWhereUniqueInput | Prisma.ShiftWhereUniqueInput[]
+}
+
+export type ShiftUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.ShiftCreateWithoutUserInput, Prisma.ShiftUncheckedCreateWithoutUserInput> | Prisma.ShiftCreateWithoutUserInput[] | Prisma.ShiftUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.ShiftCreateOrConnectWithoutUserInput | Prisma.ShiftCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.ShiftUpsertWithWhereUniqueWithoutUserInput | Prisma.ShiftUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.ShiftCreateManyUserInputEnvelope
+  set?: Prisma.ShiftWhereUniqueInput | Prisma.ShiftWhereUniqueInput[]
+  disconnect?: Prisma.ShiftWhereUniqueInput | Prisma.ShiftWhereUniqueInput[]
+  delete?: Prisma.ShiftWhereUniqueInput | Prisma.ShiftWhereUniqueInput[]
+  connect?: Prisma.ShiftWhereUniqueInput | Prisma.ShiftWhereUniqueInput[]
+  update?: Prisma.ShiftUpdateWithWhereUniqueWithoutUserInput | Prisma.ShiftUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.ShiftUpdateManyWithWhereWithoutUserInput | Prisma.ShiftUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.ShiftScalarWhereInput | Prisma.ShiftScalarWhereInput[]
+}
+
+export type ShiftUncheckedUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.ShiftCreateWithoutUserInput, Prisma.ShiftUncheckedCreateWithoutUserInput> | Prisma.ShiftCreateWithoutUserInput[] | Prisma.ShiftUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.ShiftCreateOrConnectWithoutUserInput | Prisma.ShiftCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.ShiftUpsertWithWhereUniqueWithoutUserInput | Prisma.ShiftUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.ShiftCreateManyUserInputEnvelope
+  set?: Prisma.ShiftWhereUniqueInput | Prisma.ShiftWhereUniqueInput[]
+  disconnect?: Prisma.ShiftWhereUniqueInput | Prisma.ShiftWhereUniqueInput[]
+  delete?: Prisma.ShiftWhereUniqueInput | Prisma.ShiftWhereUniqueInput[]
+  connect?: Prisma.ShiftWhereUniqueInput | Prisma.ShiftWhereUniqueInput[]
+  update?: Prisma.ShiftUpdateWithWhereUniqueWithoutUserInput | Prisma.ShiftUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.ShiftUpdateManyWithWhereWithoutUserInput | Prisma.ShiftUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.ShiftScalarWhereInput | Prisma.ShiftScalarWhereInput[]
 }
 
 export type ShiftCreateNestedManyWithoutOutletInput = {
@@ -378,19 +466,72 @@ export type ShiftUncheckedUpdateManyWithoutOutletNestedInput = {
   deleteMany?: Prisma.ShiftScalarWhereInput | Prisma.ShiftScalarWhereInput[]
 }
 
-export type EnumShiftStatusFieldUpdateOperationsInput = {
-  set?: $Enums.ShiftStatus
+export type ShiftCreateWithoutUserInput = {
+  start?: Date | string
+  end?: Date | string | null
+  isOpen?: boolean
+  outlet: Prisma.OutletCreateNestedOneWithoutShiftsInput
+}
+
+export type ShiftUncheckedCreateWithoutUserInput = {
+  id?: number
+  start?: Date | string
+  end?: Date | string | null
+  isOpen?: boolean
+  outletId: string
+}
+
+export type ShiftCreateOrConnectWithoutUserInput = {
+  where: Prisma.ShiftWhereUniqueInput
+  create: Prisma.XOR<Prisma.ShiftCreateWithoutUserInput, Prisma.ShiftUncheckedCreateWithoutUserInput>
+}
+
+export type ShiftCreateManyUserInputEnvelope = {
+  data: Prisma.ShiftCreateManyUserInput | Prisma.ShiftCreateManyUserInput[]
+  skipDuplicates?: boolean
+}
+
+export type ShiftUpsertWithWhereUniqueWithoutUserInput = {
+  where: Prisma.ShiftWhereUniqueInput
+  update: Prisma.XOR<Prisma.ShiftUpdateWithoutUserInput, Prisma.ShiftUncheckedUpdateWithoutUserInput>
+  create: Prisma.XOR<Prisma.ShiftCreateWithoutUserInput, Prisma.ShiftUncheckedCreateWithoutUserInput>
+}
+
+export type ShiftUpdateWithWhereUniqueWithoutUserInput = {
+  where: Prisma.ShiftWhereUniqueInput
+  data: Prisma.XOR<Prisma.ShiftUpdateWithoutUserInput, Prisma.ShiftUncheckedUpdateWithoutUserInput>
+}
+
+export type ShiftUpdateManyWithWhereWithoutUserInput = {
+  where: Prisma.ShiftScalarWhereInput
+  data: Prisma.XOR<Prisma.ShiftUpdateManyMutationInput, Prisma.ShiftUncheckedUpdateManyWithoutUserInput>
+}
+
+export type ShiftScalarWhereInput = {
+  AND?: Prisma.ShiftScalarWhereInput | Prisma.ShiftScalarWhereInput[]
+  OR?: Prisma.ShiftScalarWhereInput[]
+  NOT?: Prisma.ShiftScalarWhereInput | Prisma.ShiftScalarWhereInput[]
+  id?: Prisma.IntFilter<"Shift"> | number
+  start?: Prisma.DateTimeFilter<"Shift"> | Date | string
+  end?: Prisma.DateTimeNullableFilter<"Shift"> | Date | string | null
+  isOpen?: Prisma.BoolFilter<"Shift"> | boolean
+  outletId?: Prisma.StringFilter<"Shift"> | string
+  userId?: Prisma.StringFilter<"Shift"> | string
 }
 
 export type ShiftCreateWithoutOutletInput = {
-  date?: Date | string
-  status?: $Enums.ShiftStatus
+  start?: Date | string
+  end?: Date | string | null
+  isOpen?: boolean
+  user: Prisma.UserCreateNestedOneWithoutShiftsInput
 }
 
 export type ShiftUncheckedCreateWithoutOutletInput = {
   id?: number
-  date?: Date | string
-  status?: $Enums.ShiftStatus
+  start?: Date | string
+  end?: Date | string | null
+  isOpen?: boolean
+  userId: string
 }
 
 export type ShiftCreateOrConnectWithoutOutletInput = {
@@ -419,93 +560,139 @@ export type ShiftUpdateManyWithWhereWithoutOutletInput = {
   data: Prisma.XOR<Prisma.ShiftUpdateManyMutationInput, Prisma.ShiftUncheckedUpdateManyWithoutOutletInput>
 }
 
-export type ShiftScalarWhereInput = {
-  AND?: Prisma.ShiftScalarWhereInput | Prisma.ShiftScalarWhereInput[]
-  OR?: Prisma.ShiftScalarWhereInput[]
-  NOT?: Prisma.ShiftScalarWhereInput | Prisma.ShiftScalarWhereInput[]
-  id?: Prisma.IntFilter<"Shift"> | number
-  date?: Prisma.DateTimeFilter<"Shift"> | Date | string
-  status?: Prisma.EnumShiftStatusFilter<"Shift"> | $Enums.ShiftStatus
-  outletId?: Prisma.StringFilter<"Shift"> | string
+export type ShiftCreateManyUserInput = {
+  id?: number
+  start?: Date | string
+  end?: Date | string | null
+  isOpen?: boolean
+  outletId: string
+}
+
+export type ShiftUpdateWithoutUserInput = {
+  start?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  outlet?: Prisma.OutletUpdateOneRequiredWithoutShiftsNestedInput
+}
+
+export type ShiftUncheckedUpdateWithoutUserInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  start?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  outletId?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
+export type ShiftUncheckedUpdateManyWithoutUserInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  start?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  outletId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ShiftCreateManyOutletInput = {
   id?: number
-  date?: Date | string
-  status?: $Enums.ShiftStatus
+  start?: Date | string
+  end?: Date | string | null
+  isOpen?: boolean
+  userId: string
 }
 
 export type ShiftUpdateWithoutOutletInput = {
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  status?: Prisma.EnumShiftStatusFieldUpdateOperationsInput | $Enums.ShiftStatus
+  start?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  user?: Prisma.UserUpdateOneRequiredWithoutShiftsNestedInput
 }
 
 export type ShiftUncheckedUpdateWithoutOutletInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  status?: Prisma.EnumShiftStatusFieldUpdateOperationsInput | $Enums.ShiftStatus
+  start?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ShiftUncheckedUpdateManyWithoutOutletInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  status?: Prisma.EnumShiftStatusFieldUpdateOperationsInput | $Enums.ShiftStatus
+  start?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
 
 export type ShiftSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  date?: boolean
-  status?: boolean
+  start?: boolean
+  end?: boolean
+  isOpen?: boolean
   outletId?: boolean
+  userId?: boolean
   outlet?: boolean | Prisma.OutletDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["shift"]>
 
 export type ShiftSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  date?: boolean
-  status?: boolean
+  start?: boolean
+  end?: boolean
+  isOpen?: boolean
   outletId?: boolean
+  userId?: boolean
   outlet?: boolean | Prisma.OutletDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["shift"]>
 
 export type ShiftSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  date?: boolean
-  status?: boolean
+  start?: boolean
+  end?: boolean
+  isOpen?: boolean
   outletId?: boolean
+  userId?: boolean
   outlet?: boolean | Prisma.OutletDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["shift"]>
 
 export type ShiftSelectScalar = {
   id?: boolean
-  date?: boolean
-  status?: boolean
+  start?: boolean
+  end?: boolean
+  isOpen?: boolean
   outletId?: boolean
+  userId?: boolean
 }
 
-export type ShiftOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "date" | "status" | "outletId", ExtArgs["result"]["shift"]>
+export type ShiftOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "start" | "end" | "isOpen" | "outletId" | "userId", ExtArgs["result"]["shift"]>
 export type ShiftInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   outlet?: boolean | Prisma.OutletDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type ShiftIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   outlet?: boolean | Prisma.OutletDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type ShiftIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   outlet?: boolean | Prisma.OutletDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
 export type $ShiftPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Shift"
   objects: {
     outlet: Prisma.$OutletPayload<ExtArgs>
+    user: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
-    date: Date
-    status: $Enums.ShiftStatus
+    start: Date
+    end: Date | null
+    isOpen: boolean
     outletId: string
+    userId: string
   }, ExtArgs["result"]["shift"]>
   composites: {}
 }
@@ -901,6 +1088,7 @@ readonly fields: ShiftFieldRefs;
 export interface Prisma__ShiftClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   outlet<T extends Prisma.OutletDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OutletDefaultArgs<ExtArgs>>): Prisma.Prisma__OutletClient<runtime.Types.Result.GetResult<Prisma.$OutletPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -931,9 +1119,11 @@ export interface Prisma__ShiftClient<T, Null = never, ExtArgs extends runtime.Ty
  */
 export interface ShiftFieldRefs {
   readonly id: Prisma.FieldRef<"Shift", 'Int'>
-  readonly date: Prisma.FieldRef<"Shift", 'DateTime'>
-  readonly status: Prisma.FieldRef<"Shift", 'ShiftStatus'>
+  readonly start: Prisma.FieldRef<"Shift", 'DateTime'>
+  readonly end: Prisma.FieldRef<"Shift", 'DateTime'>
+  readonly isOpen: Prisma.FieldRef<"Shift", 'Boolean'>
   readonly outletId: Prisma.FieldRef<"Shift", 'String'>
+  readonly userId: Prisma.FieldRef<"Shift", 'String'>
 }
     
 

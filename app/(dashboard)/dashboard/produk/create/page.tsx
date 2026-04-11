@@ -1,6 +1,6 @@
 import { Suspense } from 'react'
-import CreateProductForm from '@/app/(dashboard)/dashboard/produk/create/create-product-form'
 import Heading from '@/components/heading'
+import { CreateProductForm } from './create-product-form'
 
 export default function CreateProductPage() {
     return (

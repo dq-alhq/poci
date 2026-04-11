@@ -29,8 +29,8 @@ model User {
   sessions       Session[]
   accounts       Account[]
   stockTransfers StockTransfer[]
+  shifts         Shift[]
   purchases      Purchase[]
-  carts          Cart[]
 
   @@unique([email])
   @@unique([username])
@@ -74,50 +74,53 @@ model Account {
   @@map("account")
 }
 
-//////////////////////////
-// MASTER
-//////////////////////////
-enum TransferType {
-  OUT // Ambil dari gudang ke outlet
-  IN // Pembelian
-  RETURN // Balikin dari outlet ke gudang
-  DAMAGED // Barang rusak
-}
-
-enum ShiftStatus {
-  OPEN
-  CLOSED
-}
-
-enum PurchaseType {
-  ITEM // Barang
-  SERVICE // Layanan
-}
-
-// --- Tabel-Tabel Utama ---
-
-model Product {
+model Item {
   id    String  @id @default(cuid())
   name  String
+  price Int
+  stock Int     @default(0)
   unit  String  @default("pcs")
   image String?
 
-  isProduct Boolean @default(true)
-
-  buyPrice  Int
-  sellPrice Int
-
-  qty Int @default(0)
-
-  outletStocks  OutletStock[]
-  transferItems TransferItem[]
-  purchaseItems PurchaseItem[]
-  cart          Cart[]
+  isMaterial Boolean @default(false)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  outletStocks       OutletStock[]
+  stockTransferItems StockTransferItem[]
+  purchaseItems      PurchaseItem[]
+  productItems       ProductItem[]
+
+  @@map("item")
+}
+
+model Product {
+  id    String  @id @default(cuid())
+  name  String
+  price Int
+  image String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  saleItems    SaleItem[]
+  productItems ProductItem[]
+
   @@map("product")
+}
+
+model ProductItem {
+  qty Int @default(0)
+
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+
+  itemId String
+  item   Item   @relation(fields: [itemId], references: [id])
+
+  @@id([productId, itemId])
+  @@map("product_item")
 }
 
 model Outlet {
@@ -127,75 +130,87 @@ model Outlet {
   latitude  String?
   longitude String?
 
-  stocks    OutletStock[]
-  transfers StockTransfer[]
-  shifts    Shift[]
+  outletStocks   OutletStock[]
+  stockTransfers StockTransfer[]
+  shifts         Shift[]
+  sales          Sale[]
 
   @@map("outlet")
 }
 
 model OutletStock {
-  id  Int @id @default(autoincrement())
-  qty Int @default(0)
+  id    String @id @default(cuid())
+  stock Int    @default(0)
 
-  outletId  String
-  outlet    Outlet  @relation(fields: [outletId], references: [id])
-  productId String
-  product   Product @relation(fields: [productId], references: [id])
+  outletId String
+  outlet   Outlet @relation(fields: [outletId], references: [id])
+  itemId   String
+  item     Item   @relation(fields: [itemId], references: [id])
 
-  @@index([outletId, productId]) // Pastikan satu outlet hanya punya satu row per produk
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([outletId, itemId])
   @@map("outlet_stock")
 }
 
-// --- Tabel Transaksi & Pergerakan ---
-model StockTransfer {
-  id        Int          @id @default(autoincrement())
-  type      TransferType
-  createdAt DateTime     @default(now())
+enum TransferType {
+  IN
+  OUT
+  DAMAGED
+}
 
-  items    TransferItem[]
+model StockTransfer {
+  id   Int          @id @default(autoincrement())
+  type TransferType @default(IN)
+
   outletId String?
-  outlet   Outlet?        @relation(fields: [outletId], references: [id])
+  outlet   Outlet? @relation(fields: [outletId], references: [id])
 
   note String?
 
+  createdAt   DateTime @default(now())
   createdById String
-  createdBy   User   @relation(fields: [createdById], references: [id])
+  createdBy   User     @relation(fields: [createdById], references: [id])
+
+  items StockTransferItem[]
 
   @@map("stock_transfer")
 }
 
+model StockTransferItem {
+  id  String @id @default(cuid())
+  qty Int    @default(0)
+
+  stockTransferId Int
+  stockTransfer   StockTransfer @relation(fields: [stockTransferId], references: [id])
+
+  itemId String
+  item   Item   @relation(fields: [itemId], references: [id])
+
+  @@unique([stockTransferId, itemId])
+  @@map("stock_transfer_item")
+}
+
 model Shift {
-  id     Int         @id @default(autoincrement())
-  date   DateTime    @default(now())
-  status ShiftStatus @default(OPEN)
+  id     Int       @id @default(autoincrement())
+  start  DateTime  @default(now())
+  end    DateTime?
+  isOpen Boolean   @default(true)
 
   outletId String
   outlet   Outlet @relation(fields: [outletId], references: [id])
 
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
   @@map("shift")
 }
 
-model TransferItem {
-  id         Int @id @default(autoincrement())
-  transferId Int
-  qty        Int
-
-  transfer  StockTransfer @relation(fields: [transferId], references: [id])
-  productId String
-  product   Product       @relation(fields: [productId], references: [id])
-
-  @@map("transfer_item")
-}
-
-// --- Tabel Pengadaan (Kulakan) ---
-
 model Purchase {
-  id       Int          @id @default(autoincrement())
-  title    String?
-  type     PurchaseType @default(ITEM)
-  supplier String
-  total    Int
+  id    Int     @id @default(autoincrement())
+  title String?
+  total Int
 
   createdAt DateTime @default(now())
 
@@ -208,33 +223,45 @@ model Purchase {
 }
 
 model PurchaseItem {
-  id         Int    @id @default(autoincrement())
-  purchaseId Int
-  productId  String
-  qty        Int
-  price      Int
-
-  purchase Purchase @relation(fields: [purchaseId], references: [id])
-  product  Product  @relation(fields: [productId], references: [id])
-
-  @@map("purchase_item")
-}
-
-model Cart {
   id    Int @id @default(autoincrement())
   qty   Int
   price Int
-  total Int @default(0)
+
+  purchaseId Int
+  purchase   Purchase @relation(fields: [purchaseId], references: [id])
+
+  itemId String
+  item   Item   @relation(fields: [itemId], references: [id])
+
+  @@unique([purchaseId, itemId])
+  @@map("purchase_item")
+}
+
+model Sale {
+  id    Int     @id @default(autoincrement())
+  title String?
+  total Int
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 
+  items SaleItem[]
+
+  outletId String
+  outlet   Outlet @relation(fields: [outletId], references: [id])
+
+  @@map("sale")
+}
+
+model SaleItem {
+  id    Int @id @default(autoincrement())
+  qty   Int
+  price Int
+
+  saleId    Int
+  sale      Sale    @relation(fields: [saleId], references: [id])
   productId String
   product   Product @relation(fields: [productId], references: [id])
 
-  user   User?   @relation(fields: [userId], references: [id])
-  userId String?
-
-  @@index([productId])
-  @@map("cart")
+  @@unique([saleId, productId])
+  @@map("sale_item")
 }

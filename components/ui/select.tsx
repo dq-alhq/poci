@@ -126,7 +126,7 @@ const SelectContent = <T extends object>({
 }: ListBoxProps<T> & Pick<PopoverProps, 'offset'> & { side?: 'bottom' | 'top'; isSearchable?: boolean }) => {
     const renderContent = () => (
         <ListBox
-            className='flex max-h-[calc(var(--visual-viewport-height)-10rem)] flex-col overflow-auto rounded-lg p-1 outline-hidden sm:max-h-[inherit]'
+            className='flex max-h-[inherit] flex-col overflow-auto rounded-lg p-1 outline-hidden'
             data-slot='select-content'
             layout='stack'
             orientation='vertical'
@@ -139,14 +139,13 @@ const SelectContent = <T extends object>({
     return (
         <Popover
             className={cn(
-                'data-exiting:fade-out-0 data-entering:fade-in-0 data-exiting:zoom-out-95 data-entering:zoom-in-95 data-[placement=bottom]:slide-in-from-top-2 data-[placement=left]:slide-in-from-right-2 data-[placement=right]:slide-in-from-left-2 data-[placement=top]:slide-in-from-bottom-2 z-50 w-auto min-w-(--trigger-width) overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md outline-hidden data-entering:animate-in data-exiting:animate-out',
+                'data-exiting:fade-out-0 data-entering:fade-in-0 data-exiting:zoom-out-95 data-entering:zoom-in-95 data-[placement=bottom]:slide-in-from-top-2 data-[placement=left]:slide-in-from-right-2 data-[placement=right]:slide-in-from-left-2 data-[placement=top]:slide-in-from-bottom-2 z-50 flex h-full w-auto min-w-(--trigger-width) flex-col overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md outline-hidden data-entering:animate-in data-exiting:animate-out',
                 className
             )}
             offset={offset}
             placement={side}
             style={{
                 width: 'var(--trigger-width)'
-                // width: 'auto'
             }}
             trigger='focus'
         >
@@ -166,7 +165,7 @@ const SelectContent = <T extends object>({
                         return inputIndex === inputValue.length
                     }}
                 >
-                    <SearchField aria-label='Search' autoFocus className='relative'>
+                    <SearchField aria-label='Search' autoFocus className='relative flex'>
                         <Label>
                             <IconSearch className='absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground' />
                         </Label>

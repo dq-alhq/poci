@@ -1,0 +1,167 @@
+[
+    {
+        "productId": "original-kecil",
+        "itemId": "cup-kecil",
+        "qty": 1
+    },
+    {
+        "productId": "original-jumbo",
+        "itemId": "cup",
+        "qty": 1
+    },
+    {
+        "productId": "original-extra",
+        "itemId": "cup-extra",
+        "qty": 1
+    },
+    {
+        "productId": "apple",
+        "itemId": "cup",
+        "qty": 1
+    },
+    {
+        "productId": "apple",
+        "itemId": "bubuk-apple",
+        "qty": 1
+    },
+    {
+        "productId": "blackcurrant",
+        "itemId": "cup",
+        "qty": 1
+    },
+    {
+        "productId": "blackcurrant",
+        "itemId": "bubuk-blackcurrant",
+        "qty": 1
+    },
+    {
+        "productId": "orange",
+        "itemId": "cup",
+        "qty": 1
+    },
+    {
+        "productId": "orange",
+        "itemId": "bubuk-orange",
+        "qty": 1
+    },
+    {
+        "productId": "lemon-honey",
+        "itemId": "cup",
+        "qty": 1
+    },
+    {
+        "productId": "lemon-honey",
+        "itemId": "bubuk-lemon-honey",
+        "qty": 1
+    },
+    {
+        "productId": "mango",
+        "itemId": "cup",
+        "qty": 1
+    },
+    {
+        "productId": "mango",
+        "itemId": "bubuk-mango",
+        "qty": 1
+    },
+    {
+        "productId": "lychee",
+        "itemId": "cup",
+        "qty": 1
+    },
+    {
+        "productId": "lychee",
+        "itemId": "bubuk-lychee",
+        "qty": 1
+    },
+    {
+        "productId": "milk-tea",
+        "itemId": "cup",
+        "qty": 1
+    },
+    {
+        "productId": "milk-tea",
+        "itemId": "bubuk-milk-tea",
+        "qty": 1
+    },
+    {
+        "productId": "chocolate",
+        "itemId": "cup",
+        "qty": 1
+    },
+    {
+        "productId": "chocolate",
+        "itemId": "bubuk-chocolate",
+        "qty": 1
+    },
+    {
+        "productId": "chocolate",
+        "itemId": "bubuk-milk-tea",
+        "qty": 1
+    },
+    {
+        "productId": "cappucino",
+        "itemId": "cup",
+        "qty": 1
+    },
+    {
+        "productId": "cappucino",
+        "itemId": "bubuk-cappucino",
+        "qty": 1
+    },
+    {
+        "productId": "cappucino",
+        "itemId": "bubuk-milk-tea",
+        "qty": 1
+    },
+    {
+        "productId": "thai-tea",
+        "itemId": "cup",
+        "qty": 1
+    },
+    {
+        "productId": "thai-tea",
+        "itemId": "bubuk-thai-tea",
+        "qty": 1
+    },
+    {
+        "productId": "thai-tea",
+        "itemId": "bubuk-milk-tea",
+        "qty": 1
+    },
+    {
+        "productId": "matcha",
+        "itemId": "cup",
+        "qty": 1
+    },
+    {
+        "productId": "matcha",
+        "itemId": "bubuk-matcha",
+        "qty": 1
+    },
+    {
+        "productId": "matcha",
+        "itemId": "bubuk-milk-tea",
+        "qty": 1
+    },
+    {
+        "productId": "coffee-coconut-latte",
+        "itemId": "cup",
+        "qty": 1
+    },
+    {
+        "productId": "coffee-coconut-latte",
+        "itemId": "bubuk-coffee-coconut-latte",
+        "qty": 1
+    },
+    {
+        "productId": "coffee-latte",
+        "itemId": "cup",
+        "qty": 1
+    },
+    {
+        "productId": "coffee-latte",
+        "itemId": "bubuk-coffee-latte",
+        "qty": 1
+    }
+]

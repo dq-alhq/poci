@@ -14,16 +14,17 @@ export const metadata: Metadata = {
 export default function ProdukPage() {
     return (
         <div className='px-6'>
-            <Heading description={'Kelola produk di Aplikasi anda'} title={'Produk'} />
+            <Heading description={'Kelola produk di Aplikasi anda'} title={'Produk'}>
+                <Link className={buttonVariants()} href='/dashboard/produk/create'>
+                    Tambah Produk
+                </Link>
+            </Heading>
             <div className='py-6'>
                 <Autocomplete>
                     <div className='mb-6 flex w-full items-center justify-between gap-4'>
                         <SearchField aria-label='Search products' className='lg:max-w-sm'>
                             <SearchInput placeholder='Cari ...' />
                         </SearchField>
-                        <Link className={buttonVariants()} href='/dashboard/produk/create'>
-                            Tambah Produk
-                        </Link>
                     </div>
                     <Suspense fallback={<div>Loading...</div>}>
                         <ProdukList />

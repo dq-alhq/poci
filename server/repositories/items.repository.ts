@@ -2,68 +2,24 @@
 
 import db from '@/lib/prisma'
 
-export const getAllProducts = async () => {
-    const data = await db.product.findMany({
-        where: {
-            isProduct: true
-        }
-    })
-
-    const count = await db.product.count({
-        where: {
-            isProduct: true
-        }
-    })
-
-    return {
-        data,
-        count
-    }
-}
-
-export const getAllItems = async () => {
-    const data = await db.product.findMany({
-        where: {
-            isProduct: false
-        },
+export const getItems = async () => {
+    return db.item.findMany({
         orderBy: {
-            name: 'asc'
+            isMaterial: 'desc'
         }
     })
-
-    const count = await db.product.count({
-        where: {
-            isProduct: false
-        }
-    })
-
-    return {
-        data,
-        count
-    }
 }
 
-export const getAllMaterials = async () => {
-    const data = await db.product.findMany({
+export const getMaterialItems = async () => {
+    return db.item.findMany({
         where: {
-            isProduct: false
+            isMaterial: true
         }
     })
-
-    const count = await db.product.count({
-        where: {
-            isProduct: false
-        }
-    })
-
-    return {
-        data,
-        count
-    }
 }
 
 export const getItem = async (id: string) => {
-    return db.product.findUnique({
+    return db.item.findUnique({
         where: {
             id
         }

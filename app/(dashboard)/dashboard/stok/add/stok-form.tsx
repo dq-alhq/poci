@@ -1,95 +1,182 @@
 'use client'
 
-import type { Product } from '@/generated/prisma/client'
-import { IconDeviceFloppy, IconMinus, IconPlus } from '@tabler/icons-react'
+import type { Item } from '@/generated/prisma/client'
+import { IconDeviceFloppy, IconPlus, IconTrash } from '@tabler/icons-react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { useActionState, useEffect } from 'react'
+import { type FormEvent, useState, useTransition } from 'react'
 import { FieldError, GridListItem } from 'react-aria-components'
 import { toast } from 'sonner'
 import { ItemGroup, ItemGroupSection } from '@/components/item-card'
+import { Autocomplete } from '@/components/ui/autocomplete'
 import { Button } from '@/components/ui/button'
-import { FieldLabel, FieldSet, Form } from '@/components/ui/field'
-import { InputGroup, Textarea } from '@/components/ui/input'
-import { ItemContent, ItemDescription, ItemHeader, ItemTitle, itemVariants } from '@/components/ui/item'
-import { NumberField } from '@/components/ui/number-field'
+import { Drawer } from '@/components/ui/drawer'
+import { FieldLabel, Form } from '@/components/ui/field'
+import { Textarea } from '@/components/ui/input'
+import {
+    ItemActions,
+    ItemContent,
+    ItemDescription,
+    ItemHeader,
+    ItemMedia,
+    ItemTitle,
+    itemVariants,
+    ItemGroup as NativeItemGroup
+} from '@/components/ui/item'
+import { NumberField, NumberInputSm } from '@/components/ui/number-field'
+import { SearchField, SearchInput } from '@/components/ui/search-field'
+import { Skeleton } from '@/components/ui/skeleton'
 import { TextField } from '@/components/ui/text-field'
-import { updateStock } from '@/server/services/products.service'
+import { updateStock } from '@/server/services/item.service'
 
-export function StokForm({ items }: { items: Product[] }) {
-    const [state, action, pending] = useActionState(updateStock, null)
+export function StokForm({ items }: { items: Item[] }) {
+    const [openDialog, setOpenDialog] = useState(false)
+    const [errors, setErrors] = useState<Record<string, string>>({})
+    const [stocks, setStocks] = useState<{ itemId: string; quantity: number }[]>([])
+    const [note, setNote] = useState('')
 
     const router = useRouter()
 
-    useEffect(() => {
-        if (state?.success) {
-            toast.success(state.message || 'Stok berhasil ditambahkan')
-            router.push('/dashboard/stok')
-        } else if (state?.error) {
-            toast.error(state.message || 'Stok gagal ditambahkan')
+    const [pending, startTransition] = useTransition()
+
+    const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        if (stocks.length === 0) {
+            setErrors({ note: 'Silakan pilih item' })
+            return
         }
-    }, [state])
+        startTransition(async () => {
+            const { success, error, message } = await updateStock({
+                note,
+                items: stocks.map((stock) => ({ itemId: stock.itemId, qty: stock.quantity })),
+                type: 'IN'
+            })
+            if (error) {
+                setErrors({ note: error.message })
+                toast.error(error)
+                return
+            }
+            if (success) {
+                toast.success(message || 'Stok berhasil ditambahkan')
+            }
+            setErrors({})
+            router.push('/dashboard/stok')
+        })
+    }
 
     return (
-        <Form action={action} className='space-y-4' validationErrors={state?.error}>
-            <input name='type' type='hidden' value={'IN'} />
-            <ItemGroup>
-                <ItemGroupSection>
-                    {items.map((product) => (
-                        <GridListItem
-                            className={itemVariants({
-                                variant: 'outline',
-                                size: 'sm',
-                                className: 'cursor-pointer'
-                            })}
-                            key={product.id}
-                            textValue={product.name}
-                        >
-                            <ItemHeader>
-                                <Image
-                                    alt={product.name}
-                                    className='aspect-square w-full object-cover'
-                                    height={256}
-                                    src={product?.image || ''}
-                                    width={256}
-                                />
-                            </ItemHeader>
+        <Form className='space-y-4' onSubmit={onSubmit} validationErrors={errors}>
+            <Drawer isOpen={openDialog} onOpenChange={setOpenDialog}>
+                <Button onPress={() => setOpenDialog(true)}>
+                    <IconPlus />
+                    Tambah Item
+                </Button>
+                <Drawer.Content>
+                    <Drawer.Header>
+                        <Drawer.Title>Tambah Item</Drawer.Title>
+                        <Drawer.Description>Silakan pilih item</Drawer.Description>
+                    </Drawer.Header>
+                    <Drawer.Body>
+                        <Autocomplete>
+                            <SearchField aria-label='Cari' className='mb-4'>
+                                <SearchInput placeholder='Cari item' />
+                            </SearchField>
+                            <ItemGroup>
+                                <ItemGroupSection className='sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3'>
+                                    {items
+                                        .filter((item) => !stocks.find((stock) => stock.itemId === item.id))
+                                        .map((item) => (
+                                            <GridListItem
+                                                className={itemVariants({
+                                                    variant: 'outline',
+                                                    size: 'sm',
+                                                    className: 'cursor-pointer'
+                                                })}
+                                                key={item.id}
+                                                onAction={() => {
+                                                    setStocks((prev) => [...prev, { itemId: item.id, quantity: 0 }])
+                                                    setOpenDialog(false)
+                                                }}
+                                                textValue={item.name}
+                                            >
+                                                <ItemHeader>
+                                                    {item?.image ? (
+                                                        <Image
+                                                            alt={item.name}
+                                                            className='aspect-square w-full object-cover'
+                                                            height={256}
+                                                            src={item?.image || ''}
+                                                            width={256}
+                                                        />
+                                                    ) : (
+                                                        <Skeleton className='aspect-square w-full' />
+                                                    )}
+                                                </ItemHeader>
+                                                <ItemContent>
+                                                    <ItemTitle className='line-clamp-1 w-full justify-center text-center'>
+                                                        {item.name}
+                                                    </ItemTitle>
+                                                    <ItemDescription className='text-center'>
+                                                        {item.stock} {item.unit}
+                                                    </ItemDescription>
+                                                </ItemContent>
+                                            </GridListItem>
+                                        ))}
+                                </ItemGroupSection>
+                            </ItemGroup>
+                        </Autocomplete>
+                    </Drawer.Body>
+                </Drawer.Content>
+            </Drawer>
+
+            <NativeItemGroup className='grid gap-2 lg:grid-cols-3'>
+                {items
+                    .filter((item) => stocks.find((stock) => stock.itemId === item.id))
+                    .map((item, i) => (
+                        <div className={itemVariants({ variant: 'outline', className: 'relative' })} key={i}>
+                            <ItemMedia className='size-20' variant='image'>
+                                {item?.image ? (
+                                    <Image
+                                        alt={item.name}
+                                        className='object-cover'
+                                        height={64}
+                                        src={item?.image}
+                                        width={64}
+                                    />
+                                ) : (
+                                    <Skeleton className='aspect-square w-full' />
+                                )}
+                            </ItemMedia>
                             <ItemContent>
-                                <ItemTitle className='line-clamp-1 w-full justify-center text-center'>
-                                    {product.name}
-                                </ItemTitle>
-                                <ItemDescription className='text-center'>
-                                    {product.qty} {product.unit}
-                                </ItemDescription>
-                            </ItemContent>
-                            <FieldSet>
+                                <ItemTitle className='line-clamp-1'>{item.name}</ItemTitle>
                                 <NumberField
-                                    aria-label={`Jumlah ${product.name}`}
+                                    aria-label='Qty'
+                                    className='max-w-32 lg:max-w-64'
                                     minValue={0}
-                                    name={`qty-${product.id}`}
+                                    onChange={(value) =>
+                                        setStocks(
+                                            stocks.map((stock) =>
+                                                stock.itemId === item.id ? { ...stock, quantity: value } : stock
+                                            )
+                                        )
+                                    }
+                                    orientation='horizontal'
+                                    value={stocks.find((stock) => stock.itemId === item.id)?.quantity || 0}
                                 >
-                                    <InputGroup>
-                                        <InputGroup.Addon>
-                                            <InputGroup.Button slot='decrement' variant='default'>
-                                                <IconMinus />
-                                            </InputGroup.Button>
-                                        </InputGroup.Addon>
-                                        <InputGroup.Input className='text-center' name={`${product.id}`} />
-                                        <InputGroup.Addon align={'inline-end'}>
-                                            <InputGroup.Button slot='increment' variant='default'>
-                                                <IconPlus />
-                                            </InputGroup.Button>
-                                        </InputGroup.Addon>
-                                    </InputGroup>
+                                    <NumberInputSm />
                                     <FieldError />
                                 </NumberField>
-                            </FieldSet>
-                        </GridListItem>
+                            </ItemContent>
+                            <ItemActions className='absolute top-2 right-2'>
+                                <Button size='icon-sm' variant='destructive'>
+                                    <IconTrash />
+                                </Button>
+                            </ItemActions>
+                        </div>
                     ))}
-                </ItemGroupSection>
-            </ItemGroup>
+            </NativeItemGroup>
 
-            <TextField name='note'>
+            <TextField name='note' onChange={setNote} value={note}>
                 <FieldLabel>Catatan</FieldLabel>
                 <Textarea />
                 <FieldError />

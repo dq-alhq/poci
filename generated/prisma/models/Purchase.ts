@@ -39,8 +39,6 @@ export type PurchaseSumAggregateOutputType = {
 export type PurchaseMinAggregateOutputType = {
   id: number | null
   title: string | null
-  type: $Enums.PurchaseType | null
-  supplier: string | null
   total: number | null
   createdAt: Date | null
   createdById: string | null
@@ -49,8 +47,6 @@ export type PurchaseMinAggregateOutputType = {
 export type PurchaseMaxAggregateOutputType = {
   id: number | null
   title: string | null
-  type: $Enums.PurchaseType | null
-  supplier: string | null
   total: number | null
   createdAt: Date | null
   createdById: string | null
@@ -59,8 +55,6 @@ export type PurchaseMaxAggregateOutputType = {
 export type PurchaseCountAggregateOutputType = {
   id: number
   title: number
-  type: number
-  supplier: number
   total: number
   createdAt: number
   createdById: number
@@ -81,8 +75,6 @@ export type PurchaseSumAggregateInputType = {
 export type PurchaseMinAggregateInputType = {
   id?: true
   title?: true
-  type?: true
-  supplier?: true
   total?: true
   createdAt?: true
   createdById?: true
@@ -91,8 +83,6 @@ export type PurchaseMinAggregateInputType = {
 export type PurchaseMaxAggregateInputType = {
   id?: true
   title?: true
-  type?: true
-  supplier?: true
   total?: true
   createdAt?: true
   createdById?: true
@@ -101,8 +91,6 @@ export type PurchaseMaxAggregateInputType = {
 export type PurchaseCountAggregateInputType = {
   id?: true
   title?: true
-  type?: true
-  supplier?: true
   total?: true
   createdAt?: true
   createdById?: true
@@ -198,8 +186,6 @@ export type PurchaseGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 export type PurchaseGroupByOutputType = {
   id: number
   title: string | null
-  type: $Enums.PurchaseType
-  supplier: string
   total: number
   createdAt: Date
   createdById: string
@@ -231,8 +217,6 @@ export type PurchaseWhereInput = {
   NOT?: Prisma.PurchaseWhereInput | Prisma.PurchaseWhereInput[]
   id?: Prisma.IntFilter<"Purchase"> | number
   title?: Prisma.StringNullableFilter<"Purchase"> | string | null
-  type?: Prisma.EnumPurchaseTypeFilter<"Purchase"> | $Enums.PurchaseType
-  supplier?: Prisma.StringFilter<"Purchase"> | string
   total?: Prisma.IntFilter<"Purchase"> | number
   createdAt?: Prisma.DateTimeFilter<"Purchase"> | Date | string
   createdById?: Prisma.StringFilter<"Purchase"> | string
@@ -243,8 +227,6 @@ export type PurchaseWhereInput = {
 export type PurchaseOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrderInput | Prisma.SortOrder
-  type?: Prisma.SortOrder
-  supplier?: Prisma.SortOrder
   total?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
@@ -258,8 +240,6 @@ export type PurchaseWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.PurchaseWhereInput[]
   NOT?: Prisma.PurchaseWhereInput | Prisma.PurchaseWhereInput[]
   title?: Prisma.StringNullableFilter<"Purchase"> | string | null
-  type?: Prisma.EnumPurchaseTypeFilter<"Purchase"> | $Enums.PurchaseType
-  supplier?: Prisma.StringFilter<"Purchase"> | string
   total?: Prisma.IntFilter<"Purchase"> | number
   createdAt?: Prisma.DateTimeFilter<"Purchase"> | Date | string
   createdById?: Prisma.StringFilter<"Purchase"> | string
@@ -270,8 +250,6 @@ export type PurchaseWhereUniqueInput = Prisma.AtLeast<{
 export type PurchaseOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrderInput | Prisma.SortOrder
-  type?: Prisma.SortOrder
-  supplier?: Prisma.SortOrder
   total?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
@@ -288,8 +266,6 @@ export type PurchaseScalarWhereWithAggregatesInput = {
   NOT?: Prisma.PurchaseScalarWhereWithAggregatesInput | Prisma.PurchaseScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Purchase"> | number
   title?: Prisma.StringNullableWithAggregatesFilter<"Purchase"> | string | null
-  type?: Prisma.EnumPurchaseTypeWithAggregatesFilter<"Purchase"> | $Enums.PurchaseType
-  supplier?: Prisma.StringWithAggregatesFilter<"Purchase"> | string
   total?: Prisma.IntWithAggregatesFilter<"Purchase"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Purchase"> | Date | string
   createdById?: Prisma.StringWithAggregatesFilter<"Purchase"> | string
@@ -297,8 +273,6 @@ export type PurchaseScalarWhereWithAggregatesInput = {
 
 export type PurchaseCreateInput = {
   title?: string | null
-  type?: $Enums.PurchaseType
-  supplier: string
   total: number
   createdAt?: Date | string
   items?: Prisma.PurchaseItemCreateNestedManyWithoutPurchaseInput
@@ -308,8 +282,6 @@ export type PurchaseCreateInput = {
 export type PurchaseUncheckedCreateInput = {
   id?: number
   title?: string | null
-  type?: $Enums.PurchaseType
-  supplier: string
   total: number
   createdAt?: Date | string
   createdById: string
@@ -318,8 +290,6 @@ export type PurchaseUncheckedCreateInput = {
 
 export type PurchaseUpdateInput = {
   title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  type?: Prisma.EnumPurchaseTypeFieldUpdateOperationsInput | $Enums.PurchaseType
-  supplier?: Prisma.StringFieldUpdateOperationsInput | string
   total?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.PurchaseItemUpdateManyWithoutPurchaseNestedInput
@@ -329,8 +299,6 @@ export type PurchaseUpdateInput = {
 export type PurchaseUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  type?: Prisma.EnumPurchaseTypeFieldUpdateOperationsInput | $Enums.PurchaseType
-  supplier?: Prisma.StringFieldUpdateOperationsInput | string
   total?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
@@ -340,8 +308,6 @@ export type PurchaseUncheckedUpdateInput = {
 export type PurchaseCreateManyInput = {
   id?: number
   title?: string | null
-  type?: $Enums.PurchaseType
-  supplier: string
   total: number
   createdAt?: Date | string
   createdById: string
@@ -349,8 +315,6 @@ export type PurchaseCreateManyInput = {
 
 export type PurchaseUpdateManyMutationInput = {
   title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  type?: Prisma.EnumPurchaseTypeFieldUpdateOperationsInput | $Enums.PurchaseType
-  supplier?: Prisma.StringFieldUpdateOperationsInput | string
   total?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -358,8 +322,6 @@ export type PurchaseUpdateManyMutationInput = {
 export type PurchaseUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  type?: Prisma.EnumPurchaseTypeFieldUpdateOperationsInput | $Enums.PurchaseType
-  supplier?: Prisma.StringFieldUpdateOperationsInput | string
   total?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
@@ -378,8 +340,6 @@ export type PurchaseOrderByRelationAggregateInput = {
 export type PurchaseCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
-  type?: Prisma.SortOrder
-  supplier?: Prisma.SortOrder
   total?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
@@ -393,8 +353,6 @@ export type PurchaseAvgOrderByAggregateInput = {
 export type PurchaseMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
-  type?: Prisma.SortOrder
-  supplier?: Prisma.SortOrder
   total?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
@@ -403,8 +361,6 @@ export type PurchaseMaxOrderByAggregateInput = {
 export type PurchaseMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
-  type?: Prisma.SortOrder
-  supplier?: Prisma.SortOrder
   total?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
@@ -462,10 +418,6 @@ export type PurchaseUncheckedUpdateManyWithoutCreatedByNestedInput = {
   deleteMany?: Prisma.PurchaseScalarWhereInput | Prisma.PurchaseScalarWhereInput[]
 }
 
-export type EnumPurchaseTypeFieldUpdateOperationsInput = {
-  set?: $Enums.PurchaseType
-}
-
 export type PurchaseCreateNestedOneWithoutItemsInput = {
   create?: Prisma.XOR<Prisma.PurchaseCreateWithoutItemsInput, Prisma.PurchaseUncheckedCreateWithoutItemsInput>
   connectOrCreate?: Prisma.PurchaseCreateOrConnectWithoutItemsInput
@@ -482,8 +434,6 @@ export type PurchaseUpdateOneRequiredWithoutItemsNestedInput = {
 
 export type PurchaseCreateWithoutCreatedByInput = {
   title?: string | null
-  type?: $Enums.PurchaseType
-  supplier: string
   total: number
   createdAt?: Date | string
   items?: Prisma.PurchaseItemCreateNestedManyWithoutPurchaseInput
@@ -492,8 +442,6 @@ export type PurchaseCreateWithoutCreatedByInput = {
 export type PurchaseUncheckedCreateWithoutCreatedByInput = {
   id?: number
   title?: string | null
-  type?: $Enums.PurchaseType
-  supplier: string
   total: number
   createdAt?: Date | string
   items?: Prisma.PurchaseItemUncheckedCreateNestedManyWithoutPurchaseInput
@@ -531,8 +479,6 @@ export type PurchaseScalarWhereInput = {
   NOT?: Prisma.PurchaseScalarWhereInput | Prisma.PurchaseScalarWhereInput[]
   id?: Prisma.IntFilter<"Purchase"> | number
   title?: Prisma.StringNullableFilter<"Purchase"> | string | null
-  type?: Prisma.EnumPurchaseTypeFilter<"Purchase"> | $Enums.PurchaseType
-  supplier?: Prisma.StringFilter<"Purchase"> | string
   total?: Prisma.IntFilter<"Purchase"> | number
   createdAt?: Prisma.DateTimeFilter<"Purchase"> | Date | string
   createdById?: Prisma.StringFilter<"Purchase"> | string
@@ -540,8 +486,6 @@ export type PurchaseScalarWhereInput = {
 
 export type PurchaseCreateWithoutItemsInput = {
   title?: string | null
-  type?: $Enums.PurchaseType
-  supplier: string
   total: number
   createdAt?: Date | string
   createdBy: Prisma.UserCreateNestedOneWithoutPurchasesInput
@@ -550,8 +494,6 @@ export type PurchaseCreateWithoutItemsInput = {
 export type PurchaseUncheckedCreateWithoutItemsInput = {
   id?: number
   title?: string | null
-  type?: $Enums.PurchaseType
-  supplier: string
   total: number
   createdAt?: Date | string
   createdById: string
@@ -575,8 +517,6 @@ export type PurchaseUpdateToOneWithWhereWithoutItemsInput = {
 
 export type PurchaseUpdateWithoutItemsInput = {
   title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  type?: Prisma.EnumPurchaseTypeFieldUpdateOperationsInput | $Enums.PurchaseType
-  supplier?: Prisma.StringFieldUpdateOperationsInput | string
   total?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserUpdateOneRequiredWithoutPurchasesNestedInput
@@ -585,8 +525,6 @@ export type PurchaseUpdateWithoutItemsInput = {
 export type PurchaseUncheckedUpdateWithoutItemsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  type?: Prisma.EnumPurchaseTypeFieldUpdateOperationsInput | $Enums.PurchaseType
-  supplier?: Prisma.StringFieldUpdateOperationsInput | string
   total?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
@@ -595,16 +533,12 @@ export type PurchaseUncheckedUpdateWithoutItemsInput = {
 export type PurchaseCreateManyCreatedByInput = {
   id?: number
   title?: string | null
-  type?: $Enums.PurchaseType
-  supplier: string
   total: number
   createdAt?: Date | string
 }
 
 export type PurchaseUpdateWithoutCreatedByInput = {
   title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  type?: Prisma.EnumPurchaseTypeFieldUpdateOperationsInput | $Enums.PurchaseType
-  supplier?: Prisma.StringFieldUpdateOperationsInput | string
   total?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.PurchaseItemUpdateManyWithoutPurchaseNestedInput
@@ -613,8 +547,6 @@ export type PurchaseUpdateWithoutCreatedByInput = {
 export type PurchaseUncheckedUpdateWithoutCreatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  type?: Prisma.EnumPurchaseTypeFieldUpdateOperationsInput | $Enums.PurchaseType
-  supplier?: Prisma.StringFieldUpdateOperationsInput | string
   total?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.PurchaseItemUncheckedUpdateManyWithoutPurchaseNestedInput
@@ -623,8 +555,6 @@ export type PurchaseUncheckedUpdateWithoutCreatedByInput = {
 export type PurchaseUncheckedUpdateManyWithoutCreatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  type?: Prisma.EnumPurchaseTypeFieldUpdateOperationsInput | $Enums.PurchaseType
-  supplier?: Prisma.StringFieldUpdateOperationsInput | string
   total?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -663,8 +593,6 @@ export type PurchaseCountOutputTypeCountItemsArgs<ExtArgs extends runtime.Types.
 export type PurchaseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
-  type?: boolean
-  supplier?: boolean
   total?: boolean
   createdAt?: boolean
   createdById?: boolean
@@ -676,8 +604,6 @@ export type PurchaseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
 export type PurchaseSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
-  type?: boolean
-  supplier?: boolean
   total?: boolean
   createdAt?: boolean
   createdById?: boolean
@@ -687,8 +613,6 @@ export type PurchaseSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type PurchaseSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
-  type?: boolean
-  supplier?: boolean
   total?: boolean
   createdAt?: boolean
   createdById?: boolean
@@ -698,14 +622,12 @@ export type PurchaseSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type PurchaseSelectScalar = {
   id?: boolean
   title?: boolean
-  type?: boolean
-  supplier?: boolean
   total?: boolean
   createdAt?: boolean
   createdById?: boolean
 }
 
-export type PurchaseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "type" | "supplier" | "total" | "createdAt" | "createdById", ExtArgs["result"]["purchase"]>
+export type PurchaseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "total" | "createdAt" | "createdById", ExtArgs["result"]["purchase"]>
 export type PurchaseInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   items?: boolean | Prisma.Purchase$itemsArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -727,8 +649,6 @@ export type $PurchasePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     title: string | null
-    type: $Enums.PurchaseType
-    supplier: string
     total: number
     createdAt: Date
     createdById: string
@@ -1159,8 +1079,6 @@ export interface Prisma__PurchaseClient<T, Null = never, ExtArgs extends runtime
 export interface PurchaseFieldRefs {
   readonly id: Prisma.FieldRef<"Purchase", 'Int'>
   readonly title: Prisma.FieldRef<"Purchase", 'String'>
-  readonly type: Prisma.FieldRef<"Purchase", 'PurchaseType'>
-  readonly supplier: Prisma.FieldRef<"Purchase", 'String'>
   readonly total: Prisma.FieldRef<"Purchase", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Purchase", 'DateTime'>
   readonly createdById: Prisma.FieldRef<"Purchase", 'String'>

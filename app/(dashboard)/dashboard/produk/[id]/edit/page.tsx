@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { Suspense } from 'react'
 import Heading from '@/components/heading'
 import { buttonVariants } from '@/components/ui/button-group'
-import EditProductPage from './edit-product'
+import { EditProductForm } from './edit-product-forn'
 
 export default async function EditProdukPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params
@@ -16,7 +16,7 @@ export default async function EditProdukPage({ params }: { params: Promise<{ id:
                 </Link>
             </Heading>
             <Suspense fallback={<div>Loading...</div>}>
-                <EditProductPage id={id} />
+                <EditProductForm id={id} />
             </Suspense>
         </div>
     )

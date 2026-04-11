@@ -9,7 +9,15 @@ import { DropZone } from '@/components/ui/drop-zone'
 import { FileTrigger } from '@/components/ui/file-trigger'
 import { Spinner } from './ui/spinner'
 
-export const FileUpload = ({ defaultValue, name = 'image' }: { defaultValue?: string; name?: string }) => {
+export const FileUpload = ({
+    defaultValue,
+    onChange,
+    name = 'image'
+}: {
+    defaultValue?: string
+    onChange?: (url: string) => void
+    name?: string
+}) => {
     const [oldFile] = useState<string>(defaultValue || '')
     const [droppedImage, setDroppedImage] = useState<string>('')
     const inputFileRef = useRef<HTMLInputElement>(null)
@@ -29,6 +37,7 @@ export const FileUpload = ({ defaultValue, name = 'image' }: { defaultValue?: st
                 body: formData
             })
             const data = await res.json()
+            onChange?.(data.url)
             setDroppedImage(data.url)
             setLoading(false)
         }
@@ -48,6 +57,7 @@ export const FileUpload = ({ defaultValue, name = 'image' }: { defaultValue?: st
                     body: formData
                 })
                 const data = await res.json()
+                onChange?.(data.url)
                 setDroppedImage(data.url)
                 setLoading(false)
             }
@@ -63,7 +73,7 @@ export const FileUpload = ({ defaultValue, name = 'image' }: { defaultValue?: st
             })
             setLoading(false)
         }
-
+        onChange?.('')
         setDroppedImage('')
     }
 

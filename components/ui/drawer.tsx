@@ -129,7 +129,7 @@ const DrawerContent = ({
                                 className={cn(
                                     'relative flex flex-col overflow-hidden outline-hidden will-change-auto',
                                     side === 'top' || side === 'bottom'
-                                        ? 'mx-auto max-h-[calc(var(--visual-viewport-height)-var(--visual-viewport-vertical-padding))] max-w-lg'
+                                        ? 'mx-auto max-h-[calc(var(--visual-viewport-height)-var(--visual-viewport-vertical-padding))] min-h-[calc(var(--visual-viewport-height)-var(--visual-viewport-vertical-padding))] max-w-lg'
                                         : 'h-full max-h-screen'
                                 )}
                                 role='dialog'

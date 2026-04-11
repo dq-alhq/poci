@@ -10,7 +10,7 @@ import { Separator } from '@/components/ui/separator'
 import { Skeleton } from '@/components/ui/skeleton'
 import { TextField } from '@/components/ui/text-field'
 import { authClient } from '@/lib/auth-client'
-import { updateProfile } from '@/server/services/auth/profile'
+import { updateProfile } from '@/server/services/users.service'
 
 export default function ProfileUpdateForm() {
     const { refetch, data, isPending: loading } = authClient.useSession()

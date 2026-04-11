@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Suspense } from 'react'
 import Heading from '@/components/heading'
@@ -5,6 +6,10 @@ import { Autocomplete } from '@/components/ui/autocomplete'
 import { buttonVariants } from '@/components/ui/button-group'
 import { SearchField, SearchInput } from '@/components/ui/search-field'
 import { StokList } from './stok-list'
+
+export const metadata: Metadata = {
+    title: 'Stok'
+}
 
 export default async function StokPage() {
     return (

@@ -4,36 +4,35 @@ import type { Product } from '@/generated/prisma/client'
 import { IconDeviceFloppy, IconMinus, IconPlus } from '@tabler/icons-react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { useActionState, useEffect } from 'react'
+import { useState } from 'react'
 import { GridListItem } from 'react-aria-components'
-import { toast } from 'sonner'
 import { ItemGroup, ItemGroupSection } from '@/components/item-card'
 import { Button } from '@/components/ui/button'
-import { FieldSet, Form } from '@/components/ui/field'
+import { FieldSet } from '@/components/ui/field'
 import { InputGroup } from '@/components/ui/input'
 import { ItemContent, ItemDescription, ItemHeader, ItemTitle, itemVariants } from '@/components/ui/item'
 import { NumberField } from '@/components/ui/number-field'
-import { addToCart } from '@/server/services/cart.service'
 
-export function ItemForm({ items }: { items: Product[] }) {
-    const [state, action, pending] = useActionState(addToCart, null)
-
+export function ItemForm({ products }: { products: Product[] }) {
+    const [loading, setLoading] = useState(false)
+    const [items, setItems] = useState<Record<string, number>>({})
     const router = useRouter()
 
-    useEffect(() => {
-        if (state?.success) {
-            toast.success(state.message || 'Item berhasil ditambahkan')
-            router.push('/dashboard/pembelanjaan/create/cart')
-        } else if (state?.error) {
-            toast.error(state?.error || 'Item gagal ditambahkan')
+    const onSave = async () => {
+        setLoading(true)
+        if (typeof window !== 'undefined') {
+            localStorage.removeItem('items')
+            localStorage.setItem('items', JSON.stringify(items))
         }
-    }, [state])
+        router.push('/dashboard/pembelanjaan/create/cart')
+        setLoading(false)
+    }
 
     return (
-        <Form action={action} className='space-y-4' validationErrors={state?.error}>
+        <div className='space-y-6'>
             <ItemGroup>
                 <ItemGroupSection>
-                    {items.map((product) => (
+                    {products.map((product) => (
                         <GridListItem
                             className={itemVariants({
                                 variant: 'outline',
@@ -65,6 +64,8 @@ export function ItemForm({ items }: { items: Product[] }) {
                                     aria-label={`Jumlah ${product.name}`}
                                     minValue={0}
                                     name={`qty-${product.id}`}
+                                    onChange={(value) => setItems({ ...items, [product.id]: value })}
+                                    value={items[product.id]}
                                 >
                                     <InputGroup>
                                         <InputGroup.Addon>
@@ -87,10 +88,10 @@ export function ItemForm({ items }: { items: Product[] }) {
                 </ItemGroupSection>
             </ItemGroup>
 
-            <Button className='w-full' isPending={pending} type='submit'>
+            <Button className='w-full' isPending={loading} onPress={onSave} type='submit'>
                 <IconDeviceFloppy />
                 Simpan
             </Button>
-        </Form>
+        </div>
     )
 }
