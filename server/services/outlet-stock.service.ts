@@ -1,29 +1,33 @@
 'use server'
 
-import z from 'zod'
 import db from '@/lib/prisma'
+import { updateStock } from '@/server/services/item.service'
 
-const addOutletStockSchema = z.array(
-    z.object({
-        itemId: z.string(),
-        qty: z.number(),
-        outletId: z.string()
-    })
-)
-
-export const addOutletStock = async ({ items }: { items: { itemId: string; qty: number; outletId: string }[] }) => {
-    const { data, success, error } = addOutletStockSchema.safeParse({ items })
-    if (!success) {
-        return {
-            success: false,
-            error: z.flattenError(error).fieldErrors
-        }
-    }
-
+export const addOutletStock = async ({ items }: { items: { itemId: string; stock: number; outletId: string }[] }) => {
     try {
-        await db.outletStock.createMany({
-            data
-        })
+        await Promise.all([
+            ...items.map((item) =>
+                db.outletStock.upsert({
+                    where: {
+                        outletId_itemId: {
+                            outletId: item.outletId,
+                            itemId: item.itemId
+                        }
+                    },
+                    update: { stock: { increment: item.stock } },
+                    create: item
+                })
+            ),
+            updateStock({
+                items: items.map((item) => ({
+                    itemId: item.itemId,
+                    qty: item.stock
+                })),
+                outletId: items[0].outletId,
+                type: 'OUT',
+                note: 'Stok Keluar'
+            })
+        ])
         return {
             success: true,
             message: 'Stok outlet berhasil ditambahkan'
@@ -31,7 +35,7 @@ export const addOutletStock = async ({ items }: { items: { itemId: string; qty: 
     } catch (error: any) {
         return {
             success: false,
-            error: error.message
+            message: error.message
         }
     }
 }

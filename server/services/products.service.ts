@@ -107,7 +107,7 @@ export const deleteProduct = async (id: string) => {
         if (!product) {
             return {
                 success: false,
-                error: 'Item tidak ditemukan'
+                message: 'Item tidak ditemukan'
             }
         }
         if (product.image) {
@@ -127,7 +127,7 @@ export const deleteProduct = async (id: string) => {
     } catch (error: any) {
         return {
             success: false,
-            error: error.message
+            message: error.message
         }
     }
 }

@@ -1,99 +1,99 @@
 'use client'
 
-import type { Product } from '@/generated/prisma/client'
+import type { Item } from '@/generated/prisma/client'
 import { IconDeviceFloppy, IconMinus, IconPlus } from '@tabler/icons-react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
-import { GridListItem } from 'react-aria-components'
+import { useState, useTransition } from 'react'
 import { toast } from 'sonner'
-import { ItemGroup, ItemGroupSection } from '@/components/item-card'
 import { Button } from '@/components/ui/button'
 import { FieldSet } from '@/components/ui/field'
 import { InputGroup } from '@/components/ui/input'
-import { ItemContent, ItemDescription, ItemHeader, ItemTitle, itemVariants } from '@/components/ui/item'
+import { ItemContent, ItemDescription, ItemGroup, ItemHeader, ItemTitle, itemVariants } from '@/components/ui/item'
 import { NumberField } from '@/components/ui/number-field'
+import { Skeleton } from '@/components/ui/skeleton'
 import { addOutletStock } from '@/server/services/outlet-stock.service'
 
-export function OutletStockForm({ products, outletId }: { products: Product[]; outletId: string }) {
-    const [loading, setLoading] = useState(false)
-    const [items, setItems] = useState<Record<string, number>>({})
+export function OutletStockForm({ items, outletId }: { items: Item[]; outletId: string }) {
+    const [loading, startTransition] = useTransition()
+    const [stocks, setStocks] = useState<Record<string, number>>({})
     const router = useRouter()
 
     const onSave = async () => {
-        setLoading(true)
-        const { success, message } = await addOutletStock({
-            items: Object.entries(items).map(([productId, qty]) => ({ productId, qty, outletId }))
+        startTransition(async () => {
+            const { success, message } = await addOutletStock({
+                items: Object.entries(stocks).map(([itemId, stock]) => ({ itemId, stock, outletId }))
+            })
+            if (!success) {
+                toast.error(message ?? 'Gagal menambahkan stok ke outlet')
+            }
+            if (success) {
+                toast.success(message ?? 'Stok berhasil ditambahkan ke outlet')
+                router.push('/')
+            }
         })
-        if (!success) {
-            setLoading(false)
-            return
-        }
-        if (success) {
-            toast.success(message)
-            router.push('/')
-            setLoading(false)
-        }
     }
 
     return (
         <div className='space-y-6'>
-            <ItemGroup>
-                <ItemGroupSection>
-                    {products.map((product) => (
-                        <GridListItem
-                            className={itemVariants({
-                                variant: 'outline',
-                                size: 'sm',
-                                className: 'cursor-pointer'
-                            })}
-                            key={product.id}
-                            textValue={product.name}
-                        >
-                            <ItemHeader>
+            <ItemGroup className='grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'>
+                {items.map((item) => (
+                    <div
+                        className={itemVariants({
+                            variant: 'outline',
+                            size: 'sm',
+                            className: 'cursor-pointer'
+                        })}
+                        key={item.id}
+                    >
+                        <ItemHeader>
+                            {item.image ? (
                                 <Image
-                                    alt={product.name}
+                                    alt={item.name}
                                     className='aspect-square w-full object-cover'
                                     height={256}
-                                    src={product?.image || ''}
+                                    src={item.image}
                                     width={256}
                                 />
-                            </ItemHeader>
-                            <ItemContent>
-                                <ItemTitle className='line-clamp-1 w-full justify-center text-center'>
-                                    {product.name}
-                                </ItemTitle>
-                                <ItemDescription className='text-center'>
-                                    {product.qty} {product.unit}
-                                </ItemDescription>
-                            </ItemContent>
-                            <FieldSet>
-                                <NumberField
-                                    aria-label={`Jumlah ${product.name}`}
-                                    minValue={0}
-                                    name={`qty-${product.id}`}
-                                    onChange={(value) => setItems({ ...items, [product.id]: value })}
-                                    value={items[product.id]}
-                                >
-                                    <InputGroup>
-                                        <InputGroup.Addon>
-                                            <InputGroup.Button slot='decrement' variant='default'>
-                                                <IconMinus />
-                                            </InputGroup.Button>
-                                        </InputGroup.Addon>
-                                        <InputGroup.Input className='text-center' />
-                                        <InputGroup.Addon align={'inline-end'}>
-                                            <InputGroup.Button slot='increment' variant='default'>
-                                                <IconPlus />
-                                            </InputGroup.Button>
-                                        </InputGroup.Addon>
-                                    </InputGroup>
-                                </NumberField>
-                                <input name={`price-${product.id}`} type='hidden' value={product.buyPrice} />
-                            </FieldSet>
-                        </GridListItem>
-                    ))}
-                </ItemGroupSection>
+                            ) : (
+                                <Skeleton className='aspect-square w-full object-cover' />
+                            )}
+                        </ItemHeader>
+                        <ItemContent>
+                            <ItemTitle className='line-clamp-1 w-full justify-center text-center'>
+                                {item.name}
+                            </ItemTitle>
+                            <ItemDescription className='text-center'>
+                                {item.stock} {item.unit}
+                            </ItemDescription>
+                        </ItemContent>
+                        <FieldSet>
+                            <NumberField
+                                aria-label={`Jumlah ${item.name}`}
+                                maxValue={item.stock}
+                                minValue={0}
+                                name={`qty-${item.id}`}
+                                onChange={(value) => setStocks({ ...stocks, [item.id]: value })}
+                                value={stocks[item.id]}
+                            >
+                                <InputGroup>
+                                    <InputGroup.Addon>
+                                        <InputGroup.Button slot='decrement' variant='default'>
+                                            <IconMinus />
+                                        </InputGroup.Button>
+                                    </InputGroup.Addon>
+                                    <InputGroup.Input className='text-center' />
+                                    <InputGroup.Addon align={'inline-end'}>
+                                        <InputGroup.Button slot='increment' variant='default'>
+                                            <IconPlus />
+                                        </InputGroup.Button>
+                                    </InputGroup.Addon>
+                                </InputGroup>
+                            </NumberField>
+                            <input name={`price-${item.id}`} type='hidden' value={item.price} />
+                        </FieldSet>
+                    </div>
+                ))}
             </ItemGroup>
 
             <Button className='w-full' isPending={loading} onPress={onSave} type='submit'>

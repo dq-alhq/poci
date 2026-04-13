@@ -1,4 +1,4 @@
-import { UserForm } from '@/app/(dashboard)/users/form'
+import { UserForm } from '@/app/(dashboard)/(admin)/users/form'
 import { InterceptModal } from '@/components/intercept-modal'
 
 export default function Page() {

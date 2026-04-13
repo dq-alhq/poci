@@ -1740,7 +1740,8 @@ export const SaleScalarFieldEnum = {
   title: 'title',
   total: 'total',
   createdAt: 'createdAt',
-  outletId: 'outletId'
+  outletId: 'outletId',
+  shiftId: 'shiftId'
 } as const
 
 export type SaleScalarFieldEnum = (typeof SaleScalarFieldEnum)[keyof typeof SaleScalarFieldEnum]

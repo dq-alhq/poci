@@ -226,6 +226,7 @@ export type ShiftWhereInput = {
   userId?: Prisma.StringFilter<"Shift"> | string
   outlet?: Prisma.XOR<Prisma.OutletScalarRelationFilter, Prisma.OutletWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  sales?: Prisma.SaleListRelationFilter
 }
 
 export type ShiftOrderByWithRelationInput = {
@@ -237,6 +238,7 @@ export type ShiftOrderByWithRelationInput = {
   userId?: Prisma.SortOrder
   outlet?: Prisma.OutletOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
+  sales?: Prisma.SaleOrderByRelationAggregateInput
 }
 
 export type ShiftWhereUniqueInput = Prisma.AtLeast<{
@@ -251,6 +253,7 @@ export type ShiftWhereUniqueInput = Prisma.AtLeast<{
   userId?: Prisma.StringFilter<"Shift"> | string
   outlet?: Prisma.XOR<Prisma.OutletScalarRelationFilter, Prisma.OutletWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  sales?: Prisma.SaleListRelationFilter
 }, "id">
 
 export type ShiftOrderByWithAggregationInput = {
@@ -285,6 +288,7 @@ export type ShiftCreateInput = {
   isOpen?: boolean
   outlet: Prisma.OutletCreateNestedOneWithoutShiftsInput
   user: Prisma.UserCreateNestedOneWithoutShiftsInput
+  sales?: Prisma.SaleCreateNestedManyWithoutShiftInput
 }
 
 export type ShiftUncheckedCreateInput = {
@@ -294,6 +298,7 @@ export type ShiftUncheckedCreateInput = {
   isOpen?: boolean
   outletId: string
   userId: string
+  sales?: Prisma.SaleUncheckedCreateNestedManyWithoutShiftInput
 }
 
 export type ShiftUpdateInput = {
@@ -302,6 +307,7 @@ export type ShiftUpdateInput = {
   isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   outlet?: Prisma.OutletUpdateOneRequiredWithoutShiftsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutShiftsNestedInput
+  sales?: Prisma.SaleUpdateManyWithoutShiftNestedInput
 }
 
 export type ShiftUncheckedUpdateInput = {
@@ -311,6 +317,7 @@ export type ShiftUncheckedUpdateInput = {
   isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   outletId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  sales?: Prisma.SaleUncheckedUpdateManyWithoutShiftNestedInput
 }
 
 export type ShiftCreateManyInput = {
@@ -380,6 +387,11 @@ export type ShiftMinOrderByAggregateInput = {
 
 export type ShiftSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+}
+
+export type ShiftNullableScalarRelationFilter = {
+  is?: Prisma.ShiftWhereInput | null
+  isNot?: Prisma.ShiftWhereInput | null
 }
 
 export type ShiftCreateNestedManyWithoutUserInput = {
@@ -466,11 +478,28 @@ export type ShiftUncheckedUpdateManyWithoutOutletNestedInput = {
   deleteMany?: Prisma.ShiftScalarWhereInput | Prisma.ShiftScalarWhereInput[]
 }
 
+export type ShiftCreateNestedOneWithoutSalesInput = {
+  create?: Prisma.XOR<Prisma.ShiftCreateWithoutSalesInput, Prisma.ShiftUncheckedCreateWithoutSalesInput>
+  connectOrCreate?: Prisma.ShiftCreateOrConnectWithoutSalesInput
+  connect?: Prisma.ShiftWhereUniqueInput
+}
+
+export type ShiftUpdateOneWithoutSalesNestedInput = {
+  create?: Prisma.XOR<Prisma.ShiftCreateWithoutSalesInput, Prisma.ShiftUncheckedCreateWithoutSalesInput>
+  connectOrCreate?: Prisma.ShiftCreateOrConnectWithoutSalesInput
+  upsert?: Prisma.ShiftUpsertWithoutSalesInput
+  disconnect?: Prisma.ShiftWhereInput | boolean
+  delete?: Prisma.ShiftWhereInput | boolean
+  connect?: Prisma.ShiftWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ShiftUpdateToOneWithWhereWithoutSalesInput, Prisma.ShiftUpdateWithoutSalesInput>, Prisma.ShiftUncheckedUpdateWithoutSalesInput>
+}
+
 export type ShiftCreateWithoutUserInput = {
   start?: Date | string
   end?: Date | string | null
   isOpen?: boolean
   outlet: Prisma.OutletCreateNestedOneWithoutShiftsInput
+  sales?: Prisma.SaleCreateNestedManyWithoutShiftInput
 }
 
 export type ShiftUncheckedCreateWithoutUserInput = {
@@ -479,6 +508,7 @@ export type ShiftUncheckedCreateWithoutUserInput = {
   end?: Date | string | null
   isOpen?: boolean
   outletId: string
+  sales?: Prisma.SaleUncheckedCreateNestedManyWithoutShiftInput
 }
 
 export type ShiftCreateOrConnectWithoutUserInput = {
@@ -524,6 +554,7 @@ export type ShiftCreateWithoutOutletInput = {
   end?: Date | string | null
   isOpen?: boolean
   user: Prisma.UserCreateNestedOneWithoutShiftsInput
+  sales?: Prisma.SaleCreateNestedManyWithoutShiftInput
 }
 
 export type ShiftUncheckedCreateWithoutOutletInput = {
@@ -532,6 +563,7 @@ export type ShiftUncheckedCreateWithoutOutletInput = {
   end?: Date | string | null
   isOpen?: boolean
   userId: string
+  sales?: Prisma.SaleUncheckedCreateNestedManyWithoutShiftInput
 }
 
 export type ShiftCreateOrConnectWithoutOutletInput = {
@@ -560,6 +592,56 @@ export type ShiftUpdateManyWithWhereWithoutOutletInput = {
   data: Prisma.XOR<Prisma.ShiftUpdateManyMutationInput, Prisma.ShiftUncheckedUpdateManyWithoutOutletInput>
 }
 
+export type ShiftCreateWithoutSalesInput = {
+  start?: Date | string
+  end?: Date | string | null
+  isOpen?: boolean
+  outlet: Prisma.OutletCreateNestedOneWithoutShiftsInput
+  user: Prisma.UserCreateNestedOneWithoutShiftsInput
+}
+
+export type ShiftUncheckedCreateWithoutSalesInput = {
+  id?: number
+  start?: Date | string
+  end?: Date | string | null
+  isOpen?: boolean
+  outletId: string
+  userId: string
+}
+
+export type ShiftCreateOrConnectWithoutSalesInput = {
+  where: Prisma.ShiftWhereUniqueInput
+  create: Prisma.XOR<Prisma.ShiftCreateWithoutSalesInput, Prisma.ShiftUncheckedCreateWithoutSalesInput>
+}
+
+export type ShiftUpsertWithoutSalesInput = {
+  update: Prisma.XOR<Prisma.ShiftUpdateWithoutSalesInput, Prisma.ShiftUncheckedUpdateWithoutSalesInput>
+  create: Prisma.XOR<Prisma.ShiftCreateWithoutSalesInput, Prisma.ShiftUncheckedCreateWithoutSalesInput>
+  where?: Prisma.ShiftWhereInput
+}
+
+export type ShiftUpdateToOneWithWhereWithoutSalesInput = {
+  where?: Prisma.ShiftWhereInput
+  data: Prisma.XOR<Prisma.ShiftUpdateWithoutSalesInput, Prisma.ShiftUncheckedUpdateWithoutSalesInput>
+}
+
+export type ShiftUpdateWithoutSalesInput = {
+  start?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  outlet?: Prisma.OutletUpdateOneRequiredWithoutShiftsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutShiftsNestedInput
+}
+
+export type ShiftUncheckedUpdateWithoutSalesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  start?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  outletId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
 export type ShiftCreateManyUserInput = {
   id?: number
   start?: Date | string
@@ -573,6 +655,7 @@ export type ShiftUpdateWithoutUserInput = {
   end?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   outlet?: Prisma.OutletUpdateOneRequiredWithoutShiftsNestedInput
+  sales?: Prisma.SaleUpdateManyWithoutShiftNestedInput
 }
 
 export type ShiftUncheckedUpdateWithoutUserInput = {
@@ -581,6 +664,7 @@ export type ShiftUncheckedUpdateWithoutUserInput = {
   end?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   outletId?: Prisma.StringFieldUpdateOperationsInput | string
+  sales?: Prisma.SaleUncheckedUpdateManyWithoutShiftNestedInput
 }
 
 export type ShiftUncheckedUpdateManyWithoutUserInput = {
@@ -604,6 +688,7 @@ export type ShiftUpdateWithoutOutletInput = {
   end?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   user?: Prisma.UserUpdateOneRequiredWithoutShiftsNestedInput
+  sales?: Prisma.SaleUpdateManyWithoutShiftNestedInput
 }
 
 export type ShiftUncheckedUpdateWithoutOutletInput = {
@@ -612,6 +697,7 @@ export type ShiftUncheckedUpdateWithoutOutletInput = {
   end?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  sales?: Prisma.SaleUncheckedUpdateManyWithoutShiftNestedInput
 }
 
 export type ShiftUncheckedUpdateManyWithoutOutletInput = {
@@ -623,6 +709,35 @@ export type ShiftUncheckedUpdateManyWithoutOutletInput = {
 }
 
 
+/**
+ * Count Type ShiftCountOutputType
+ */
+
+export type ShiftCountOutputType = {
+  sales: number
+}
+
+export type ShiftCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  sales?: boolean | ShiftCountOutputTypeCountSalesArgs
+}
+
+/**
+ * ShiftCountOutputType without action
+ */
+export type ShiftCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ShiftCountOutputType
+   */
+  select?: Prisma.ShiftCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * ShiftCountOutputType without action
+ */
+export type ShiftCountOutputTypeCountSalesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SaleWhereInput
+}
+
 
 export type ShiftSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -633,6 +748,8 @@ export type ShiftSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   userId?: boolean
   outlet?: boolean | Prisma.OutletDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  sales?: boolean | Prisma.Shift$salesArgs<ExtArgs>
+  _count?: boolean | Prisma.ShiftCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["shift"]>
 
 export type ShiftSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -670,6 +787,8 @@ export type ShiftOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
 export type ShiftInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   outlet?: boolean | Prisma.OutletDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  sales?: boolean | Prisma.Shift$salesArgs<ExtArgs>
+  _count?: boolean | Prisma.ShiftCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ShiftIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   outlet?: boolean | Prisma.OutletDefaultArgs<ExtArgs>
@@ -685,6 +804,7 @@ export type $ShiftPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   objects: {
     outlet: Prisma.$OutletPayload<ExtArgs>
     user: Prisma.$UserPayload<ExtArgs>
+    sales: Prisma.$SalePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1089,6 +1209,7 @@ export interface Prisma__ShiftClient<T, Null = never, ExtArgs extends runtime.Ty
   readonly [Symbol.toStringTag]: "PrismaPromise"
   outlet<T extends Prisma.OutletDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OutletDefaultArgs<ExtArgs>>): Prisma.Prisma__OutletClient<runtime.Types.Result.GetResult<Prisma.$OutletPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  sales<T extends Prisma.Shift$salesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Shift$salesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SalePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1522,6 +1643,30 @@ export type ShiftDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Limit how many Shifts to delete.
    */
   limit?: number
+}
+
+/**
+ * Shift.sales
+ */
+export type Shift$salesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Sale
+   */
+  select?: Prisma.SaleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Sale
+   */
+  omit?: Prisma.SaleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SaleInclude<ExtArgs> | null
+  where?: Prisma.SaleWhereInput
+  orderBy?: Prisma.SaleOrderByWithRelationInput | Prisma.SaleOrderByWithRelationInput[]
+  cursor?: Prisma.SaleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SaleScalarFieldEnum | Prisma.SaleScalarFieldEnum[]
 }
 
 /**

@@ -36,17 +36,17 @@ const NumberInput = ({ className, ...props }: Omit<InputProps, 'type'>) => (
         />
         <div className='flex h-[calc(100%+2px)] flex-col'>
             <Button
-                className='-me-px flex h-1/2 w-6 flex-1 items-center justify-center border border-input bg-background text-muted-foreground text-sm transition-[color,box-shadow] hover:bg-accent hover:text-foreground disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50'
+                className='-me-px flex h-1/2 w-6 flex-1 items-center justify-center border border-input bg-primary text-primary-foreground text-sm transition-[color,box-shadow] hover:text-foreground hover:brightness-110 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 data-pressed:brightness-90'
                 slot='increment'
             >
-                <IconChevronUp className='size-3' />
+                <IconChevronUp className='size-3.5' />
                 <span className='sr-only'>Increment</span>
             </Button>
             <Button
-                className='-me-px -mt-px flex h-1/2 w-6 flex-1 items-center justify-center border border-input bg-background text-muted-foreground text-sm transition-[color,box-shadow] hover:bg-accent hover:text-foreground disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50'
+                className='-me-px -mt-px flex h-1/2 w-6 flex-1 items-center justify-center border border-input bg-primary text-primary-foreground text-sm transition-[color,box-shadow] hover:text-foreground hover:brightness-110 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 data-pressed:brightness-90'
                 slot='decrement'
             >
-                <IconChevronDown className='size-3' />
+                <IconChevronDown className='size-3.5' />
                 <span className='sr-only'>Decrement</span>
             </Button>
         </div>
@@ -61,6 +61,7 @@ const NumberInputSm = ({ className, ...props }: Omit<InputProps, 'type'>) => (
     >
         <Button
             className='-ms-px flex aspect-square h-[inherit] items-center justify-center rounded-l-md border border-primary bg-primary text-primary-foreground text-sm transition-all hover:brightness-110 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 data-pressed:scale-90 data-pressed:brightness-90 group-data-invalid/field:border-destructive group-data-invalid/field:bg-destructive'
+            excludeFromTabOrder
             slot='decrement'
         >
             <IconMinus />
@@ -73,6 +74,7 @@ const NumberInputSm = ({ className, ...props }: Omit<InputProps, 'type'>) => (
         />
         <Button
             className='-me-px flex aspect-square h-[inherit] items-center justify-center rounded-r-md border border-primary bg-primary text-primary-foreground text-sm transition-all hover:brightness-110 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 data-pressed:scale-90 data-pressed:brightness-90 group-data-invalid/field:border-destructive group-data-invalid/field:bg-destructive'
+            excludeFromTabOrder
             slot='increment'
         >
             <IconPlus />

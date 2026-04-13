@@ -1,5 +1,13 @@
 [
     {
+        "id": "es-batu",
+        "name": "Es Batu",
+        "isMaterial": true,
+        "unit": "pcs",
+        "price": 4000,
+        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/es-kristal.png"
+    },
+    {
         "id": "bubuk-apple",
         "name": "Apple",
         "isMaterial": true,
@@ -166,14 +174,6 @@
         "unit": "pack",
         "price": 46500,
         "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/sedotan.png"
-    },
-    {
-        "id": "galon",
-        "name": "Galon",
-        "isMaterial": false,
-        "unit": "pcs",
-        "price": 5000,
-        "image": "https://89fnasbstnmof0rn.public.blob.vercel-storage.com/galon-19l.png"
     },
     {
         "id": "gula",

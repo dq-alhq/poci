@@ -5,6 +5,7 @@ import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 import z from 'zod'
 import { auth } from '@/lib/auth'
+import db from '@/lib/prisma'
 
 const createUserSchema = z.object({
     role: z.enum(['user', 'admin']),
@@ -114,7 +115,7 @@ export async function login(_: any, formData: FormData) {
         }
     }
 
-    redirect('/dashboard', 'replace')
+    redirect('/', 'replace')
 }
 
 const updatePasswordSchema = z
@@ -193,4 +194,8 @@ export async function updateProfile(_: any, formData: FormData) {
             }
         }
     }
+}
+
+export const getUserById = async (id: string) => {
+    return db.user.findUnique({ where: { id } })
 }

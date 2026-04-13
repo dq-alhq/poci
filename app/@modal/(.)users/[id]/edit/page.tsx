@@ -1,6 +1,6 @@
 import type { User } from '@/generated/prisma/client'
 import { headers } from 'next/headers'
-import { UserForm } from '@/app/(dashboard)/users/form'
+import { UserForm } from '@/app/(dashboard)/(admin)/users/form'
 import { InterceptModal } from '@/components/intercept-modal'
 import { auth } from '@/lib/auth'
 

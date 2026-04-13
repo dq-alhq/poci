@@ -7,7 +7,6 @@ import {
     IconLayoutGrid,
     IconMoneybagMinus,
     IconPackage,
-    IconShoppingCart,
     IconUserCircle,
     IconUsers
 } from '@tabler/icons-react'
@@ -24,13 +23,7 @@ export const getNavigations = (role: string | undefined) => {
             title: 'Produk',
             href: '/dashboard/produk',
             icon: IconPackage,
-            show: true
-        },
-        {
-            title: 'Outlet',
-            href: '/dashboard/outlet',
-            icon: IconBuildingStore,
-            show: true
+            show: role === 'admin'
         },
         {
             title: 'Stok',
@@ -39,10 +32,10 @@ export const getNavigations = (role: string | undefined) => {
             show: true
         },
         {
-            title: 'Pembelanjaan',
-            href: '/dashboard/pembelanjaan',
-            icon: IconShoppingCart,
-            show: true
+            title: 'Outlet',
+            href: '/dashboard/outlet',
+            icon: IconBuildingStore,
+            show: role === 'admin'
         },
         {
             title: 'Pengeluaran',
@@ -54,7 +47,7 @@ export const getNavigations = (role: string | undefined) => {
             title: 'Shift',
             href: '/dashboard/shift',
             icon: IconClock,
-            show: true
+            show: role === 'admin'
         }
     ]
 
@@ -63,6 +56,12 @@ export const getNavigations = (role: string | undefined) => {
             title: 'Home',
             href: '/',
             icon: IconHome,
+            show: true
+        },
+        {
+            title: 'Dashboard',
+            href: '/dashboard',
+            icon: IconLayoutGrid,
             show: true
         }
     ]

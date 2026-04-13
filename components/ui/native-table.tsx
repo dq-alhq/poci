@@ -44,7 +44,7 @@ const TableCell = (props: ComponentProps<'td'>) => (
         data-slot='table-cell'
         {...props}
         className={cn(
-            'group border-l px-4 py-(--gutter-y) align-middle outline-hidden first:border-l-0 first:pl-(--gutter,--spacing(2)) last:pr-(--gutter,--spacing(2))',
+            'group shrink-0 border-l px-4 py-(--gutter-y) align-middle outline-hidden first:border-l-0 first:pl-(--gutter,--spacing(2)) last:pr-(--gutter,--spacing(2))',
             props.className
         )}
     />

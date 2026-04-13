@@ -1,10 +1,11 @@
 import { IconArrowLeft } from '@tabler/icons-react'
 import Link from 'next/link'
+import { Suspense } from 'react'
+import { PengeluaranCreatePage } from '@/app/(dashboard)/dashboard/pengeluaran/create/pengeluaran-page'
 import Heading from '@/components/heading'
 import { buttonVariants } from '@/components/ui/button-group'
-import { PengeluaranForm } from './pengeluaran-form'
 
-export default function PembelanjaanCreatePage() {
+export default async function PembelanjaanCreatePage() {
     return (
         <div className='px-6'>
             <Heading description={'Buat pengeluaran baru'} title={'Buat Pengeluaran'}>
@@ -13,7 +14,9 @@ export default function PembelanjaanCreatePage() {
                 </Link>
             </Heading>
             <div className='py-6'>
-                <PengeluaranForm />
+                <Suspense fallback={<div>Loading...</div>}>
+                    <PengeluaranCreatePage />
+                </Suspense>
             </div>
         </div>
     )

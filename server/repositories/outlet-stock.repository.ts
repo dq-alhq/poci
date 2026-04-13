@@ -7,6 +7,11 @@ export const getOutletStock = async (outletId: string) => {
         where: {
             outletId
         },
+        orderBy: {
+            item: {
+                id: 'desc'
+            }
+        },
         include: {
             item: true
         }

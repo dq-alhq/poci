@@ -29,11 +29,13 @@ export type AggregateSale = {
 export type SaleAvgAggregateOutputType = {
   id: number | null
   total: number | null
+  shiftId: number | null
 }
 
 export type SaleSumAggregateOutputType = {
   id: number | null
   total: number | null
+  shiftId: number | null
 }
 
 export type SaleMinAggregateOutputType = {
@@ -42,6 +44,7 @@ export type SaleMinAggregateOutputType = {
   total: number | null
   createdAt: Date | null
   outletId: string | null
+  shiftId: number | null
 }
 
 export type SaleMaxAggregateOutputType = {
@@ -50,6 +53,7 @@ export type SaleMaxAggregateOutputType = {
   total: number | null
   createdAt: Date | null
   outletId: string | null
+  shiftId: number | null
 }
 
 export type SaleCountAggregateOutputType = {
@@ -58,6 +62,7 @@ export type SaleCountAggregateOutputType = {
   total: number
   createdAt: number
   outletId: number
+  shiftId: number
   _all: number
 }
 
@@ -65,11 +70,13 @@ export type SaleCountAggregateOutputType = {
 export type SaleAvgAggregateInputType = {
   id?: true
   total?: true
+  shiftId?: true
 }
 
 export type SaleSumAggregateInputType = {
   id?: true
   total?: true
+  shiftId?: true
 }
 
 export type SaleMinAggregateInputType = {
@@ -78,6 +85,7 @@ export type SaleMinAggregateInputType = {
   total?: true
   createdAt?: true
   outletId?: true
+  shiftId?: true
 }
 
 export type SaleMaxAggregateInputType = {
@@ -86,6 +94,7 @@ export type SaleMaxAggregateInputType = {
   total?: true
   createdAt?: true
   outletId?: true
+  shiftId?: true
 }
 
 export type SaleCountAggregateInputType = {
@@ -94,6 +103,7 @@ export type SaleCountAggregateInputType = {
   total?: true
   createdAt?: true
   outletId?: true
+  shiftId?: true
   _all?: true
 }
 
@@ -189,6 +199,7 @@ export type SaleGroupByOutputType = {
   total: number
   createdAt: Date
   outletId: string
+  shiftId: number | null
   _count: SaleCountAggregateOutputType | null
   _avg: SaleAvgAggregateOutputType | null
   _sum: SaleSumAggregateOutputType | null
@@ -220,8 +231,10 @@ export type SaleWhereInput = {
   total?: Prisma.IntFilter<"Sale"> | number
   createdAt?: Prisma.DateTimeFilter<"Sale"> | Date | string
   outletId?: Prisma.StringFilter<"Sale"> | string
+  shiftId?: Prisma.IntNullableFilter<"Sale"> | number | null
   items?: Prisma.SaleItemListRelationFilter
   outlet?: Prisma.XOR<Prisma.OutletScalarRelationFilter, Prisma.OutletWhereInput>
+  shift?: Prisma.XOR<Prisma.ShiftNullableScalarRelationFilter, Prisma.ShiftWhereInput> | null
 }
 
 export type SaleOrderByWithRelationInput = {
@@ -230,12 +243,15 @@ export type SaleOrderByWithRelationInput = {
   total?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   outletId?: Prisma.SortOrder
+  shiftId?: Prisma.SortOrderInput | Prisma.SortOrder
   items?: Prisma.SaleItemOrderByRelationAggregateInput
   outlet?: Prisma.OutletOrderByWithRelationInput
+  shift?: Prisma.ShiftOrderByWithRelationInput
 }
 
 export type SaleWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  outletId_shiftId?: Prisma.SaleOutletIdShiftIdCompoundUniqueInput
   AND?: Prisma.SaleWhereInput | Prisma.SaleWhereInput[]
   OR?: Prisma.SaleWhereInput[]
   NOT?: Prisma.SaleWhereInput | Prisma.SaleWhereInput[]
@@ -243,9 +259,11 @@ export type SaleWhereUniqueInput = Prisma.AtLeast<{
   total?: Prisma.IntFilter<"Sale"> | number
   createdAt?: Prisma.DateTimeFilter<"Sale"> | Date | string
   outletId?: Prisma.StringFilter<"Sale"> | string
+  shiftId?: Prisma.IntNullableFilter<"Sale"> | number | null
   items?: Prisma.SaleItemListRelationFilter
   outlet?: Prisma.XOR<Prisma.OutletScalarRelationFilter, Prisma.OutletWhereInput>
-}, "id">
+  shift?: Prisma.XOR<Prisma.ShiftNullableScalarRelationFilter, Prisma.ShiftWhereInput> | null
+}, "id" | "outletId_shiftId">
 
 export type SaleOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -253,6 +271,7 @@ export type SaleOrderByWithAggregationInput = {
   total?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   outletId?: Prisma.SortOrder
+  shiftId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.SaleCountOrderByAggregateInput
   _avg?: Prisma.SaleAvgOrderByAggregateInput
   _max?: Prisma.SaleMaxOrderByAggregateInput
@@ -269,6 +288,7 @@ export type SaleScalarWhereWithAggregatesInput = {
   total?: Prisma.IntWithAggregatesFilter<"Sale"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Sale"> | Date | string
   outletId?: Prisma.StringWithAggregatesFilter<"Sale"> | string
+  shiftId?: Prisma.IntNullableWithAggregatesFilter<"Sale"> | number | null
 }
 
 export type SaleCreateInput = {
@@ -277,6 +297,7 @@ export type SaleCreateInput = {
   createdAt?: Date | string
   items?: Prisma.SaleItemCreateNestedManyWithoutSaleInput
   outlet: Prisma.OutletCreateNestedOneWithoutSalesInput
+  shift?: Prisma.ShiftCreateNestedOneWithoutSalesInput
 }
 
 export type SaleUncheckedCreateInput = {
@@ -285,6 +306,7 @@ export type SaleUncheckedCreateInput = {
   total: number
   createdAt?: Date | string
   outletId: string
+  shiftId?: number | null
   items?: Prisma.SaleItemUncheckedCreateNestedManyWithoutSaleInput
 }
 
@@ -294,6 +316,7 @@ export type SaleUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.SaleItemUpdateManyWithoutSaleNestedInput
   outlet?: Prisma.OutletUpdateOneRequiredWithoutSalesNestedInput
+  shift?: Prisma.ShiftUpdateOneWithoutSalesNestedInput
 }
 
 export type SaleUncheckedUpdateInput = {
@@ -302,6 +325,7 @@ export type SaleUncheckedUpdateInput = {
   total?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   outletId?: Prisma.StringFieldUpdateOperationsInput | string
+  shiftId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   items?: Prisma.SaleItemUncheckedUpdateManyWithoutSaleNestedInput
 }
 
@@ -311,6 +335,7 @@ export type SaleCreateManyInput = {
   total: number
   createdAt?: Date | string
   outletId: string
+  shiftId?: number | null
 }
 
 export type SaleUpdateManyMutationInput = {
@@ -325,6 +350,7 @@ export type SaleUncheckedUpdateManyInput = {
   total?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   outletId?: Prisma.StringFieldUpdateOperationsInput | string
+  shiftId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type SaleListRelationFilter = {
@@ -337,17 +363,24 @@ export type SaleOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type SaleOutletIdShiftIdCompoundUniqueInput = {
+  outletId: string
+  shiftId: number
+}
+
 export type SaleCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   total?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   outletId?: Prisma.SortOrder
+  shiftId?: Prisma.SortOrder
 }
 
 export type SaleAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   total?: Prisma.SortOrder
+  shiftId?: Prisma.SortOrder
 }
 
 export type SaleMaxOrderByAggregateInput = {
@@ -356,6 +389,7 @@ export type SaleMaxOrderByAggregateInput = {
   total?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   outletId?: Prisma.SortOrder
+  shiftId?: Prisma.SortOrder
 }
 
 export type SaleMinOrderByAggregateInput = {
@@ -364,11 +398,13 @@ export type SaleMinOrderByAggregateInput = {
   total?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   outletId?: Prisma.SortOrder
+  shiftId?: Prisma.SortOrder
 }
 
 export type SaleSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   total?: Prisma.SortOrder
+  shiftId?: Prisma.SortOrder
 }
 
 export type SaleScalarRelationFilter = {
@@ -418,6 +454,56 @@ export type SaleUncheckedUpdateManyWithoutOutletNestedInput = {
   deleteMany?: Prisma.SaleScalarWhereInput | Prisma.SaleScalarWhereInput[]
 }
 
+export type SaleCreateNestedManyWithoutShiftInput = {
+  create?: Prisma.XOR<Prisma.SaleCreateWithoutShiftInput, Prisma.SaleUncheckedCreateWithoutShiftInput> | Prisma.SaleCreateWithoutShiftInput[] | Prisma.SaleUncheckedCreateWithoutShiftInput[]
+  connectOrCreate?: Prisma.SaleCreateOrConnectWithoutShiftInput | Prisma.SaleCreateOrConnectWithoutShiftInput[]
+  createMany?: Prisma.SaleCreateManyShiftInputEnvelope
+  connect?: Prisma.SaleWhereUniqueInput | Prisma.SaleWhereUniqueInput[]
+}
+
+export type SaleUncheckedCreateNestedManyWithoutShiftInput = {
+  create?: Prisma.XOR<Prisma.SaleCreateWithoutShiftInput, Prisma.SaleUncheckedCreateWithoutShiftInput> | Prisma.SaleCreateWithoutShiftInput[] | Prisma.SaleUncheckedCreateWithoutShiftInput[]
+  connectOrCreate?: Prisma.SaleCreateOrConnectWithoutShiftInput | Prisma.SaleCreateOrConnectWithoutShiftInput[]
+  createMany?: Prisma.SaleCreateManyShiftInputEnvelope
+  connect?: Prisma.SaleWhereUniqueInput | Prisma.SaleWhereUniqueInput[]
+}
+
+export type SaleUpdateManyWithoutShiftNestedInput = {
+  create?: Prisma.XOR<Prisma.SaleCreateWithoutShiftInput, Prisma.SaleUncheckedCreateWithoutShiftInput> | Prisma.SaleCreateWithoutShiftInput[] | Prisma.SaleUncheckedCreateWithoutShiftInput[]
+  connectOrCreate?: Prisma.SaleCreateOrConnectWithoutShiftInput | Prisma.SaleCreateOrConnectWithoutShiftInput[]
+  upsert?: Prisma.SaleUpsertWithWhereUniqueWithoutShiftInput | Prisma.SaleUpsertWithWhereUniqueWithoutShiftInput[]
+  createMany?: Prisma.SaleCreateManyShiftInputEnvelope
+  set?: Prisma.SaleWhereUniqueInput | Prisma.SaleWhereUniqueInput[]
+  disconnect?: Prisma.SaleWhereUniqueInput | Prisma.SaleWhereUniqueInput[]
+  delete?: Prisma.SaleWhereUniqueInput | Prisma.SaleWhereUniqueInput[]
+  connect?: Prisma.SaleWhereUniqueInput | Prisma.SaleWhereUniqueInput[]
+  update?: Prisma.SaleUpdateWithWhereUniqueWithoutShiftInput | Prisma.SaleUpdateWithWhereUniqueWithoutShiftInput[]
+  updateMany?: Prisma.SaleUpdateManyWithWhereWithoutShiftInput | Prisma.SaleUpdateManyWithWhereWithoutShiftInput[]
+  deleteMany?: Prisma.SaleScalarWhereInput | Prisma.SaleScalarWhereInput[]
+}
+
+export type SaleUncheckedUpdateManyWithoutShiftNestedInput = {
+  create?: Prisma.XOR<Prisma.SaleCreateWithoutShiftInput, Prisma.SaleUncheckedCreateWithoutShiftInput> | Prisma.SaleCreateWithoutShiftInput[] | Prisma.SaleUncheckedCreateWithoutShiftInput[]
+  connectOrCreate?: Prisma.SaleCreateOrConnectWithoutShiftInput | Prisma.SaleCreateOrConnectWithoutShiftInput[]
+  upsert?: Prisma.SaleUpsertWithWhereUniqueWithoutShiftInput | Prisma.SaleUpsertWithWhereUniqueWithoutShiftInput[]
+  createMany?: Prisma.SaleCreateManyShiftInputEnvelope
+  set?: Prisma.SaleWhereUniqueInput | Prisma.SaleWhereUniqueInput[]
+  disconnect?: Prisma.SaleWhereUniqueInput | Prisma.SaleWhereUniqueInput[]
+  delete?: Prisma.SaleWhereUniqueInput | Prisma.SaleWhereUniqueInput[]
+  connect?: Prisma.SaleWhereUniqueInput | Prisma.SaleWhereUniqueInput[]
+  update?: Prisma.SaleUpdateWithWhereUniqueWithoutShiftInput | Prisma.SaleUpdateWithWhereUniqueWithoutShiftInput[]
+  updateMany?: Prisma.SaleUpdateManyWithWhereWithoutShiftInput | Prisma.SaleUpdateManyWithWhereWithoutShiftInput[]
+  deleteMany?: Prisma.SaleScalarWhereInput | Prisma.SaleScalarWhereInput[]
+}
+
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type SaleCreateNestedOneWithoutItemsInput = {
   create?: Prisma.XOR<Prisma.SaleCreateWithoutItemsInput, Prisma.SaleUncheckedCreateWithoutItemsInput>
   connectOrCreate?: Prisma.SaleCreateOrConnectWithoutItemsInput
@@ -437,6 +523,7 @@ export type SaleCreateWithoutOutletInput = {
   total: number
   createdAt?: Date | string
   items?: Prisma.SaleItemCreateNestedManyWithoutSaleInput
+  shift?: Prisma.ShiftCreateNestedOneWithoutSalesInput
 }
 
 export type SaleUncheckedCreateWithoutOutletInput = {
@@ -444,6 +531,7 @@ export type SaleUncheckedCreateWithoutOutletInput = {
   title?: string | null
   total: number
   createdAt?: Date | string
+  shiftId?: number | null
   items?: Prisma.SaleItemUncheckedCreateNestedManyWithoutSaleInput
 }
 
@@ -482,6 +570,50 @@ export type SaleScalarWhereInput = {
   total?: Prisma.IntFilter<"Sale"> | number
   createdAt?: Prisma.DateTimeFilter<"Sale"> | Date | string
   outletId?: Prisma.StringFilter<"Sale"> | string
+  shiftId?: Prisma.IntNullableFilter<"Sale"> | number | null
+}
+
+export type SaleCreateWithoutShiftInput = {
+  title?: string | null
+  total: number
+  createdAt?: Date | string
+  items?: Prisma.SaleItemCreateNestedManyWithoutSaleInput
+  outlet: Prisma.OutletCreateNestedOneWithoutSalesInput
+}
+
+export type SaleUncheckedCreateWithoutShiftInput = {
+  id?: number
+  title?: string | null
+  total: number
+  createdAt?: Date | string
+  outletId: string
+  items?: Prisma.SaleItemUncheckedCreateNestedManyWithoutSaleInput
+}
+
+export type SaleCreateOrConnectWithoutShiftInput = {
+  where: Prisma.SaleWhereUniqueInput
+  create: Prisma.XOR<Prisma.SaleCreateWithoutShiftInput, Prisma.SaleUncheckedCreateWithoutShiftInput>
+}
+
+export type SaleCreateManyShiftInputEnvelope = {
+  data: Prisma.SaleCreateManyShiftInput | Prisma.SaleCreateManyShiftInput[]
+  skipDuplicates?: boolean
+}
+
+export type SaleUpsertWithWhereUniqueWithoutShiftInput = {
+  where: Prisma.SaleWhereUniqueInput
+  update: Prisma.XOR<Prisma.SaleUpdateWithoutShiftInput, Prisma.SaleUncheckedUpdateWithoutShiftInput>
+  create: Prisma.XOR<Prisma.SaleCreateWithoutShiftInput, Prisma.SaleUncheckedCreateWithoutShiftInput>
+}
+
+export type SaleUpdateWithWhereUniqueWithoutShiftInput = {
+  where: Prisma.SaleWhereUniqueInput
+  data: Prisma.XOR<Prisma.SaleUpdateWithoutShiftInput, Prisma.SaleUncheckedUpdateWithoutShiftInput>
+}
+
+export type SaleUpdateManyWithWhereWithoutShiftInput = {
+  where: Prisma.SaleScalarWhereInput
+  data: Prisma.XOR<Prisma.SaleUpdateManyMutationInput, Prisma.SaleUncheckedUpdateManyWithoutShiftInput>
 }
 
 export type SaleCreateWithoutItemsInput = {
@@ -489,6 +621,7 @@ export type SaleCreateWithoutItemsInput = {
   total: number
   createdAt?: Date | string
   outlet: Prisma.OutletCreateNestedOneWithoutSalesInput
+  shift?: Prisma.ShiftCreateNestedOneWithoutSalesInput
 }
 
 export type SaleUncheckedCreateWithoutItemsInput = {
@@ -497,6 +630,7 @@ export type SaleUncheckedCreateWithoutItemsInput = {
   total: number
   createdAt?: Date | string
   outletId: string
+  shiftId?: number | null
 }
 
 export type SaleCreateOrConnectWithoutItemsInput = {
@@ -520,6 +654,7 @@ export type SaleUpdateWithoutItemsInput = {
   total?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   outlet?: Prisma.OutletUpdateOneRequiredWithoutSalesNestedInput
+  shift?: Prisma.ShiftUpdateOneWithoutSalesNestedInput
 }
 
 export type SaleUncheckedUpdateWithoutItemsInput = {
@@ -528,6 +663,7 @@ export type SaleUncheckedUpdateWithoutItemsInput = {
   total?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   outletId?: Prisma.StringFieldUpdateOperationsInput | string
+  shiftId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type SaleCreateManyOutletInput = {
@@ -535,6 +671,7 @@ export type SaleCreateManyOutletInput = {
   title?: string | null
   total: number
   createdAt?: Date | string
+  shiftId?: number | null
 }
 
 export type SaleUpdateWithoutOutletInput = {
@@ -542,6 +679,7 @@ export type SaleUpdateWithoutOutletInput = {
   total?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.SaleItemUpdateManyWithoutSaleNestedInput
+  shift?: Prisma.ShiftUpdateOneWithoutSalesNestedInput
 }
 
 export type SaleUncheckedUpdateWithoutOutletInput = {
@@ -549,6 +687,7 @@ export type SaleUncheckedUpdateWithoutOutletInput = {
   title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   total?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  shiftId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   items?: Prisma.SaleItemUncheckedUpdateManyWithoutSaleNestedInput
 }
 
@@ -557,6 +696,40 @@ export type SaleUncheckedUpdateManyWithoutOutletInput = {
   title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   total?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  shiftId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type SaleCreateManyShiftInput = {
+  id?: number
+  title?: string | null
+  total: number
+  createdAt?: Date | string
+  outletId: string
+}
+
+export type SaleUpdateWithoutShiftInput = {
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  total?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  items?: Prisma.SaleItemUpdateManyWithoutSaleNestedInput
+  outlet?: Prisma.OutletUpdateOneRequiredWithoutSalesNestedInput
+}
+
+export type SaleUncheckedUpdateWithoutShiftInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  total?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  outletId?: Prisma.StringFieldUpdateOperationsInput | string
+  items?: Prisma.SaleItemUncheckedUpdateManyWithoutSaleNestedInput
+}
+
+export type SaleUncheckedUpdateManyWithoutShiftInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  total?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  outletId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -596,8 +769,10 @@ export type SaleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   total?: boolean
   createdAt?: boolean
   outletId?: boolean
+  shiftId?: boolean
   items?: boolean | Prisma.Sale$itemsArgs<ExtArgs>
   outlet?: boolean | Prisma.OutletDefaultArgs<ExtArgs>
+  shift?: boolean | Prisma.Sale$shiftArgs<ExtArgs>
   _count?: boolean | Prisma.SaleCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["sale"]>
 
@@ -607,7 +782,9 @@ export type SaleSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   total?: boolean
   createdAt?: boolean
   outletId?: boolean
+  shiftId?: boolean
   outlet?: boolean | Prisma.OutletDefaultArgs<ExtArgs>
+  shift?: boolean | Prisma.Sale$shiftArgs<ExtArgs>
 }, ExtArgs["result"]["sale"]>
 
 export type SaleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -616,7 +793,9 @@ export type SaleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   total?: boolean
   createdAt?: boolean
   outletId?: boolean
+  shiftId?: boolean
   outlet?: boolean | Prisma.OutletDefaultArgs<ExtArgs>
+  shift?: boolean | Prisma.Sale$shiftArgs<ExtArgs>
 }, ExtArgs["result"]["sale"]>
 
 export type SaleSelectScalar = {
@@ -625,19 +804,23 @@ export type SaleSelectScalar = {
   total?: boolean
   createdAt?: boolean
   outletId?: boolean
+  shiftId?: boolean
 }
 
-export type SaleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "total" | "createdAt" | "outletId", ExtArgs["result"]["sale"]>
+export type SaleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "total" | "createdAt" | "outletId" | "shiftId", ExtArgs["result"]["sale"]>
 export type SaleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   items?: boolean | Prisma.Sale$itemsArgs<ExtArgs>
   outlet?: boolean | Prisma.OutletDefaultArgs<ExtArgs>
+  shift?: boolean | Prisma.Sale$shiftArgs<ExtArgs>
   _count?: boolean | Prisma.SaleCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SaleIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   outlet?: boolean | Prisma.OutletDefaultArgs<ExtArgs>
+  shift?: boolean | Prisma.Sale$shiftArgs<ExtArgs>
 }
 export type SaleIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   outlet?: boolean | Prisma.OutletDefaultArgs<ExtArgs>
+  shift?: boolean | Prisma.Sale$shiftArgs<ExtArgs>
 }
 
 export type $SalePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -645,6 +828,7 @@ export type $SalePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   objects: {
     items: Prisma.$SaleItemPayload<ExtArgs>[]
     outlet: Prisma.$OutletPayload<ExtArgs>
+    shift: Prisma.$ShiftPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -652,6 +836,7 @@ export type $SalePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     total: number
     createdAt: Date
     outletId: string
+    shiftId: number | null
   }, ExtArgs["result"]["sale"]>
   composites: {}
 }
@@ -1048,6 +1233,7 @@ export interface Prisma__SaleClient<T, Null = never, ExtArgs extends runtime.Typ
   readonly [Symbol.toStringTag]: "PrismaPromise"
   items<T extends Prisma.Sale$itemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Sale$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SaleItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   outlet<T extends Prisma.OutletDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OutletDefaultArgs<ExtArgs>>): Prisma.Prisma__OutletClient<runtime.Types.Result.GetResult<Prisma.$OutletPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  shift<T extends Prisma.Sale$shiftArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Sale$shiftArgs<ExtArgs>>): Prisma.Prisma__ShiftClient<runtime.Types.Result.GetResult<Prisma.$ShiftPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1082,6 +1268,7 @@ export interface SaleFieldRefs {
   readonly total: Prisma.FieldRef<"Sale", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Sale", 'DateTime'>
   readonly outletId: Prisma.FieldRef<"Sale", 'String'>
+  readonly shiftId: Prisma.FieldRef<"Sale", 'Int'>
 }
     
 
@@ -1504,6 +1691,25 @@ export type Sale$itemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
   take?: number
   skip?: number
   distinct?: Prisma.SaleItemScalarFieldEnum | Prisma.SaleItemScalarFieldEnum[]
+}
+
+/**
+ * Sale.shift
+ */
+export type Sale$shiftArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Shift
+   */
+  select?: Prisma.ShiftSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Shift
+   */
+  omit?: Prisma.ShiftOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ShiftInclude<ExtArgs> | null
+  where?: Prisma.ShiftWhereInput
 }
 
 /**

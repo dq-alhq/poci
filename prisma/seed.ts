@@ -50,6 +50,19 @@ async function main() {
             }
         }
     })
+
+    const _uzik = await auth.api.createUser({
+        body: {
+            name: 'Uzik',
+            email: 'uzik@mail.com',
+            role: 'user',
+            password: 'password',
+            data: {
+                username: 'uzik'
+            }
+        }
+    })
+
     console.info('✅ User Created!')
 
     console.info('🧃 Seeding Items')

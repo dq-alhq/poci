@@ -58,7 +58,7 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
             <SidebarHeader>
                 <SidebarMenu>
                     <SidebarMenuItem>
-                        <SidebarMenuButton href={'/dashboard'} size='lg'>
+                        <SidebarMenuButton href={'/'} size='lg'>
                             <IconInnerShadowTop className='size-5!' />
                             <span className='font-semibold text-base'>Dashboard</span>
                         </SidebarMenuButton>

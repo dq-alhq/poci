@@ -203,6 +203,7 @@ model Shift {
 
   userId String
   user   User   @relation(fields: [userId], references: [id])
+  sales  Sale[]
 
   @@map("shift")
 }
@@ -249,6 +250,10 @@ model Sale {
   outletId String
   outlet   Outlet @relation(fields: [outletId], references: [id])
 
+  shiftId Int?
+  shift   Shift? @relation(fields: [shiftId], references: [id])
+
+  @@unique([outletId, shiftId])
   @@map("sale")
 }
 
