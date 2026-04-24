@@ -6,7 +6,7 @@ import { admin, username } from 'better-auth/plugins'
 import z from 'zod'
 import db from './prisma'
 
-export const passwordSchema = z.string().min(8, { message: 'Password minimal 8 karakter' })
+export const passwordSchema = z.string().min(6, { message: 'Password minimal 6 karakter' })
 
 export const auth = betterAuth({
     database: prismaAdapter(db, {

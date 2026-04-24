@@ -2,6 +2,7 @@ import { Providers } from '@/components/providers'
 import './globals.css'
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
+import { headers } from 'next/headers'
 
 const fontSans = localFont({
     src: './fonts/InstrumentSans.ttf',
@@ -18,15 +19,18 @@ export const metadata: Metadata = {
     description: 'Nextjs, Prisma, Better Auth, HQ UI'
 }
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
     modal
 }: Readonly<{
     children: React.ReactNode
     modal: React.ReactNode
 }>) {
+    const acceptLanguage = (await headers()).get('accept-language')
+    const lang = acceptLanguage?.split(/[,;]/)[0] || 'id-ID'
+
     return (
-        <html className={`${fontSans.variable} ${fontMono.variable}`} lang='en' suppressHydrationWarning>
+        <html className={`${fontSans.variable} ${fontMono.variable}`} lang={lang} suppressHydrationWarning>
             <body className='font-sans antialiased'>
                 <Providers attribute='class' defaultTheme='system' disableTransitionOnChange enableSystem>
                     {children}

@@ -3,7 +3,7 @@
 import type * as React from 'react'
 import { useRouter } from 'next/navigation'
 import { ThemeProvider, type ThemeProviderProps } from 'next-themes'
-import { RouterProvider } from 'react-aria-components'
+import { I18nProvider, RouterProvider } from 'react-aria-components'
 import { Toaster } from './ui/sonner'
 
 declare module 'react-aria-components' {
@@ -18,13 +18,15 @@ function ClientProvider({ children }: { children: React.ReactNode }) {
     return <RouterProvider navigate={router.push}>{children}</RouterProvider>
 }
 
-export function Providers({ children, ...props }: ThemeProviderProps) {
+export function Providers({ children, lang, ...props }: ThemeProviderProps & { lang?: string }) {
     return (
-        <ClientProvider>
-            <ThemeProvider {...props}>
-                <Toaster richColors />
-                {children}
-            </ThemeProvider>
-        </ClientProvider>
+        <I18nProvider locale={lang || 'id'}>
+            <ClientProvider>
+                <ThemeProvider {...props}>
+                    <Toaster richColors />
+                    {children}
+                </ThemeProvider>
+            </ClientProvider>
+        </I18nProvider>
     )
 }
